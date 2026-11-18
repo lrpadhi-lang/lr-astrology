@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "LR Astrology",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "LR Astrology",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "description": "Your trusted platform for Vedic astrology, horoscope calculations, Panchangam and Muhurtham."
+}
