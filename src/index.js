@@ -2,10 +2,26 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // వాయిస్ కాల్ కోసం టోకెన్ అడిగే API రూట్
+    // CORS Preflight
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        status: 204,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
+      });
+    }
+
     if (url.pathname === "/api/agora-token") {
-      const channel = url.searchParams.get("channel") || "astrology-room";
-      const uid = url.searchParams.get("uid") || "0";
+      const channel = (url.searchParams.get("channel") || "astrology-room").trim();
+      const uidStr = (url.searchParams.get("uid") || "0").trim();
+      const roleParam = (url.searchParams.get("role") || "publisher").toLowerCase();
+      const expireSeconds = Math.min(
+        Math.max(parseInt(url.searchParams.get("expire") || "3600", 10) || 3600, 60),
+        86400
+      );
 
       if (!env.AGORA_APP_ID || !env.AGORA_APP_CERTIFICATE) {
         return new Response(
@@ -14,29 +30,194 @@ export default {
           }),
           {
             status: 500,
-            headers: { "Content-Type": "application/json" }
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
+            }
           }
         );
       }
 
-      return new Response(
-        JSON.stringify({
-          appId: env.AGORA_APP_ID,
-          channel: channel,
-          uid: uid,
-          status: "ready_for_token_signing"
-        }),
-        {
-          status: 200,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
+      try {
+        const uidNum = /^\d+$/.test(uidStr) ? parseInt(uidStr, 10) : 0;
+        const privilegeExpireTs = Math.floor(Date.now() / 1000) + expireSeconds;
+        const token = await buildRtcToken007({
+          appId: env.AGORA_APP_ID.trim(),
+          appCertificate: env.AGORA_APP_CERTIFICATE.trim(),
+          channelName: channel,
+          uid: uidNum,
+          role: roleParam === "subscriber" ? "subscriber" : "publisher",
+          privilegeExpireTs
+        });
+
+        return new Response(
+          JSON.stringify({
+            token,
+            appId: env.AGORA_APP_ID.trim(),
+            channel,
+            uid: uidNum,
+            expireAt: privilegeExpireTs
+          }),
+          {
+            status: 200,
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              "Cache-Control": "no-store"
+            }
           }
-        }
-      );
+        );
+      } catch (err) {
+        return new Response(
+          JSON.stringify({ error: "Token generation failed", details: err.message }),
+          {
+            status: 500,
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*"
+            }
+          }
+        );
+      }
     }
 
-    // మిగిలిన అన్ని రిక్వెస్ట్‌లకు మీ index.html మరియు ఇతర ఫైల్స్ సర్వ్ చేస్తుంది
     return env.ASSETS.fetch(request);
   }
 };
+
+// --- Agora AccessToken2 (007) Implementation using Web Crypto API ---
+const VERSION = "007";
+const SERVICE_RTC = 1;
+const PRIVILEGE_JOIN_CHANNEL = 1;
+const PRIVILEGE_PUBLISH_AUDIO = 2;
+const PRIVILEGE_PUBLISH_VIDEO = 3;
+const PRIVILEGE_PUBLISH_DATA = 4;
+
+async function buildRtcToken007({
+  appId,
+  appCertificate,
+  channelName,
+  uid,
+  role,
+  privilegeExpireTs
+}) {
+  const issueTs = Math.floor(Date.now() / 1000);
+  const expire = 0; // service level expire (0 = use privilege map)
+  const salt = (crypto.getRandomValues(new Uint32Array(1))[0] % 99999999) + 1;
+
+  // 1. Signing key = HMAC-SHA256(appCertificate, packUint32(issueTs)) -> HMAC-SHA256(..., packUint32(salt))
+  const key1 = await hmacSha256(
+    new TextEncoder().encode(appCertificate),
+    packUint32(issueTs)
+  );
+  const signingKey = await hmacSha256(key1, packUint32(salt));
+
+  // 2. Privileges map
+  const privileges = new Map();
+  privileges.set(PRIVILEGE_JOIN_CHANNEL, privilegeExpireTs);
+  if (role === "publisher") {
+    privileges.set(PRIVILEGE_PUBLISH_AUDIO, privilegeExpireTs);
+    privileges.set(PRIVILEGE_PUBLISH_VIDEO, privilegeExpireTs);
+    privileges.set(PRIVILEGE_PUBLISH_DATA, privilegeExpireTs);
+  }
+
+  // 3. RTC Service message
+  const rtcServicePack = concatBytes([
+    packUint16(SERVICE_RTC),
+    packString(channelName),
+    packString(uid === 0 ? "" : String(uid)),
+    packMapUint32(privileges)
+  ]);
+
+  // 4. Inner message (appId, issueTs, expire, salt, services count + rtcServicePack)
+  const innerMessage = concatBytes([
+    packString(appId),
+    packUint32(issueTs),
+    packUint32(expire),
+    packUint32(salt),
+    packUint16(1), // 1 service
+    rtcServicePack
+  ]);
+
+  // 5. Signature = HMAC-SHA256(signingKey, innerMessage)
+  const signature = new Uint8Array(await hmacSha256(signingKey, innerMessage));
+
+  // 6. Content = packString(signature) + innerMessage
+  const content = concatBytes([packStringBytes(signature), innerMessage]);
+
+  // 7. Compress with deflate-raw (if supported) or raw
+  const compressed = await deflateRaw(content);
+
+  return VERSION + toBase64(compressed);
+}
+
+function packUint16(val) {
+  const buf = new ArrayBuffer(2);
+  new DataView(buf).setUint16(0, val, true);
+  return new Uint8Array(buf);
+}
+
+function packUint32(val) {
+  const buf = new ArrayBuffer(4);
+  new DataView(buf).setUint32(0, val >>> 0, true);
+  return new Uint8Array(buf);
+}
+
+function packString(str) {
+  const bytes = new TextEncoder().encode(str);
+  return concatBytes([packUint16(bytes.length), bytes]);
+}
+
+function packStringBytes(bytes) {
+  return concatBytes([packUint16(bytes.length), bytes]);
+}
+
+function packMapUint32(map) {
+  const parts = [packUint16(map.size)];
+  for (const [k, v] of map.entries()) {
+    parts.push(packUint16(k), packUint32(v));
+  }
+  return concatBytes(parts);
+}
+
+function concatBytes(arrays) {
+  const total = arrays.reduce((sum, a) => sum + a.length, 0);
+  const out = new Uint8Array(total);
+  let offset = 0;
+  for (const a of arrays) {
+    out.set(a, offset);
+    offset += a.length;
+  }
+  return out;
+}
+
+async function hmacSha256(keyBytes, dataBytes) {
+  const cryptoKey = await crypto.subtle.importKey(
+    "raw",
+    keyBytes,
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  return crypto.subtle.sign("HMAC", cryptoKey, dataBytes);
+}
+
+async function deflateRaw(bytes) {
+  if (typeof CompressionStream !== "undefined") {
+    const cs = new CompressionStream("deflate-raw");
+    const writer = cs.writable.getWriter();
+    writer.write(bytes);
+    writer.close();
+    const buf = await new Response(cs.readable).arrayBuffer();
+    return new Uint8Array(buf);
+  }
+  return bytes;
+}
+
+function toBase64(bytes) {
+  let binary = "";
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
