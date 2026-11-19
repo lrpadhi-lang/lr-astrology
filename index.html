@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="te">
 <head>
+    <script src="https://download.agora.io/sdk/release/AgoraRTC_N-4.22.0.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LR Astrology</title>
@@ -9234,6 +9235,85 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         <div id="infoModalBody"></div>
     </div>
 </div>
-
+<div id="voice-call-box" style="padding: 16px; border: 1px solid #ddd; border-radius: 10px; max-width: 360px;">
+  <h3 style="margin-top: 0;">జ్యోతిష్య వాయిస్ కన్సల్టేషన్</h3>
+  <input id="channelInput" type="text" value="astrology-room" placeholder="ఛానల్ పేరు" style="padding: 8px; width: 100%; margin-bottom: 10px; box-sizing: border-box;" />
+  <button id="joinCallBtn" onclick="startVoiceCall()" style="padding: 10px 16px; cursor: pointer;">కాల్ కలపండి</button>
+  <button id="leaveCallBtn" onclick="leaveVoiceCall()" disabled style="padding: 10px 16px; cursor: pointer; margin-left: 8px;">కాల్ కట్ చేయండి</button>
+  <p id="callStatus" style="margin-top: 10px; font-size: 14px;">సిద్ధంగా ఉంది</p>
+</div>
 </body>
 </html>
+<script>
+  let rtcClient = null;
+  let localAudioTrack = null;
+
+  async function startVoiceCall() {
+    const statusEl = document.getElementById("callStatus");
+    const joinBtn = document.getElementById("joinCallBtn");
+    const leaveBtn = document.getElementById("leaveCallBtn");
+    const channelName = (document.getElementById("channelInput").value || "astrology-room").trim();
+
+    try {
+      statusEl.textContent = "టోకెన్ తీసుకుంటోంది...";
+      joinBtn.disabled = true;
+
+      const res = await fetch(`/api/agora-token?channel=${encodeURIComponent(channelName)}&uid=0&role=publisher`);
+      const data = await res.json();
+
+      if (!res.ok || !data.token) {
+        throw new Error(data.error || "టోకెన్ పొందడంలో లోపం జరిగింది");
+      }
+
+      rtcClient = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+
+      rtcClient.on("user-published", async (user, mediaType) => {
+        await rtcClient.subscribe(user, mediaType);
+        if (mediaType === "audio" && user.audioTrack) {
+          user.audioTrack.play();
+          statusEl.textContent = "వాయిస్ కాల్ కనెక్ట్ అయింది";
+        }
+      });
+
+      rtcClient.on("user-unpublished", () => {
+        statusEl.textContent = "ఎదుటివారు కాల్ నుండి వెళ్లారు";
+      });
+
+      statusEl.textContent = "ఛానల్‌లోకి కనెక్ట్ అవుతోంది...";
+      await rtcClient.join(data.appId, data.channel, data.token, data.uid);
+
+      localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+      await rtcClient.publish([localAudioTrack]);
+
+      leaveBtn.disabled = false;
+      statusEl.textContent = `కనెక్ట్ అయింది — ఛానల్: ${data.channel}`;
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = "లోపం: " + err.message;
+      joinBtn.disabled = false;
+      leaveBtn.disabled = true;
+    }
+  }
+
+  async function leaveVoiceCall() {
+    const statusEl = document.getElementById("callStatus");
+    const joinBtn = document.getElementById("joinCallBtn");
+    const leaveBtn = document.getElementById("leaveCallBtn");
+
+    try {
+      if (localAudioTrack) {
+        localAudioTrack.stop();
+        localAudioTrack.close();
+        localAudioTrack = null;
+      }
+      if (rtcClient) {
+        await rtcClient.leave();
+        rtcClient = null;
+      }
+    } finally {
+      statusEl.textContent = "కాల్ నిలిపివేయబడింది";
+      joinBtn.disabled = false;
+      leaveBtn.disabled = true;
+    }
+  }
+</script>
