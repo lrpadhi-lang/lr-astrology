@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LR Astrology</title>
     <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
-    <link rel="manifest" href="/manifest.json">
-</head>
     <style>
         html { font-size: 18px; }   /* యాప్ మొత్తం టెక్స్ట్ స్కేల్ — బేస్ 18px */
 
@@ -3157,6 +3155,30 @@
         .about-body { width: 100% !important; max-width: 100% !important; text-align: left; }
         .about-name { text-align: center !important; width: 100% !important; margin-top: 2px !important; }
         .about-text { max-width: 100% !important; }
+
+        /* డ్రాయర్ శీర్షిక స్పష్టంగా */
+        .drawer-head .brand-name {
+            color: #fff9ec !important;
+            text-shadow: 0 1px 3px rgba(40, 20, 8, 0.55);
+            font-size: 1.9rem !important;
+        }
+        .drawer-head .brand-tag {
+            color: #f7e6c4 !important;
+            text-shadow: 0 1px 2px rgba(40, 20, 8, 0.5);
+            font-weight: 700 !important;
+        }
+
+        .call-announce {
+            margin: 12px 0 6px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(179, 34, 31, 0.06);
+            border: 1px solid rgba(179, 34, 31, 0.25);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #6f4a2e;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -3186,7 +3208,6 @@
         <div class="drawer-sep"></div>
         <a class="drawer-link" onclick="drawerGo('jatakamPage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a1 1 0 0 1 1 1v17l-6-4.2L6 21V4a1 1 0 0 1 1-1z"/></svg> సేవ్ చేసిన ప్రొఫైల్స్</a>
         <a class="drawer-link" id="drawerLoginItem" onclick="closeDrawer(); openLogin();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg> లాగిన్</a>
-        <a class="drawer-link" onclick="closeDrawer(); openSettings();"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.9 19.3a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.7 8.9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9v0a1.7 1.7 0 0 0 1.56 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1z"/></svg> సెట్టింగ్స్ (యజమాని)</a>
         <a class="drawer-link" id="drawerLogoutItem" style="display: none;" onclick="doLogout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12H4m0 0 3.5-3.5M4 12l3.5 3.5"/><path d="M10 4h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-8"/></svg> లాగ్ అవుట్</a>
     </nav>
 
@@ -3885,6 +3906,33 @@
 
 
 
+
+        <!-- ASTROLOGER PANEL -->
+        <div id="astroPanelPage" style="display: none;">
+            <div class="page-banner">
+                <h2>జ్యోతిష్కుడి ప్యానెల్</h2>
+                <p>కాల్‌లు స్వీకరించడానికి మీ ఛానెల్‌లో చేరండి.</p>
+            </div>
+
+            <div class="card-box">
+                <div class="input-group">
+                    <label class="input-label">మీరు ఏ జ్యోతిష్కుడు?</label>
+                    <select id="panelAstro" class="select-field"></select>
+                    <div class="hint-text">విజిటర్ ఏ జ్యోతిష్కుడికి కాల్ చేసినా, ఆ జ్యోతిష్కుడి ఛానెల్ లోనే కాల్ వస్తుంది.</div>
+                </div>
+                <button type="button" class="primary-btn" onclick="joinAstroPanel()">ప్యానెల్ తెరవండి</button>
+                <button type="button" class="call-end" style="margin-left: 8px;" onclick="leaveAstroPanel()">మూసివేయండి</button>
+                <div id="panelStatus" class="hint-text" style="margin-top: 12px; font-weight: 700;"></div>
+            </div>
+
+            <div class="card-box">
+                <div class="info-note">
+                    ఈ ప్యానెల్ తెరిచి ఉంచితే, విజిటర్ కాల్ చేసినప్పుడు మీరు నేరుగా మాట్లాడవచ్చు.
+                    మొదట ⚙️ సెట్టింగ్స్‌లో Agora App ID ఇవ్వాలి. ఇది మీ ఫోన్/కంప్యూటర్‌లో తెరిచి ఉంచుకోవాలి.
+                </div>
+            </div>
+        </div>
+
         <!-- KARMA PAGE -->
         <div id="karmaPage" style="display: none;">
             <div class="page-banner">
@@ -4097,7 +4145,12 @@
                 </div>
                 <div class="astro-grid" id="astroGrid"></div>
             </div>
-        </div>
+                    <div class="card-box" style="text-align: center;">
+                <div class="hint-text">మీరు జ్యోతిష్కుడా? కాల్‌లు స్వీకరించడానికి
+                    <span style="text-decoration: underline; cursor: pointer;" onclick="showPage('astroPanelPage')">జ్యోతిష్కుడి ప్యానెల్</span> తెరవండి.
+                </div>
+            </div>
+</div>
 
     </div>
 
@@ -4990,7 +5043,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
     }
 
     function showPage(pageId) {
-        ['homePage', 'jatakamPage', 'gocharamPage', 'muhurtamPage', 'astrologersPage', 'booksPage', 'karmaPage'].forEach(id => {
+        ['homePage', 'jatakamPage', 'gocharamPage', 'muhurtamPage', 'astrologersPage', 'booksPage', 'karmaPage', 'astroPanelPage'].forEach(id => {
             document.getElementById(id).style.display = 'none';
         });
         document.getElementById(pageId).style.display = 'block';
@@ -7772,6 +7825,9 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         updateModeBadges();
         if (typeof loadVisits === 'function') loadVisits();
         if (typeof openFromHash === 'function') openFromHash();
+        if (typeof initOwnerGate === 'function') initOwnerGate();
+        if (typeof initCallRing === 'function') initCallRing();
+        if (typeof initPanelSelect === 'function') initPanelSelect();
         attachTeluguInput(document.getElementById('mhName'));
         const mhNakSel = document.getElementById('mhNakshatra');
         if (mhNakSel) {
@@ -7803,6 +7859,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
     ];
 
     let astroFilter = 'all';
+    let asSessionVerified = false;
     let astroOtpCode = null;
     let astroState = { mobile: '', verified: false, birth: null, wallet: 0 };
     try {
@@ -8065,6 +8122,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         if (el.value === asOtpCode) {
             astroState.mobile = document.getElementById('asMobile').value;
             astroState.verified = true;
+            asSessionVerified = true;
             saveAstroState();
             asShowStep(3);
         } else {
@@ -8193,7 +8251,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
 
         renderWallet();
 
-        if (entry) asShowStep(astroState.saved ? 6 : 1);
+        if (entry) asShowStep(asSessionVerified ? (astroState.saved ? 6 : 3) : 1);
     }
 
     // ================= వాలెట్ + రీచార్జ్ =================
@@ -8370,6 +8428,240 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         document.body.style.overflow = '';
     }
 
+    // ---------- కాల్ ప్రకటన (జ్యోతిష్కుడి పేరుతో) ----------
+    const CALL_ANNOUNCE = {
+        1: function (n) { return 'నమస్కారం... మీరు ' + n + ' గారికి కాల్ చేస్తున్నారు. దయచేసి వేచి ఉండండి, మీ కాల్ వారికి అనుసంధానం చేయబడుతోంది. శుభం భూయాత్!'; },
+        2: function (n) { return 'మీరు కాల్ చేస్తున్న వ్యక్తి... ' + n + ' గారు. వారు ప్రస్తుతం మీ కాల్‌కు సమాధానం ఇవ్వడానికి సిద్ధమవుతున్నారు. దయచేసి లైన్‌లోనే వేచి ఉండండి.'; },
+        3: function (n) { return 'నమస్కారం, ఇది ' + n + ' గారి నంబర్. మీ కాల్ కనెక్ట్ అవుతోంది, దయచేసి వేచి ఉండండి.'; },
+        4: function (n) { return 'నమస్తే అండి! మీరు ' + n + ' గారికి ఫోన్ చేశారు. కొద్దిసేపట్లో వారు మీతో మాట్లాడుతారు, దయచేసి లైన్‌లో ఉండండి.'; }
+    };
+    let callAnnounceStyle = 2;
+
+    function callAnnounceText(name) {
+        const fn = CALL_ANNOUNCE[callAnnounceStyle] || CALL_ANNOUNCE[1];
+        return fn(name || 'జ్యోతిష్కుడు');
+    }
+
+    function speakCall(name) {
+        try {
+            if (!('speechSynthesis' in window)) return;
+            const text = callAnnounceText(name);
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'te-IN';
+            u.rate = 0.92;
+            u.pitch = 1.0;
+            const voices = window.speechSynthesis.getVoices() || [];
+            const tel = voices.filter(function (v) { return /te[-_]?IN/i.test(v.lang) || /telugu/i.test(v.name); })[0];
+            if (tel) u.voice = tel;
+            window.speechSynthesis.speak(u);
+        } catch (e) { }
+    }
+
+    function stopSpeakCall() {
+        try { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); } catch (e) { }
+    }
+
+    // ---------- డైలర్ టోన్ (మధురమైన నేపథ్య సంగీతం + రెండు ప్రకటనలు) ----------
+    let dialerTimers = [], musicTimer = null, musicFading = false;
+
+    function callLine1(name) {
+        return 'నమస్కారం... మీరు ప్రముఖ జ్యోతిష్య పండితులు, శ్రీ ' + name + ' గారికి కాల్ చేస్తున్నారు.';
+    }
+    function callLine2(name) {
+        return 'జ్యోతిష్యులు శ్రీ ' + name + ' గారు ప్రస్తుతం ఇతర సేవలలో నిమగ్నమై ఉన్నారు. దయచేసి కొద్ది క్షణాలు లైన్‌లోనే వేచి ఉండండి, మీ కాల్ త్వరలోనే కలుపబడుతుంది.';
+    }
+
+    function playMusicPhrase() {
+        if (!ringCtx) return;
+        const gainPeak = musicFading ? 0.018 : 0.045;
+        // మృదువైన వేణువు లాంటి స్వరాలు (పెంటటానిక్)
+        const notes = [523.25, 587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33];
+        const t0 = ringCtx.currentTime;
+        notes.forEach(function (f, i) {
+            const t = t0 + i * 0.55;
+            const o = ringCtx.createOscillator(), g = ringCtx.createGain();
+            o.type = 'sine';
+            o.frequency.value = f;
+            g.gain.setValueAtTime(0.0001, t);
+            g.gain.exponentialRampToValueAtTime(gainPeak, t + 0.35);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + 2.1);
+            o.connect(g);
+            g.connect(ringCtx.destination);
+            o.start(t);
+            o.stop(t + 2.2);
+        });
+    }
+
+    function startDialer() {
+        stopDialer();
+        try {
+            ringCtx = ringCtx || new (window.AudioContext || window.webkitAudioContext)();
+            if (ringCtx.state === 'suspended') ringCtx.resume();
+        } catch (e) { }
+        musicFading = false;
+        playMusicPhrase();
+        musicTimer = setInterval(playMusicPhrase, 4400);
+
+        const a = (typeof callIdx !== 'undefined' && callIdx >= 0 && ASTROLOGERS[callIdx]) ? ASTROLOGERS[callIdx] : null;
+        const nm = a ? a.name : 'జ్యోతిష్కుడు';
+        const el = document.getElementById('callAnnounce');
+        if (el) {
+            el.innerHTML = '<div>' + escHtml(callLine1(nm)) + '</div><div style="margin-top:8px;">' + escHtml(callLine2(nm)) + '</div>';
+        }
+
+        dialerTimers.push(setTimeout(function () { speakLine(callLine1(nm)); }, 5000));   // మొదటి మాట
+        dialerTimers.push(setTimeout(function () { speakLine(callLine2(nm)); }, 22000));  // రెండవ మాట
+        dialerTimers.push(setTimeout(function () { musicFading = true; }, 30000));        // సంగీతం నెమ్మదిగా తగ్గడం
+        dialerTimers.push(setTimeout(function () { stopDialer(); }, 36000));
+    }
+
+    function stopDialer() {
+        dialerTimers.forEach(function (t) { clearTimeout(t); });
+        dialerTimers = [];
+        if (musicTimer) clearInterval(musicTimer);
+        musicTimer = null;
+        try { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); } catch (e) { }
+    }
+
+    function speakLine(text) {
+        try {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'te-IN';
+            u.rate = 0.9;
+            u.pitch = 1.0;
+            const voices = window.speechSynthesis.getVoices() || [];
+            const tel = voices.filter(function (v) { return /te[-_]?IN/i.test(v.lang) || /telugu/i.test(v.name); })[0];
+            if (tel) u.voice = tel;
+            window.speechSynthesis.speak(u);
+        } catch (e) { }
+    }
+
+    // ---------- జ్యోతిష్కుడి ప్యానెల్ ----------
+    let panelState = null;
+
+    function panelMsg(t, ok) {
+        const el = document.getElementById('panelStatus');
+        if (!el) return;
+        el.textContent = t;
+        el.style.color = ok ? '#1f6f43' : '#b3221f';
+    }
+
+    function initPanelSelect() {
+        const sel = document.getElementById('panelAstro');
+        if (!sel || sel.options.length) return;
+        sel.innerHTML = ASTROLOGERS.map(function (a, i) {
+            return '<option value="' + a.id + '">' + escHtml(a.name) + ' — ' + escHtml(a.langs.join(' · ')) + '</option>';
+        }).join('');
+    }
+
+    async function joinAstroPanel() {
+        const s = getSettings();
+        if (!s.agoraId) { panelMsg('మొదట ⚙️ సెట్టింగ్స్‌లో Agora App ID ఇవ్వండి.'); return; }
+        const sel = document.getElementById('panelAstro');
+        const id = sel ? sel.value : '';
+        try {
+            panelMsg('కనెక్ట్ అవుతోంది...', true);
+            const AgoraRTC = await loadAgoraSdk();
+            const channel = 'lr_' + id;
+            const uid = 1001;
+            const token = await fetchAgoraToken(channel, uid);
+            const client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+            await client.join(s.agoraId, channel, token, uid);
+            const mic = await AgoraRTC.createMicrophoneAudioTrack();
+            await client.publish([mic]);
+            client.on('user-published', async function (user, mediaType) {
+                await client.subscribe(user, mediaType);
+                if (mediaType === 'audio') { user.audioTrack.play(); panelMsg('కాల్ వచ్చింది — మాట్లాడండి', true); }
+            });
+            client.on('user-left', function () { panelMsg('కాల్ ముగిసింది — మళ్లీ వేచి ఉన్నారు', true); });
+            panelState = { client: client, mic: mic, channel: channel };
+            panelMsg('సిద్ధంగా ఉన్నారు — కాల్ కోసం వేచి ఉన్నారు (' + channel + ')', true);
+        } catch (e) {
+            panelMsg('కనెక్షన్ కుదరలేదు: ' + (e.message || e.name || ''), false);
+        }
+    }
+
+    async function leaveAstroPanel() {
+        if (!panelState) { panelMsg('ప్యానెల్ తెరిచి లేదు'); return; }
+        const st = panelState;
+        panelState = null;
+        try { if (st.mic) { st.mic.stop(); st.mic.close(); } } catch (e) { }
+        try { await st.client.leave(); } catch (e) { }
+        panelMsg('ప్యానెల్ మూసివేయబడింది');
+    }
+
+    // ---------- Agora వాయిస్ కాల్ ----------
+    const AGORA_SDK_URL = 'https://download.agora.io/sdk/web/AgoraRTC_N-production.js';
+    let agoraState = null;
+
+    function loadAgoraSdk() {
+        return new Promise(function (resolve, reject) {
+            if (window.AgoraRTC) { resolve(window.AgoraRTC); return; }
+            const sc = document.createElement('script');
+            sc.src = AGORA_SDK_URL;
+            sc.async = true;
+            sc.onload = function () { window.AgoraRTC ? resolve(window.AgoraRTC) : reject(new Error('SDK load failed')); };
+            sc.onerror = function () { reject(new Error('SDK load failed')); };
+            document.head.appendChild(sc);
+        });
+    }
+
+    async function fetchAgoraToken(channel, uid) {
+        const s = getSettings();
+        if (!s.agoraToken) return null;
+        const url = s.agoraToken + (s.agoraToken.indexOf('?') > -1 ? '&' : '?')
+            + 'channel=' + encodeURIComponent(channel) + '&uid=' + uid;
+        const r = await fetch(url);
+        if (!r.ok) throw new Error('token server ' + r.status);
+        const j = await r.json();
+        return j.token || null;
+    }
+
+    async function startAgoraCall(astro) {
+        const s = getSettings();
+        if (!s.agoraId) return false;            // App ID లేకపోతే డెమో మోడే
+        try {
+            const AgoraRTC = await loadAgoraSdk();
+            const channel = 'lr_' + astro.id;
+            const uid = Math.floor(Math.random() * 100000) + 1;
+            const token = await fetchAgoraToken(channel, uid);
+            const client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
+            await client.join(s.agoraId, channel, token, uid);
+            const mic = await AgoraRTC.createMicrophoneAudioTrack();
+            await client.publish([mic]);
+            client.on('user-published', async function (user, mediaType) {
+                await client.subscribe(user, mediaType);
+                if (mediaType === 'audio') user.audioTrack.play();
+                setCallStatus('జ్యోతిష్కుడు లైన్‌లో ఉన్నారు — మాట్లాడవచ్చు', true);
+            });
+            client.on('user-left', function () { setCallStatus('జ్యోతిష్కుడు లైన్ నుంచి వెళ్లారు', false); });
+            agoraState = { client: client, mic: mic, channel: channel };
+            setCallStatus('కనెక్ట్ అయింది — మీ మైక్రోఫోన్ ఆన్‌లో ఉంది', true);
+            return true;
+        } catch (e) {
+            setCallStatus('Agora కనెక్షన్ కుదరలేదు: ' + (e.message || e.name || 'తెలియదు'), false);
+            return false;
+        }
+    }
+
+    async function leaveAgoraCall() {
+        if (!agoraState) return;
+        const st = agoraState;
+        agoraState = null;
+        try { if (st.mic) { st.mic.stop(); st.mic.close(); } } catch (e) { }
+        try { await st.client.leave(); } catch (e) { }
+    }
+
+    function setCallStatus(text, ok) {
+        const el = document.getElementById('callStatus');
+        if (!el) return;
+        el.textContent = text;
+        el.style.color = ok ? '#1f6f43' : '#b3221f';
+    }
+
     // ---------- కాల్ ----------
     let callIdx = -1;
     let callTimer = null;
@@ -8384,6 +8676,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
             '<div class="call-ring">📞</div>' +
             '<h3>' + escHtml(a.name) + '</h3>' +
             '<div class="astro-langs" style="margin-bottom:10px;">' + a.langs.join(' · ') + '</div>' +
+            '<div class="call-announce" id="callAnnounce">' + escHtml(callLine1(a.name)) + '</div>' +
             '<div class="wallet-line"><span>కాల్ ఫీజు</span><span>₹' + a.fee + '</span></div>' +
             '<div class="wallet-line"><span>వాలెట్ బ్యాలెన్స్</span><span>₹' + (astroState.wallet || 0) + '</span></div>' +
             '<button type="button" class="primary-btn" style="margin-top:14px;" onclick="connectCall()">📞 కాల్ చేయండి</button>' +
@@ -8400,12 +8693,13 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
             return;
         }
         chargeWallet(a.fee, 'కాల్ — ' + a.name);
+        if (typeof startAgoraCall === 'function') { startAgoraCall(a); }
         callSeconds = 0;
         const body = document.getElementById('callBody');
         body.innerHTML =
             '<div class="call-ring">📞</div>' +
             '<h3>' + escHtml(a.name) + '</h3>' +
-            '<div class="call-status">కాల్ కనెక్ట్ అయింది (డెమో)</div>' +
+            '<div class="call-status" id="callStatus">కాల్ కనెక్ట్ అవుతోంది...</div>' +
             '<div class="call-timer" id="callTimer">00:00</div>' +
             '<button type="button" class="call-end" onclick="endCall()">కాల్ ముగించండి</button>' +
             '<div class="otp-demo" style="margin-top:12px;">ఇది డెమో స్క్రీన్ మాత్రమే — వాయిస్ ట్రాన్స్‌ఫర్ కోసం Exotel / Twilio కనెక్షన్ అవసరం.</div>';
@@ -8562,7 +8856,10 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
             sarvamKey: (document.getElementById('setSarvamKey').value || '').trim(),
             razorpayKey: (document.getElementById('setRazorpayKey').value || '').trim(),
             book1Link: (document.getElementById('setBook1').value || '').trim(),
-            book2Link: (document.getElementById('setBook2').value || '').trim()
+            book2Link: (document.getElementById('setBook2').value || '').trim(),
+            agoraId: (document.getElementById('setAgoraId').value || '').trim(),
+            agoraToken: (document.getElementById('setAgoraToken').value || '').trim(),
+            visitsUrl: (document.getElementById('setVisitsUrl').value || '').trim()
         };
         try { localStorage.setItem('lrAppSettings', JSON.stringify(s)); } catch (e) {}
         updateModeBadges();
@@ -8576,6 +8873,9 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         document.getElementById('setRazorpayKey').value = s.razorpayKey || '';
         document.getElementById('setBook1').value = s.book1Link || '';
         document.getElementById('setBook2').value = s.book2Link || '';
+        document.getElementById('setAgoraId').value = s.agoraId || '';
+        document.getElementById('setAgoraToken').value = s.agoraToken || '';
+        document.getElementById('setVisitsUrl').value = s.visitsUrl || '';
         updateModeBadges();
         document.getElementById('settingsModal').classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -8705,7 +9005,15 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         const totalEl = document.getElementById('visTotal');
         if (!todayEl || !totalEl) return;
         try {
-            const res = await fetch('./api/visits', { cache: 'no-store' });
+            const cfg = getSettings();
+            let endpoint = (cfg.visitsUrl || '').trim();
+            if (!endpoint) {
+                endpoint = './api/visits';
+            } else {
+                endpoint = endpoint.replace(/\/+$/, '');
+                if (endpoint.indexOf('/api/visits') === -1) endpoint += '/api/visits';
+            }
+            const res = await fetch(endpoint, { cache: 'no-store' });
             if (!res.ok) throw new Error('no endpoint');
             const data = await res.json();
             todayEl.textContent = Number(data.today || 0).toLocaleString('en-IN');
@@ -8727,9 +9035,57 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         window.open(link, '_blank');
     }
 
+    // యజమాని సెట్టింగ్స్ — ఫుటర్ కాపీరైట్‌పై వరుసగా 5 సార్లు నొక్కితే తెరుచుకుంటుంది
+    let ownerTapCount = 0, ownerTapTimer = null;
+    function initOwnerGate() {
+        const el = document.querySelector('.footer-bottom');
+        if (!el) return;
+        el.addEventListener('click', function () {
+            ownerTapCount++;
+            clearTimeout(ownerTapTimer);
+            ownerTapTimer = setTimeout(function () { ownerTapCount = 0; }, 2500);
+            if (ownerTapCount >= 5) {
+                ownerTapCount = 0;
+                openSettings();
+            }
+        });
+    }
+
+    // రింగ్ సౌండ్ (డెమో — బ్రౌజర్ ఆడియోతో)
+    let ringCtx = null, ringTimer = null;
+    function ringBeep(freq, when, dur) {
+        const o = ringCtx.createOscillator(), g = ringCtx.createGain();
+        o.type = 'sine';
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(0.0001, when);
+        g.gain.exponentialRampToValueAtTime(0.10, when + 0.06);
+        g.gain.exponentialRampToValueAtTime(0.0001, when + dur);
+        o.connect(g);
+        g.connect(ringCtx.destination);
+        o.start(when);
+        o.stop(when + dur + 0.05);
+    }
+    function startRing() { startDialer(); }
+    function stopRing() { stopDialer(); }
+    function initCallRing() {
+        const modal = document.getElementById('callModal');
+        if (!modal) return;
+        new MutationObserver(function () {
+            if (modal.classList.contains('open')) {
+                startRing();
+                // డైలర్ టోన్ మరియు ప్రకటనలు startDialer లోనే మొదలవుతాయి
+            } else {
+                stopRing();
+                stopSpeakCall();
+                stopDialer();
+                if (typeof leaveAgoraCall === 'function') { leaveAgoraCall(); }
+            }
+        }).observe(modal, { attributes: true, attributeFilter: ['class'] });
+    }
+
     function openFromHash() {
         const h = (location.hash || '').replace('#', '');
-        const map = { books: 'booksPage', karma: 'karmaPage', astrologers: 'astrologersPage', jatakam: 'jatakamPage',
+        const map = { books: 'booksPage', karma: 'karmaPage', panel: 'astroPanelPage', astrologers: 'astrologersPage', jatakam: 'jatakamPage',
                       panchangam: 'gocharamPage', muhurtam: 'muhurtamPage' };
         if (map[h]) showPage(map[h]);
     }
@@ -8768,6 +9124,23 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         <div class="input-group">
             <label class="input-label">పుస్తకం 2 చెల్లింపు లింక్ — జ్యోతిష కర్మఫల రహస్యం</label>
             <input type="url" id="setBook2" class="input-field" placeholder="https://rzp.io/l/..." autocomplete="off">
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Agora App ID <span class="mode-badge" id="agoraBadge">డెమో</span></label>
+            <input type="text" id="setAgoraId" class="input-field" placeholder="32 అక్షరాల App ID" autocomplete="off">
+            <div class="hint-text">agora.io లో ఉచిత ఖాతా తెరిచి ఒక ప్రాజెక్ట్ చేయండి. ఆ App ID ఇక్కడ పెట్టగానే జ్యోతిష్కుడితో నిజమైన వాయిస్ కాల్ కనెక్ట్ అవుతుంది.</div>
+        </div>
+        <div class="input-group">
+            <label class="input-label">Agora టోకెన్ సర్వర్ URL (ఐచ్ఛికం)</label>
+            <input type="url" id="setAgoraToken" class="input-field" placeholder="https://your-worker.workers.dev/token" autocomplete="off">
+            <div class="hint-text">ప్రొడక్షన్‌లో టోకెన్ సర్వర్ కావాలి. ఇది ఇవ్వకపోతే App ID మాత్రమే ఉన్న టెస్టింగ్ మోడ్‌లో (24 గంటలు) పనిచేస్తుంది.</div>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">విజిటర్ కౌంటర్ URL</label>
+            <input type="url" id="setVisitsUrl" class="input-field" placeholder="https://lr-visits.lrpadhi.workers.dev/api/visits" autocomplete="off">
+            <div class="hint-text">విజిటర్ కౌంటర్ వర్కర్ లింక్ ఇక్కడ పెట్టండి. ఖాళీగా ఉంటే కౌంటర్ "—" అనే కనిపిస్తుంది.</div>
         </div>
 
         <div class="settings-note">
