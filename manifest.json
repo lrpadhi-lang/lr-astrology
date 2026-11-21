@@ -3,6 +3,8 @@
   "short_name": "LR Astrology",
   "start_url": "/",
   "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f97316",
   "icons": [
     {
       "src": "/icon-192.png",
