@@ -8,5 +8,17 @@
   "short_name": "LR Astrology",
   "start_url": "/",
   "theme_color": "#ffffff",
-  "description": "Vedic astrology charts, panchangam, and consultations"
+  "description": "Vedic astrology charts, panchangam, and consultations",
+  "icons": [
+    {
+      "src": "/launchericon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/launchericon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
