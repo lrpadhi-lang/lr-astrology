@@ -1,3 +1,18 @@
+const GITHUB_RAW_BASE = "https://raw.githubusercontent.com/Irpadhi-lang/lr-astrology/main";
+
+const STATIC_MIME_TYPES = {
+  "/": "text/html; charset=utf-8",
+  "/index.html": "text/html; charset=utf-8",
+  "/manifest.json": "application/manifest+json; charset=utf-8",
+  "/launchericon-48x48.png": "image/png",
+  "/launchericon-72x72.png": "image/png",
+  "/launchericon-96x96.png": "image/png",
+  "/launchericon-144x144.png": "image/png",
+  "/launchericon-192x192.png": "image/png",
+  "/launchericon-512x512.png": "image/png",
+  "/favicon.ico": "image/png"
+};
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -81,7 +96,32 @@ export default {
       }
     }
 
-    return env.ASSETS.fetch(request);
+    // ASSETS బైండింగ్ ఉంటే దాన్ని వాడండి, లేకపోతే ఫైళ్లను సురక్షితంగా సర్వ్ చేయండి
+    if (env && env.ASSETS && typeof env.ASSETS.fetch === "function") {
+      return env.ASSETS.fetch(request);
+    }
+
+    const cleanPath = url.pathname === "/" ? "/index.html" : url.pathname;
+    const rawFilePath = cleanPath === "/favicon.ico" ? "/launchericon-48x48.png" : cleanPath;
+    const contentType = STATIC_MIME_TYPES[url.pathname] || STATIC_MIME_TYPES[cleanPath];
+
+    if (contentType) {
+      const upstream = await fetch(`${GITHUB_RAW_BASE}${rawFilePath}`, {
+        cf: { cacheTtl: 300, cacheEverything: true }
+      });
+
+      if (upstream.ok) {
+        const headers = new Headers(upstream.headers);
+        headers.set("Content-Type", contentType);
+        headers.set("Access-Control-Allow-Origin", "*");
+        return new Response(upstream.body, {
+          status: upstream.status,
+          headers
+        });
+      }
+    }
+
+    return new Response("Not Found", { status: 404 });
   }
 };
 
