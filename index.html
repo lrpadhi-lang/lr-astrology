@@ -3249,18 +3249,19 @@
         .visitor-card h3 { color: #6f4a2e; font-size: 1rem; margin-bottom: 12px; }
         .visitor-card button { margin-bottom: 8px; }
 
-        /* ---------- భాష ప్రకారం ఫాంట్ ---------- */
-        html[lang="te"] body, html[lang="te"] body *:not(.logo) {
-            font-family: 'Noto Sans Telugu', 'Gautami', system-ui, sans-serif;
-        }
-        html[lang="en"] body, html[lang="en"] body *:not(.logo) {
+        /* ---------- భాష ప్రకారం ఫాంట్ (బ్రాండ్ ఫాంట్ మారదు) ---------- */
+        html[lang="en"] body, html[lang="en"] body *:not(.logo):not(.logo-disc span):not(.app-name):not(.brand-name):not(.stage-title) {
             font-family: 'Noto Sans', 'Segoe UI', system-ui, sans-serif !important;
         }
-        html[lang="hi"] body, html[lang="hi"] body *:not(.logo) {
+        html[lang="hi"] body, html[lang="hi"] body *:not(.logo):not(.logo-disc span):not(.app-name):not(.brand-name):not(.stage-title) {
             font-family: 'Noto Sans Devanagari', 'Nirmala UI', system-ui, sans-serif !important;
         }
-        html[lang="or"] body, html[lang="or"] body *:not(.logo) {
+        html[lang="or"] body, html[lang="or"] body *:not(.logo):not(.logo-disc span):not(.app-name):not(.brand-name):not(.stage-title) {
             font-family: 'Noto Sans Oriya', 'Kalinga', system-ui, sans-serif !important;
+        }
+        /* బ్రాండ్ ఫాంట్ — ఎప్పుడూ పాత స్క్రిప్ట్ ఫాంటే */
+        .logo, .logo-disc span, .app-name, .brand-name, .stage-title {
+            font-family: 'Italianno', 'Brush Script MT', cursive !important;
         }
     </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
