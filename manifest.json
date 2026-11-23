@@ -1,22 +1,18 @@
 {
-  "background_color": "#ffffff",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "LR Astrology",
-  "orientation": "any",
-  "scope": "/",
   "short_name": "LR Astrology",
-  "start_url": "/",
-  "theme_color": "#ffffff",
-  "description": "Vedic astrology charts, panchangam, and consultations",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#b91c1c",
   "icons": [
     {
-      "src": "/launchericon-192x192.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/launchericon-512x512.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
