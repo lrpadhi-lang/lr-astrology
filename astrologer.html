@@ -1,0 +1,1554 @@
+<!doctype html>
+<html lang="te">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fdf7ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LR జ్యోతిష్కులు">
+<meta name="description" content="LR Astrology — జ్యోతిష్కుల యాప్">
+<title>LR Astrology · జ్యోతిష్కులు</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Noto+Sans+Telugu:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fdf7ec; --wheat:#e9d1a8; --sand:#6f4a2e; --sand2:#8b5e3c;
+  --kumkum:#b3221f; --gold:#d97706; --green:#1f6f43; --ink:#3a2415;
+  --tint:rgba(111,74,46,.12); --ui-font:'Noto Sans Telugu',system-ui,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:rgba(233,209,168,.5)}
+html,body{margin:0;padding:0;background:var(--cream)}
+body{font-family:var(--ui-font);font-size:18px;line-height:1.55;color:var(--ink);
+  -webkit-text-size-adjust:100%;text-size-adjust:100%}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+::selection{background:var(--wheat);color:var(--ink)}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit;line-height:inherit}
+button{cursor:pointer}
+.brand-name,.brand-disc{font-family:'Italianno','Segoe Script',cursive !important;font-weight:400 !important}
+
+#app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--cream);position:relative;overflow-x:hidden}
+#hdr{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:var(--cream);border-bottom:1px solid var(--wheat)}
+.disc{width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:var(--sand);color:var(--cream);
+  display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;border:2px solid var(--kumkum);padding-bottom:4px}
+.brand-name{font-size:30px;line-height:1;color:var(--sand);padding-bottom:2px}
+#hdr .grow{flex:1 1 auto;min-width:0}
+#hdr .who{font-size:13px;color:var(--sand2);margin-top:-2px}
+
+.screen{display:none;padding:14px 14px 96px}
+.screen.on{display:block}
+h1,h2,h3{font-weight:700;color:var(--sand);margin:0 0 10px;line-height:1.35}
+h1{font-size:23px} h2{font-size:20px} h3{font-size:18px}
+.muted{color:var(--sand2);font-size:15px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;
+  padding:13px 20px;background:linear-gradient(90deg,var(--cream) 0%,var(--wheat) 100%);
+  color:var(--sand);font-size:18px;font-weight:700;text-decoration:none}
+.btn:active{background:linear-gradient(90deg,var(--wheat) 0%,var(--cream) 100%)}
+.btn.block{display:flex;width:100%}
+.btn.dark{background:linear-gradient(90deg,var(--sand2) 0%,var(--sand) 100%);color:var(--cream)}
+.btn.kum{background:linear-gradient(90deg,var(--kumkum) 0%,#8f1a17 100%);color:var(--cream)}
+.btn.green{background:linear-gradient(90deg,#2a8b57 0%,var(--green) 100%);color:var(--cream)}
+.btn.sm{padding:9px 14px;font-size:16px;border-radius:10px}
+.btn.ghost{background:var(--tint);color:var(--sand)}
+.btn-row{display:flex;gap:10px;margin-top:14px}
+.btn-row .btn{flex:1 1 0}
+
+.panel{background:var(--sand);color:var(--cream);border-left:4px solid var(--kumkum);
+  border-radius:0 12px 12px 0;padding:14px 16px;margin-bottom:14px}
+.panel h2,.panel h3{color:var(--cream)}
+.panel .muted{color:var(--wheat)}
+.card{background:#fffaf1;border:1px solid var(--wheat);border-radius:12px;padding:14px;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:10px}
+.grow{flex:1 1 auto;min-width:0}
+.wrap{display:flex;flex-wrap:wrap;gap:8px}
+
+.chip{display:inline-block;border:0;border-radius:999px;padding:4px 12px;background:var(--tint);
+  color:var(--sand);font-size:14px;font-weight:600}
+.chip.gold{background:rgba(217,119,6,.16);color:#8a4a05}
+.chip.kum{background:rgba(179,34,31,.12);color:var(--kumkum)}
+.chip.green{background:rgba(31,111,67,.14);color:var(--green)}
+.chip.sel{background:var(--sand);color:var(--cream)}
+
+.stat{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(233,209,168,.9)}
+.stat:last-child{border-bottom:0}
+.stat .k{color:var(--sand2);font-size:16px}
+.stat .v{font-weight:700;color:var(--sand);text-align:right}
+.panel .stat{border-bottom-color:rgba(233,209,168,.32)}
+.panel .stat .k{color:var(--wheat)}
+.panel .stat .v{color:var(--cream)}
+
+.big-num{font-size:34px;font-weight:700;color:var(--cream);line-height:1.1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mini{background:#fffaf1;border:1px solid var(--wheat);border-radius:12px;padding:12px}
+.mini .lab{font-size:14px;color:var(--sand2)}
+.mini .num{font-size:24px;font-weight:700;color:var(--sand);line-height:1.2}
+
+.avatar{width:52px;height:52px;flex:0 0 52px;border-radius:50%;background:var(--sand);color:var(--cream);
+  display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;
+  border:2px solid var(--wheat);background-size:cover;background-position:center}
+.dot{width:11px;height:11px;border-radius:50%;position:absolute;right:-1px;bottom:-1px;border:2px solid #fffaf1}
+.dot.on{background:var(--green)} .dot.off{background:var(--sand2);opacity:.55}
+
+label.f{display:block;font-size:15px;font-weight:600;color:var(--sand);margin:12px 0 6px}
+input.i,select.i,textarea.i{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--wheat);
+  background:#fffaf1;font-size:18px}
+input.i::placeholder{color:#a08a72}
+
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:45;display:none;max-width:480px;margin:0 auto;
+  background:var(--cream);border-top:1px solid var(--wheat);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+#tabs.on{display:flex}
+#tabs button{flex:1 1 0;border:0;background:transparent;padding:8px 2px 6px;border-radius:10px;
+  color:var(--sand2);font-size:12.5px;font-weight:600;letter-spacing:-.1px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;border-bottom:3px solid transparent;position:relative}
+#tabs button.act{color:var(--kumkum);border-bottom-color:var(--gold)}
+.badge{position:absolute;top:2px;right:10px;background:var(--kumkum);color:var(--cream);
+  font-size:11px;font-weight:700;border-radius:999px;padding:1px 5px;min-width:17px;text-align:center}
+
+#overlay{position:fixed;inset:0;z-index:60;display:none;background:rgba(58,36,21,.45)}
+#overlay.on{display:block}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;background:var(--cream);
+  border-radius:18px 18px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto}
+.full{position:absolute;inset:0;max-width:480px;margin:0 auto;background:var(--cream);display:flex;flex-direction:column}
+
+#toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);max-width:420px;width:calc(100% - 40px);
+  background:var(--sand);color:var(--cream);border-left:4px solid var(--kumkum);border-radius:10px;
+  padding:12px 16px;font-size:16px;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+
+/* online switch */
+.switchbar{display:flex;align-items:center;gap:12px;width:100%;border:0;border-radius:12px;padding:14px 16px;
+  background:linear-gradient(90deg,var(--cream) 0%,var(--wheat) 100%);text-align:left}
+.switchbar .track{width:54px;height:30px;border-radius:999px;background:rgba(111,74,46,.25);position:relative;flex:0 0 54px;transition:background .2s}
+.switchbar .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fffaf1;transition:left .2s}
+.switchbar.on .track{background:var(--green)}
+.switchbar.on .knob{left:27px}
+.switchbar .lbl{font-size:18px;font-weight:700;color:var(--sand)}
+
+/* incoming call */
+.callscr{position:absolute;inset:0;background:var(--sand);color:var(--cream);display:flex;
+  flex-direction:column;align-items:center;padding:28px 20px calc(24px + env(safe-area-inset-bottom))}
+.callscr .avatar{width:96px;height:96px;flex:0 0 96px;font-size:34px;border-color:var(--kumkum);background:var(--sand2)}
+.timer{font-size:44px;font-weight:700;letter-spacing:2px;color:var(--cream)}
+.callbtns{display:flex;gap:26px;margin-top:auto}
+.cbtn{width:74px;height:74px;border-radius:50%;border:0;font-size:15px;font-weight:700;color:var(--cream);
+  display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.15;padding:6px}
+.cbtn.mute{background:var(--sand2)}
+.cbtn.end{background:var(--kumkum)}
+.cbtn.answer{background:var(--green);width:84px;height:84px;font-size:16px}
+.cbtn.mute.on{background:var(--wheat);color:var(--sand)}
+.ring{animation:pulse 1.1s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+.stamp{font-size:12px;color:var(--sand2);opacity:.8;text-align:center;margin-top:18px;line-height:1.5}
+.notif{display:flex;gap:10px;padding:12px 0;border-bottom:1px dashed rgba(233,209,168,.9)}
+.notif:last-child{border-bottom:0}
+.notif .unread{width:8px;height:8px;border-radius:50%;background:var(--kumkum);flex:0 0 8px;margin-top:8px}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <header id="hdr">
+    <div class="disc brand-disc">LR</div>
+    <div class="grow">
+      <div class="brand-name">LR Astrology</div>
+      <div class="who" id="who">జ్యోతిష్కుల యాప్</div>
+    </div>
+  </header>
+
+  <main id="screens">
+    <section class="screen" id="scr-entry"></section>
+    <section class="screen" id="scr-home"></section>
+    <section class="screen" id="scr-orders"></section>
+    <section class="screen" id="scr-wallet"></section>
+    <section class="screen" id="scr-notif"></section>
+    <section class="screen" id="scr-profile"></section>
+  </main>
+
+  <nav id="tabs"></nav>
+</div>
+
+<div id="overlay"></div>
+<div id="toast"></div>
+
+<noscript><p style="padding:20px">ఈ యాప్ పనిచేయడానికి JavaScript కావాలి.</p></noscript>
+
+<script>
+(function(){
+'use strict';
+const ugadiCache = {};
+const RASI_FULL = ["మేషం", "వృషభం", "మిథునం", "కర్కాటకం", "సింహం", "కన్య", "తుల", "వృశ్చికం", "ధనుస్సు", "మకరం", "కుంభం", "మీనం"]
+const NAK_NAMES = [
+        "అశ్విని", "భరణి", "కృత్తిక", "రోహిణి", "మృగశిర", "ఆరుద్ర", "పునర్వసు", "పుష్యమి", "ఆశ్లేష",
+        "మఖ", "పుబ్బ", "ఉత్తర", "హస్త", "చిత్త", "స్వాతి", "విశాఖ", "అనూరాధ", "జ్యేష్ఠ",
+        "మూల", "పూర్వాషాఢ", "ఉత్తరాషాఢ", "శ్రవణం", "ధనిష్ఠ", "శతభిషం", "పూర్వాభాద్ర", "ఉత్తరాభాద్ర", "రేవతి"
+    ]
+const NAK_LORDS = [
+        "కేతు", "శుక్ర", "సూర్య", "చంద్ర", "కుజ", "రాహు", "గురు", "శని", "బుధ",
+        "కేతు", "శుక్ర", "సూర్య", "చంద్ర", "కుజ", "రాహు", "గురు", "శని", "బుధ",
+        "కేతు", "శుక్ర", "సూర్య", "చంద్ర", "కుజ", "రాహు", "గురు", "శని", "బుధ"
+    ]
+const TITHI_NAMES = [
+        "శుక్ల పాడ్యమి", "శుక్ల విదియ", "శుక్ల తదియ", "శుక్ల చవితి", "శుక్ల పంచమి",
+        "శుక్ల షష్ఠి", "శుక్ల సప్తమి", "శుక్ల అష్టమి", "శుక్ల నవమి", "శుక్ల దశమి",
+        "శుక్ల ఏకాదశి", "శుక్ల ద్వాదశి", "శుక్ల త్రయోదశి", "శుక్ల చతుర్దశి", "పౌర్ణమి",
+        "బహుళ పాడ్యమి", "బహుళ విదియ", "బహుళ తదియ", "బహుళ చవితి", "బహుళ పంచమి",
+        "బహుళ షష్ఠి", "బహుళ సప్తమి", "బహుళ అష్టమి", "బహుళ నవమి", "బహుళ దశమి",
+        "బహుళ ఏకాదశి", "బహుళ ద్వాదశి", "బహుళ త్రయోదశి", "బహుళ చతుర్దశి", "అమావాస్య"
+    ]
+const VARA_NAMES = ["ఆదివారం", "సోమవారం", "మంగళవారం", "బుధవారం", "గురువారం", "శుక్రవారం", "శనివారం"]
+const YOGA_NAMES = [
+        "విష్కంభం", "ప్రీతి", "ఆయుష్మాన్", "సౌభాగ్యం", "శోభనం", "అతిగండం", "సుకర్మ", "ధృతి", "శూలం",
+        "గండం", "వృద్ధి", "ధ్రువం", "వ్యాఘాతం", "హర్షణం", "వజ్రం", "సిద్ధి", "వ్యతీపాతం", "వరీయాన్",
+        "పరిఘం", "శివం", "సిద్ధం", "సాధ్యం", "శుభం", "శుక్లం", "బ్రహ్మ", "ఐంద్రం", "వైధృతి"
+    ]
+const KARANA_NAMES = ["బవ", "బాలవ", "కౌలవ", "తైతుల", "గరజ", "వణిజ", "భద్ర", "శకుని", "చతుష్పాద", "నాగవ", "కింస్తుఘ్న"]
+const DASHA_LORDS = [
+        { name: "కేతువు", short: "కే", years: 7 },
+        { name: "శుక్రుడు", short: "శు", years: 20 },
+        { name: "సూర్యుడు", short: "సూ", years: 6 },
+        { name: "చంద్రుడు", short: "చం", years: 10 },
+        { name: "కుజుడు", short: "కు", years: 7 },
+        { name: "రాహువు", short: "రా", years: 18 },
+        { name: "గురువు", short: "గు", years: 16 },
+        { name: "శని", short: "శ", years: 19 },
+        { name: "బుధుడు", short: "బు", years: 17 }
+    ]
+const DASHA_YEAR_DAYS = 365.2425;
+const SAMVATSARA_NAMES = [
+        'ప్రభవ', 'విభవ', 'శుక్ల', 'ప్రమోదూత', 'ప్రజోత్పత్తి', 'ఆంగీరస', 'శ్రీముఖ', 'భావ', 'యువ', 'ధాత',
+        'ఈశ్వర', 'బహుధాన్య', 'ప్రమాథి', 'విక్రమ', 'వృష', 'చిత్రభాను', 'స్వభాను', 'తారణ', 'పార్థివ', 'వ్యయ',
+        'సర్వజిత్', 'సర్వధారి', 'విరోధి', 'వికృతి', 'ఖర', 'నందన', 'విజయ', 'జయ', 'మన్మథ', 'దుర్ముఖి',
+        'హేవిలంబి', 'విలంబి', 'వికారి', 'శార్వరి', 'ప్లవ', 'శుభకృత్', 'శోభకృత్', 'క్రోధి', 'విశ్వావసు', 'పరాభవ',
+        'ప్లవంగ', 'కీలక', 'సౌమ్య', 'సాధారణ', 'విరోధికృత్', 'పరిధావి', 'ప్రమాదీచ', 'ఆనంద', 'రాక్షస', 'నల',
+        'పింగళ', 'కాళయుక్త', 'సిద్ధార్థి', 'రౌద్ర', 'దుర్మతి', 'దుందుభి', 'రుధిరోద్గారి', 'రక్తాక్షి', 'క్రోధన', 'అక్షయ'
+    ]
+const TELUGU_MASA = ['చైత్రం', 'వైశాఖం', 'జ్యేష్ఠం', 'ఆషాఢం', 'శ్రావణం', 'భాద్రపదం',
+        'ఆశ్వయుజం', 'కార్తీకం', 'మార్గశిరం', 'పుష్యం', 'మాఘం', 'ఫాల్గుణం']
+const MASA_BY_SUN_RASI = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 0]
+const NAK_AKSHARA = [
+        ['చూ', 'చే', 'చో', 'లా'],
+        ['లీ', 'లూ', 'లే', 'లో'],
+        ['అ', 'ఈ', 'ఉ', 'ఏ'],
+        ['ఓ', 'వా', 'వీ', 'వూ'],
+        ['వే', 'వో', 'కా', 'కీ'],
+        ['కూ', 'ఘ', 'ఙ', 'ఛ'],
+        ['కే', 'కో', 'హా', 'హీ'],
+        ['హూ', 'హే', 'హో', 'డా'],
+        ['డీ', 'డూ', 'డే', 'డో'],
+        ['మా', 'మీ', 'మూ', 'మే'],
+        ['మో', 'టా', 'టీ', 'టూ'],
+        ['టే', 'టో', 'పా', 'పీ'],
+        ['పూ', 'ష', 'ణ', 'ఠ'],
+        ['పే', 'పో', 'రా', 'రీ'],
+        ['రూ', 'రే', 'రో', 'తా'],
+        ['తీ', 'తూ', 'తే', 'తో'],
+        ['నా', 'నీ', 'నూ', 'నే'],
+        ['నో', 'యా', 'యీ', 'యూ'],
+        ['యే', 'యో', 'భా', 'భీ'],
+        ['భూ', 'ధా', 'ఫా', 'ఢా'],
+        ['భే', 'భో', 'జా', 'జీ'],
+        ['ఖీ', 'ఖూ', 'ఖే', 'ఖో'],
+        ['గా', 'గీ', 'గూ', 'గే'],
+        ['గో', 'సా', 'సీ', 'సూ'],
+        ['సే', 'సో', 'దా', 'దీ'],
+        ['దూ', 'దే', 'దో', 'చా'],
+        ['చీ', 'చూ', 'చే', 'చో']
+    ]
+function calculateEphemeris(year, month, day, hour24, min, lat, lon, tz) {
+        let utHour = hour24 + (min / 60) - tz;
+        let y = year, m = month, d = day + (utHour / 24);
+        if (m <= 2) { y -= 1; m += 12; }
+        let A = Math.floor(y / 100);
+        let B = 2 - A + Math.floor(A / 4);
+        let jd = Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
+        let T = (jd - 2451545.0) / 36525.0;
+        let d2000 = jd - 2451545.0;
+
+        let ayanamsha = 23.853056 + (1.396971 * T) + (0.000308 * T * T);
+        window.__ayanamsaUsed = ayanamsha;
+
+        // ================= ఖచ్చితమైన గ్రహస్థానాలు =================
+        // Astronomy Engine (MIT) — VSOP87 ఆధారిత గ్రహ గణన, ఖచ్చితత్వం సుమారు 1 నిమిషం కోణం.
+        let sunNirayana, moonNirayana, rahuNirayana, ketuNirayana;
+        let marsObj, mercObj, jupObj, venObj, satObj;
+        const hasAstro = (typeof Astronomy !== 'undefined' && Astronomy.GeoVector && Astronomy.Rotation_EQJ_ECT);
+        let astroDt = null;
+
+        if (hasAstro) {
+            const utMs = Date.UTC(1970, 0, 1) + ((jd - 2440587.5) * 86400000);
+            const dt = new Date(utMs);
+            astroDt = dt;
+            const rot = Astronomy.Rotation_EQJ_ECT(dt);
+            const B = Astronomy.Body;
+
+            const lonOf = (body, when) => {
+                const vec = Astronomy.GeoVector(body, when, true);
+                const v = Astronomy.RotateVector(rot, vec);
+                let l = Math.atan2(v.y, v.x) * 180 / Math.PI;
+                return norm360(l - ayanamsha);
+            };
+
+            const bodyWithRetro = (body) => {
+                const cur = lonOf(body, dt);
+                const nxt = lonOf(body, new Date(utMs + 86400000));
+                let diff = nxt - cur;
+                if (diff > 180) diff -= 360;
+                if (diff < -180) diff += 360;
+                return { lon: cur, retro: diff < 0 };
+            };
+
+            sunNirayana = lonOf(B.Sun, dt);
+            moonNirayana = lonOf(B.Moon, dt);
+            marsObj = bodyWithRetro(B.Mars);
+            mercObj = bodyWithRetro(B.Mercury);
+            jupObj = bodyWithRetro(B.Jupiter);
+            venObj = bodyWithRetro(B.Venus);
+            satObj = bodyWithRetro(B.Saturn);
+
+            // రాహువు — సగటు పాత (Mean Node), Meeus సూత్రం
+            rahuNirayana = norm360(125.0445479 - 1934.1362891 * T + 0.0020754 * T * T
+                                   + (T * T * T) / 467441 - (T * T * T * T) / 60616000 - ayanamsha);
+            ketuNirayana = norm360(rahuNirayana + 180);
+        } else {
+            // లైబ్రరీ లోడ్ కానప్పుడు పాత (సుమారైన) గణన
+            const legacy = (function () {
+        let L0 = norm360(280.46646 + 36000.76983 * T + 0.0003032 * T * T);
+        let M = norm360(357.52911 + 35999.05029 * T - 0.0001537 * T * T);
+        let Mrad = M * Math.PI / 180;
+        let C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(Mrad)
+              + (0.019993 - 0.000101 * T) * Math.sin(2 * Mrad)
+              + 0.000289 * Math.sin(3 * Mrad);
+        let sunTrop = norm360(L0 + C);
+        let sunNirayana = norm360(sunTrop - ayanamsha);
+
+        let Lp = norm360(218.3164477 + 481267.88123421 * T - 0.0015786 * T * T);
+        let D = norm360(297.8501921 + 445267.1114034 * T - 0.0018819 * T * T);
+        let Mp = norm360(134.9633964 + 477198.8675055 * T + 0.0087414 * T * T);
+        let F = norm360(93.2720950 + 483202.0175233 * T - 0.0036539 * T * T);
+
+        let Dr = D * Math.PI / 180, Mr = M * Math.PI / 180, Mpr = Mp * Math.PI / 180, Fr = F * Math.PI / 180;
+        let moonCorr = 6.288774 * Math.sin(Mpr)
+                     + 1.274027 * Math.sin(2 * Dr - Mpr)
+                     + 0.658314 * Math.sin(2 * Dr)
+                     + 0.213618 * Math.sin(2 * Mpr)
+                     - 0.185116 * Math.sin(Mr)
+                     - 0.114332 * Math.sin(2 * Fr)
+                     + 0.058793 * Math.sin(2 * Dr - 2 * Mpr)
+                     + 0.057066 * Math.sin(2 * Dr - Mr - Mpr)
+                     + 0.053322 * Math.sin(2 * Dr + Mpr);
+        let moonTrop = norm360(Lp + moonCorr);
+        let moonNirayana = norm360(moonTrop - ayanamsha);
+
+        let rahuTrop = norm360(125.04452 - 1934.136261 * T + 0.0020708 * T * T);
+        let rahuNirayana = norm360(rahuTrop - ayanamsha);
+        let ketuNirayana = norm360(rahuNirayana + 180);
+
+        function solvePlanetAt(dVal, N, i, w, a, e, M0, n) {
+            let M_p = norm360(M0 + n * dVal) * Math.PI / 180;
+            let E = M_p + e * Math.sin(M_p) * (1.0 + e * Math.cos(M_p));
+            for (let k = 0; k < 6; k++) {
+                E = E - (E - e * Math.sin(E) - M_p) / (1 - e * Math.cos(E));
+            }
+            let xv = a * (Math.cos(E) - e);
+            let yv = a * (Math.sqrt(1.0 - e * e) * Math.sin(E));
+            let v = Math.atan2(yv, xv);
+            let r = Math.sqrt(xv * xv + yv * yv);
+
+            let Nr = N * Math.PI / 180, ir = i * Math.PI / 180, wr = w * Math.PI / 180;
+            let xh = r * (Math.cos(Nr) * Math.cos(v + wr) - Math.sin(Nr) * Math.sin(v + wr) * Math.cos(ir));
+            let yh = r * (Math.sin(Nr) * Math.cos(v + wr) + Math.cos(Nr) * Math.sin(v + wr) * Math.cos(ir));
+
+            let T_n = dVal / 36525.0;
+            let L0_n = norm360(280.46646 + 36000.76983 * T_n + 0.0003032 * T_n * T_n);
+            let M_n = norm360(357.52911 + 35999.05029 * T_n - 0.0001537 * T_n * T_n) * Math.PI / 180;
+            let C_n = (1.914602 - 0.004817 * T_n) * Math.sin(M_n) + 0.019993 * Math.sin(2 * M_n);
+            let sunT_n = norm360(L0_n + C_n) * Math.PI / 180;
+            let R_earth = 1.00014 - 0.01671 * Math.cos(M_n);
+            let xe = -R_earth * Math.cos(sunT_n);
+            let ye = -R_earth * Math.sin(sunT_n);
+
+            let ay_n = 23.853056 + (1.396971 * T_n) + (0.000308 * T_n * T_n);
+            return norm360(Math.atan2(yh - ye, xh - xe) * 180 / Math.PI - ay_n);
+        }
+
+        function getPlanetWithRetro(N, i, w, a, e, M0, n) {
+            let cur = solvePlanetAt(d2000, N, i, w, a, e, M0, n);
+            let nxt = solvePlanetAt(d2000 + (1 / 24), N, i, w, a, e, M0, n);
+            let diff = nxt - cur;
+            if (diff < -180) diff += 360;
+            if (diff > 180) diff -= 360;
+            return { lon: cur, retro: diff < 0 };
+        }
+
+        let marsObj = getPlanetWithRetro(49.558, 1.8497, 286.502, 1.523688, 0.093405, 18.6021, 0.5240207766);
+        let mercObj = getPlanetWithRetro(48.331, 7.0049, 29.124, 0.387098, 0.205635, 168.6562, 4.0923344368);
+        let jupObj  = getPlanetWithRetro(100.464, 1.3033, 273.867, 5.20260, 0.048498, 19.8950, 0.0830853001);
+        let venObj  = getPlanetWithRetro(76.680, 3.3947, 54.884, 0.723330, 0.006773, 48.0052, 1.6021302244);
+        let satObj  = getPlanetWithRetro(113.665, 2.4889, 339.392, 9.55491, 0.055546, 316.9670, 0.0334442282);
+                return {
+                    sun: sunNirayana, moon: moonNirayana, rahu: rahuNirayana, ketu: ketuNirayana,
+                    mars: marsObj, merc: mercObj, jup: jupObj, ven: venObj, sat: satObj
+                };
+            })();
+            sunNirayana = legacy.sun;
+            moonNirayana = legacy.moon;
+            rahuNirayana = legacy.rahu;
+            ketuNirayana = legacy.ketu;
+            marsObj = legacy.mars;
+            mercObj = legacy.merc;
+            jupObj = legacy.jup;
+            venObj = legacy.ven;
+            satObj = legacy.sat;
+        }
+
+
+        // లగ్నం: స్పష్ట సైడ్రియల్ సమయం (apparent sidereal time) + నిజ అక్షాంశం (true obliquity)
+        let gmst;
+        if (hasAstro && astroDt) {
+            gmst = norm360(Astronomy.SiderealTime(astroDt) * 15);
+        } else {
+            gmst = norm360(280.46061837 + 360.98564736629 * d2000 + 0.000387933 * T * T);
+        }
+        let lst = norm360(gmst + lon);
+        let lstRad = lst * Math.PI / 180;
+        let omegaDeg = 125.0445479 - 1934.1362891 * T;
+        let epsDeg = 23.4392911 - 0.0130041667 * T - 1.638e-7 * T * T + 5.036e-7 * T * T * T
+                   + (9.20 / 3600) * Math.cos(omegaDeg * Math.PI / 180);
+        let eps = epsDeg * Math.PI / 180;
+        let latRad = lat * Math.PI / 180;
+
+        let yAsc = Math.cos(lstRad);
+        let xAsc = -(Math.sin(lstRad) * Math.cos(eps) + Math.tan(latRad) * Math.sin(eps));
+        let ascTrop = norm360(Math.atan2(yAsc, xAsc) * 180 / Math.PI);
+        let lagnaNirayana = norm360(ascTrop - ayanamsha);
+
+        function checkCombust(pLon, limit) {
+            let diff = Math.abs(pLon - sunNirayana);
+            if (diff > 180) diff = 360 - diff;
+            return diff < limit;
+        }
+
+        function buildBody(name, short, lonDeg, retro, combust, isLagna = false) {
+            let rasiIdx = Math.floor(lonDeg / 30);
+            let degInRasi = lonDeg % 30;
+            let nakTotal = lonDeg / (360 / 27);
+            let nakIdx = Math.floor(nakTotal);
+            let pada = Math.floor((nakTotal - nakIdx) * 4) + 1;
+            let navamshaIdx = Math.floor((lonDeg / (360 / 108))) % 12;
+
+            return {
+                name, short, lon: lonDeg,
+                rasiIdx, rasiShort: RASI_FULL[rasiIdx].replace('ం', '').replace('స్సు', ''),
+                rasiFull: RASI_FULL[rasiIdx],
+                degColon: formatDegMinColon(degInRasi),
+                degSym: formatDegMinSymbol(degInRasi),
+                nak: NAK_NAMES[nakIdx],
+                pada,
+                nakLord: NAK_LORDS[nakIdx],
+                navamsha: RASI_FULL[navamshaIdx].replace('ం', '').replace('స్సు', ''),
+                retro, combust, isLagna
+            };
+        }
+
+        let planets = [
+            buildBody("సూర్య", "సూ", sunNirayana, false, false),
+            buildBody("చంద్ర", "చం", moonNirayana, false, false),
+            buildBody("కుజ", "కు", marsObj.lon, marsObj.retro, checkCombust(marsObj.lon, 17)),
+            buildBody("బుధ", "బు", mercObj.lon, mercObj.retro, checkCombust(mercObj.lon, 14)),
+            buildBody("గురు", "గు", jupObj.lon, jupObj.retro, checkCombust(jupObj.lon, 11)),
+            buildBody("శుక్ర", "శు", venObj.lon, venObj.retro, checkCombust(venObj.lon, 10)),
+            buildBody("శని", "శ", satObj.lon, satObj.retro, checkCombust(satObj.lon, 15)),
+            buildBody("రాహు", "రా", rahuNirayana, true, false),
+            buildBody("కేతు", "కే", ketuNirayana, true, false),
+            buildBody("లగ్నం", "ల", lagnaNirayana, false, false, true)
+        ];
+
+        let diffMoonSun = norm360(moonNirayana - sunNirayana);
+        let tithiIdx = Math.floor(diffMoonSun / 12);
+        let karanaIdx = Math.floor(diffMoonSun / 6);
+        let karanaName = karanaIdx === 0 ? "కింస్తుఘ్న" : karanaIdx >= 57 ? KARANA_NAMES[karanaIdx - 50] : KARANA_NAMES[(karanaIdx - 1) % 7];
+
+        let sumMoonSun = norm360(moonNirayana + sunNirayana);
+        let yogaIdx = Math.floor(sumMoonSun / (360 / 27));
+
+        let dateObj = new Date(year, month - 1, day);
+        let varaName = VARA_NAMES[dateObj.getDay()];
+
+        return {
+            planets,
+            tithi: TITHI_NAMES[tithiIdx],
+            vara: varaName,
+            yoga: YOGA_NAMES[yogaIdx],
+            karana: karanaName,
+            moonLon: moonNirayana,
+            lagnaRasi: Math.floor(lagnaNirayana / 30)
+        };
+    }
+function getSunTimes(y, m, d, lat, lon, tz) {
+        // ఖచ్చితమైన సూర్యోదయం / సూర్యాస్తమయం (Astronomy Engine — ప్రమాణ వక్రీభవనంతో)
+        if (typeof Astronomy !== 'undefined' && Astronomy.SearchRiseSet && Astronomy.Observer) {
+            try {
+                const observer = new Astronomy.Observer(lat, lon, 0);
+                const localMidnightUtcMs = Date.UTC(y, m - 1, d, 0, 0, 0) - tz * 3600000;
+                const start = new Date(localMidnightUtcMs);
+                const rise = Astronomy.SearchRiseSet(Astronomy.Body.Sun, observer, +1, start, 1);
+                const set = Astronomy.SearchRiseSet(Astronomy.Body.Sun, observer, -1, start, 1);
+                const toLocalHours = (t) => {
+                    if (!t || !t.date) return null;
+                    const ld = new Date(t.date.getTime() + tz * 3600000);
+                    return ld.getUTCHours() + ld.getUTCMinutes() / 60 + ld.getUTCSeconds() / 3600;
+                };
+                const sr = toLocalHours(rise);
+                const ss = toLocalHours(set);
+                if (sr !== null && ss !== null) return { sunrise: sr, sunset: ss, polar: false };
+            } catch (e) { /* క్రింది పాత పద్ధతికి వెళ్తాం */ }
+        }
+        const jd0 = jdFromDate(y, m, d);
+        const n = jd0 + 0.5 - 2451545.0 + 0.0008;
+        const Jstar = n - lon / 360;
+        const M = norm360(357.5291 + 0.98560028 * Jstar);
+        const Mr = M * Math.PI / 180;
+        const C = 1.9148 * Math.sin(Mr) + 0.02 * Math.sin(2 * Mr) + 0.0003 * Math.sin(3 * Mr);
+        const lam = norm360(M + C + 180 + 102.9372);
+        const lamR = lam * Math.PI / 180;
+        const Jtransit = 2451545.0 + Jstar + 0.0053 * Math.sin(Mr) - 0.0069 * Math.sin(2 * lamR);
+        const sinDec = Math.sin(lamR) * Math.sin(23.44 * Math.PI / 180);
+        const decR = Math.asin(sinDec);
+        const latR = lat * Math.PI / 180;
+        const cosW = (Math.sin(-0.833 * Math.PI / 180) - Math.sin(latR) * sinDec) / (Math.cos(latR) * Math.cos(decR));
+        const toLocal = J => ((((J + 0.5) % 1) + 1) % 1) * 24 + tz;
+        if (cosW >= 1 || cosW <= -1) {
+            return { sunrise: 6, sunset: 18, polar: true };
+        }
+        const w0 = Math.acos(cosW) * 180 / Math.PI;
+        return { sunrise: toLocal(Jtransit - w0 / 360), sunset: toLocal(Jtransit + w0 / 360), polar: false };
+    }
+function generateVimshottari(year, month, day, hour, min, moonLon) {
+        const DAY_MS = 86400000;
+        const nakSpan = 360 / 27;
+        const nakIdx = Math.floor(moonLon / nakSpan);
+        const traversed = (moonLon % nakSpan) / nakSpan;
+        const remaining = 1 - traversed;
+        const startLordIdx = nakIdx % 9;
+        const firstLord = DASHA_LORDS[startLordIdx];
+        const birthMs = new Date(year, month - 1, day, hour || 0, min || 0, 0).getTime();
+        const balYears = firstLord.years * remaining;
+        const schedule = [];
+        let cursorMs = birthMs - (firstLord.years * remaining * DASHA_YEAR_DAYS * DAY_MS);
+        for (let i = 0; i < 9; i++) {
+            const mIdx = (startLordIdx + i) % 9;
+            const mLord = DASHA_LORDS[mIdx];
+            const mahaStart = cursorMs;
+            const mahaDays = mLord.years * DASHA_YEAR_DAYS;
+            const mahaEnd = mahaStart + mahaDays * DAY_MS;
+            const bhuktis = [];
+            let bCursor = mahaStart;
+            for (let j = 0; j < 9; j++) {
+                const bIdx = (mIdx + j) % 9;
+                const bLord = DASHA_LORDS[bIdx];
+                const antarDays = mahaDays * bLord.years / 120;
+                const antarStart = bCursor;
+                const antarEnd = antarStart + antarDays * DAY_MS;
+                const rows = [];
+                let pCursor = antarStart;
+                for (let k = 0; k < 9; k++) {
+                    const pIdx = (bIdx + k) % 9;
+                    const pLord = DASHA_LORDS[pIdx];
+                    const pratyDays = antarDays * pLord.years / 120;
+                    const pStart = pCursor;
+                    const pEnd = pStart + pratyDays * DAY_MS;
+                    rows.push({ lord: pLord.name, short: pLord.short,
+                                startMs: pStart, endMs: pEnd });
+                    pCursor = pEnd;
+                }
+                bhuktis.push({ lord: bLord.name, short: bLord.short,
+                               startMs: antarStart, endMs: antarEnd, rows: rows });
+                bCursor = antarEnd;
+            }
+            schedule.push({ lord: mLord.name, short: mLord.short, years: mLord.years,
+                            startMs: mahaStart, endMs: mahaEnd, bhuktis: bhuktis });
+            cursorMs = mahaEnd;
+        }
+        return {
+            nakIdx: nakIdx,
+            nakName: NAK_NAMES[nakIdx],
+            lord: firstLord.name,
+            balanceYears: balYears,
+            balanceYearsWhole: Math.floor(balYears),
+            balanceMonths: Math.floor((balYears - Math.floor(balYears)) * 12),
+            balanceDays: Math.round(((balYears - Math.floor(balYears)) * 12 - Math.floor((balYears - Math.floor(balYears)) * 12)) * 30),
+            schedule: schedule
+        };
+    }
+function generateSookshmaDasha(bYear, bMonth, bDay, moonLon) {
+        let nakSpan = 360 / 27;
+        let nakIdx = Math.floor(moonLon / nakSpan);
+        let remFraction = 1 - ((moonLon % nakSpan) / nakSpan);
+        let startIdx = nakIdx % 9;
+
+        let birthMs = new Date(bYear, bMonth - 1, bDay).getTime();
+        let firstFullMs = DASHA_LORDS[startIdx].years * DASHA_YEAR_DAYS * 86400000;
+        let cursorMs = birthMs - (firstFullMs * (1 - remFraction));
+
+        let nowMs = Date.now();
+        let oneYearLaterMs = nowMs + (DASHA_YEAR_DAYS * 86400000);
+        let rowsHtml = '';
+
+        for (let m = 0; m < 9; m++) {
+            let mObj = DASHA_LORDS[(startIdx + m) % 9];
+            for (let b = 0; b < 9; b++) {
+                let bObj = DASHA_LORDS[(startIdx + m + b) % 9];
+                for (let p = 0; p < 9; p++) {
+                    let pObj = DASHA_LORDS[(startIdx + m + b + p) % 9];
+                    for (let s = 0; s < 9; s++) {
+                        let sObj = DASHA_LORDS[(startIdx + m + b + p + s) % 9];
+                        let sDurationMs = (mObj.years * bObj.years * pObj.years * sObj.years / 1728000) * DASHA_YEAR_DAYS * 86400000;
+                        let endMs = cursorMs + sDurationMs;
+
+                        if (endMs >= nowMs && cursorMs <= oneYearLaterMs) {
+                            rowsHtml += `
+                                <tr>
+                                    <td>${mObj.short}</td>
+                                    <td>${bObj.short}</td>
+                                    <td>${pObj.short}</td>
+                                    <td>${sObj.short}</td>
+                                    <td>${formatDateTime(cursorMs)}</td>
+                                </tr>
+                            `;
+                        }
+                        cursorMs = endMs;
+                    }
+                }
+            }
+        }
+
+        document.getElementById('sookshmaTableBody').innerHTML = rowsHtml;
+    }
+function navamshaIndexOf(lonDeg) {
+        return Math.floor(lonDeg / (360 / 108)) % 12;
+    }
+function toNavamshaLagna(planets) {
+        const lg = planets.find(p => p.isLagna);
+        return lg ? navamshaIndexOf(lg.lon) : 0;
+    }
+function toNavamshaPlanets(planets) {
+        return planets.map(p => ({
+            name: p.short || p.name,
+            rasiIdx: navamshaIndexOf(p.lon),
+            degSym: '',
+            retro: p.retro,
+            combust: p.combust,
+            isLagna: p.isLagna
+        }));
+    }
+function getTeluguCalendarElements(refMoment, refDate, sunRasiIdx, lat, lon, tz) {
+        // మాసం: ఈ మాసం మొదలైన అమావాస్య నాడు సూర్యుడు ఉన్న రాశిని బట్టి
+        const prevAmavasya = findElongationMoment(0, refMoment, -1, 12 * 3600000, 80, lat, lon, tz);
+        let masaIdx = MASA_BY_SUN_RASI[sunRasiIdx];
+        if (prevAmavasya) {
+            const sunRasiAtStart = Math.floor(ephemAt(prevAmavasya, lat, lon, tz).planets[0].lon / 30);
+            masaIdx = MASA_BY_SUN_RASI[sunRasiAtStart];
+        }
+        // అయనం: సూర్యుడు మకరం నుంచి మిథునం వరకు ఉత్తరాయణం, కర్కాటకం నుంచి ధనుస్సు వరకు దక్షిణాయనం
+        const ayana = (sunRasiIdx >= 9 || sunRasiIdx <= 2) ? 'ఉత్తరాయణం' : 'దక్షిణాయనం';
+        return {
+            samvatsara: samvatsaraFor(refDate, lat, lon, tz),
+            ayana,
+            masa: TELUGU_MASA[masaIdx],
+            ritu: RITU_NAMES[Math.floor(masaIdx / 2)] + ' ఋతువు'
+        };
+    }
+function jdFromDate(y, m, d) {
+        let yy = y, mm = m;
+        if (mm <= 2) { yy -= 1; mm += 12; }
+        const a = Math.floor(yy / 100), b = 2 - a + Math.floor(a / 4);
+        return Math.floor(365.25 * (yy + 4716)) + Math.floor(30.6001 * (mm + 1)) + d + b - 1524.5;
+    }
+function formatDegMinSymbol(deg) {
+        let d = Math.floor(deg);
+        let m = Math.floor((deg - d) * 60);
+        return `${String(d).padStart(2, '0')}°${String(m).padStart(2, '0')}'`;
+    }
+
+function formatDegMinColon(deg) {
+        let d = Math.floor(deg);
+        let m = Math.floor((deg - d) * 60);
+        return `${String(d).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    }
+let now = new Date()
+function formatDateTime(ms) {
+        let d = new Date(ms);
+        let day = String(d.getDate()).padStart(2, '0');
+        let mon = String(d.getMonth() + 1).padStart(2, '0');
+        let yr = d.getFullYear();
+        let hr = d.getHours();
+        let min = String(d.getMinutes()).padStart(2, '0');
+        let sec = String(d.getSeconds()).padStart(2, '0');
+        let period = hr >= 12 ? 'సాయంత్రం' : 'ఉదయం';
+        let h12 = hr % 12 || 12;
+        return `${day}-${mon}-${yr} ${String(h12).padStart(2, '0')}:${min}:${sec} ${period}`;
+    }
+function buildBody(name, short, lonDeg, retro, combust, isLagna = false) {
+            let rasiIdx = Math.floor(lonDeg / 30);
+            let degInRasi = lonDeg % 30;
+            let nakTotal = lonDeg / (360 / 27);
+            let nakIdx = Math.floor(nakTotal);
+            let pada = Math.floor((nakTotal - nakIdx) * 4) + 1;
+            let navamshaIdx = Math.floor((lonDeg / (360 / 108))) % 12;
+
+            return {
+                name, short, lon: lonDeg,
+                rasiIdx, rasiShort: RASI_FULL[rasiIdx].replace('ం', '').replace('స్సు', ''),
+                rasiFull: RASI_FULL[rasiIdx],
+                degColon: formatDegMinColon(degInRasi),
+                degSym: formatDegMinSymbol(degInRasi),
+                nak: NAK_NAMES[nakIdx],
+                pada,
+                nakLord: NAK_LORDS[nakIdx],
+                navamsha: RASI_FULL[navamshaIdx].replace('ం', '').replace('స్సు', ''),
+                retro, combust, isLagna
+            };
+        }
+function norm360(deg) {
+        let d = deg % 360;
+        return d < 0 ? d + 360 : d;
+    }
+function samvatsaraFor(refDate, lat, lon, tz) {
+        let y = refDate.getFullYear();
+        if (refDate < ugadiDate(y, lat, lon, tz)) y -= 1;
+        const idx = (((y - 1987) % 60) + 60) % 60;
+        return SAMVATSARA_NAMES[idx];
+    }
+const toLocal = J => ((((J + 0.5) % 1) + 1) % 1)
+function checkCombust(pLon, limit) {
+            let diff = Math.abs(pLon - sunNirayana);
+            if (diff > 180) diff = 360 - diff;
+            return diff < limit;
+        }
+function ephemAt(dt, lat, lon, tz) {
+        return calculateEphemeris(dt.getFullYear(), dt.getMonth() + 1, dt.getDate(),
+            dt.getHours(), dt.getMinutes(), lat, lon, tz);
+    }
+const DAY_MS = 86400000;
+function findElongationMoment(target, refMoment, dir, stepMs, maxSteps, lat, lon, tz) {
+        let curMs = refMoment.getTime();
+        let prev = signedAngle(target, elongationAt(new Date(curMs), lat, lon, tz));
+        for (let i = 0; i < maxSteps; i++) {
+            const nextMs = curMs + dir * stepMs;
+            const cur = signedAngle(target, elongationAt(new Date(nextMs), lat, lon, tz));
+            const crossed = dir > 0 ? (prev < 0 && cur >= 0) : (prev > 0 && cur <= 0);
+            if (crossed) {
+                let lo = curMs, hi = nextMs;
+                for (let k = 0; k < 24; k++) {
+                    const mid = (lo + hi) / 2;
+                    const sMid = signedAngle(target, elongationAt(new Date(mid), lat, lon, tz));
+                    if (dir > 0) { if (sMid < 0) lo = mid; else hi = mid; }
+                    else { if (sMid > 0) lo = mid; else hi = mid; }
+                }
+                return new Date(dir > 0 ? hi : lo);
+            }
+            prev = cur;
+            curMs = nextMs;
+        }
+        return null;
+    }
+function solvePlanetAt(dVal, N, i, w, a, e, M0, n) {
+            let M_p = norm360(M0 + n * dVal) * Math.PI / 180;
+            let E = M_p + e * Math.sin(M_p) * (1.0 + e * Math.cos(M_p));
+            for (let k = 0; k < 6; k++) {
+                E = E - (E - e * Math.sin(E) - M_p) / (1 - e * Math.cos(E));
+            }
+            let xv = a * (Math.cos(E) - e);
+            let yv = a * (Math.sqrt(1.0 - e * e) * Math.sin(E));
+            let v = Math.atan2(yv, xv);
+            let r = Math.sqrt(xv * xv + yv * yv);
+
+            let Nr = N * Math.PI / 180, ir = i * Math.PI / 180, wr = w * Math.PI / 180;
+            let xh = r * (Math.cos(Nr) * Math.cos(v + wr) - Math.sin(Nr) * Math.sin(v + wr) * Math.cos(ir));
+            let yh = r * (Math.sin(Nr) * Math.cos(v + wr) + Math.cos(Nr) * Math.sin(v + wr) * Math.cos(ir));
+
+            let T_n = dVal / 36525.0;
+            let L0_n = norm360(280.46646 + 36000.76983 * T_n + 0.0003032 * T_n * T_n);
+            let M_n = norm360(357.52911 + 35999.05029 * T_n - 0.0001537 * T_n * T_n) * Math.PI / 180;
+            let C_n = (1.914602 - 0.004817 * T_n) * Math.sin(M_n) + 0.019993 * Math.sin(2 * M_n);
+            let sunT_n = norm360(L0_n + C_n) * Math.PI / 180;
+            let R_earth = 1.00014 - 0.01671 * Math.cos(M_n);
+            let xe = -R_earth * Math.cos(sunT_n);
+            let ye = -R_earth * Math.sin(sunT_n);
+
+            let ay_n = 23.853056 + (1.396971 * T_n) + (0.000308 * T_n * T_n);
+            return norm360(Math.atan2(yh - ye, xh - xe) * 180 / Math.PI - ay_n);
+        }
+function fmtAyanamsa(v) {
+        if (typeof v !== 'number' || isNaN(v)) return '';
+        const d = Math.floor(v);
+        const m = (v - d) * 60;
+        return d + '° ' + m.toFixed(1) + '′';
+    }
+const RITU_NAMES = ['వసంత', 'గ్రీష్మ', 'వర్ష', 'శరద్', 'హేమంత', 'శిశిర']
+
+function getPlanetWithRetro(N, i, w, a, e, M0, n) {
+            let cur = solvePlanetAt(d2000, N, i, w, a, e, M0, n);
+            let nxt = solvePlanetAt(d2000 + (1 / 24), N, i, w, a, e, M0, n);
+            let diff = nxt - cur;
+            if (diff < -180) diff += 360;
+            if (diff > 180) diff -= 360;
+            return { lon: cur, retro: diff < 0 };
+        }
+function ugadiDate(year, lat, lon, tz) {
+        if (ugadiCache[year]) return ugadiCache[year];
+        let result = null;
+        const sank = meshaSankranti(year, lat, lon, tz);
+        if (sank) {
+            const amavasya = findElongationMoment(0, sank, -1, 12 * 3600000, 80, lat, lon, tz);
+            if (amavasya) {
+                const d = new Date(amavasya.getTime() + 24 * 3600000);
+                result = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+            }
+        }
+        if (!result) result = new Date(year, 2, 20);
+        ugadiCache[year] = result;
+        return result;
+    }
+function signedAngle(target, value) {
+        return ((value - target + 540) % 360) - 180;
+    }
+function elongationAt(dt, lat, lon, tz) {
+        const r = ephemAt(dt, lat, lon, tz);
+        return norm360(r.planets[1].lon - r.planets[0].lon);
+    }
+function meshaSankranti(year, lat, lon, tz) {
+        let cur = new Date(year, 3, 1, 0, 0);
+        const rasiAt = dt => Math.floor(ephemAt(dt, lat, lon, tz).planets[0].lon / 30);
+        for (let i = 0; i < 90; i++) {
+            const next = new Date(cur.getTime() + 12 * 3600000);
+            if (rasiAt(next) === 0 && rasiAt(cur) !== 0) {
+                let lo = cur.getTime(), hi = next.getTime();
+                for (let k = 0; k < 24; k++) {
+                    const mid = (lo + hi) / 2;
+                    if (rasiAt(new Date(mid)) === 0) hi = mid; else lo = mid;
+                }
+                return new Date(hi);
+            }
+            cur = next;
+        }
+        return null;
+    }
+
+
+/* ---- shared with the website and the customer app ---- */
+function lsGet(key, fb){ try{ var r=localStorage.getItem(key); return r?JSON.parse(r):fb; }catch(e){ return fb; } }
+function lsSet(key, v){ try{ localStorage.setItem(key, JSON.stringify(v)); }catch(e){} }
+
+var APP_PLACE = { n:'హైదరాబాద్', lat:17.385, lon:78.4867, tz:5.5 };
+var RAHU_PART = {0:8, 1:2, 2:7, 3:5, 4:6, 5:4, 6:3};
+function hhmm(h){ if(h==null||isNaN(h)) return '—'; var v=h; if(v<0)v+=24; var H=Math.floor(v), M=Math.round((v-H)*60); if(M===60){H=(H+1)%24;M=0;} return ('0'+H).slice(-2)+':'+('0'+M).slice(-2); }
+function panchangamFor(place, date){
+  date = date || new Date();
+  var ep = calculateEphemeris(date.getFullYear(), date.getMonth()+1, date.getDate(),
+                              date.getHours(), date.getMinutes(), place.lat, place.lon, place.tz);
+  var sunRasi = Math.floor(ep.planets[0].lon/30);
+  var cal = null;
+  try{ cal = getTeluguCalendarElements(date, date, sunRasi, place.lat, place.lon, place.tz); }catch(e){ cal = null; }
+  var st = getSunTimes(date.getFullYear(), date.getMonth()+1, date.getDate(), place.lat, place.lon, place.tz);
+  var rise = (st && !st.polar) ? st.sunrise : 6, set = (st && !st.polar) ? st.sunset : 18;
+  var part = RAHU_PART[date.getDay()] || 1, seg = (set-rise)/8;
+  return { tithi: ep.tithi, vara: ep.vara, yoga: ep.yoga, karana: ep.karana,
+           nak: NAK_NAMES[Math.floor(ep.moonLon/(360/27))],
+           masa: cal?cal.masa:'', samvatsara: cal?cal.samvatsara:'',
+           sunrise: hhmm(rise), sunset: hhmm(set),
+           rahu: hhmm(rise+seg*(part-1))+' – '+hhmm(rise+seg*part) };
+}
+
+
+var STORE = 'lr_astrologer_v1';
+var COMMISSION_DEFAULT = 30;
+
+var ASTROS = [
+  {id:'a1',name:'పండిత్ వేంకట రమణ శర్మ',languages:['తెలుగు','हिन्दी'],fee:500,exp:22,spec:'జాతకం, వివాహ సామరస్యం'},
+  {id:'a2',name:'శ్రీమతి లక్ష్మీ కాంతం',languages:['తెలుగు'],fee:350,exp:15,spec:'స్త్రీ జాతకం, సంతానం'},
+  {id:'a3',name:'పండిత్ సూర్యనారాయణ శాస్త్రి',languages:['తెలుగు','English'],fee:700,exp:28,spec:'ముహూర్తం, గృహ ప్రవేశం'},
+  {id:'a4',name:'శ్రీ రాఘవేంద్ర ఆచార్య',languages:['తెలుగు','हिन्दी'],fee:450,exp:18,spec:'కెరీర్, వ్యాపారం'},
+  {id:'a5',name:'సుబ్రహ్మణ్య శర్మ',languages:['తెలుగు'],fee:300,exp:10,spec:'విద్య, పరీక్షలు'},
+  {id:'a6',name:'పండిత్ మాధవి దేవి',languages:['తెలుగు','ଓଡ଼ିଆ'],fee:400,exp:12,spec:'వివాహం, దోష నివారణ'},
+  {id:'a7',name:'శ్రీ నరసింహ మూర్తి',languages:['తెలుగు','English','हिन्दी'],fee:900,exp:32,spec:'కర్మ రహస్యం, దశా విశ్లేషణ'},
+  {id:'a8',name:'వెంకటేశ్వర శర్మ',languages:['తెలుగు'],fee:250,exp:8,spec:'పంచాంగం, గోచారం'}
+];
+
+/* the admin app writes this key; published + assigned entries win */
+function roster(){
+  var reg = lsGet('lrAstrologerRegistry', null);
+  if(Array.isArray(reg) && reg.length){
+    var pub = reg.filter(function(a){ return a.assigned; });
+    if(pub.length) return pub;
+  }
+  return ASTROS;
+}
+
+var CUSTOMERS = [
+  {id:'c1', name:'సరస్వతి పాధి', mobile:'9876543210'},
+  {id:'c2', name:'రమేష్ బాబు', mobile:'9701234567'},
+  {id:'c3', name:'అనితా రెడ్డి', mobile:'9948123456'},
+  {id:'c4', name:'వెంకట్ రావు', mobile:'9866543211'}
+];
+
+var S = {
+  astro:null, pin:'', orders:[], tx:[], notifs:[], online:false,
+  screen:'home', settings:{appId:'', tokenServer:''},
+  entry:{step:1, name:'', id:'', mobile:'', pin:'', pin2:''},
+  call:null, pinInput:'', unlocked:false
+};
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function rupee(n){ return '₹' + Number(Math.round(n||0)).toLocaleString('en-IN'); }
+function fmtDate(d){ var p=function(x){return (x<10?'0':'')+x;}; return p(d.getDate())+'/'+p(d.getMonth()+1)+'/'+d.getFullYear(); }
+function fmtDT(iso){ var d=new Date(iso); return fmtDate(d)+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
+function mmss(s){ s=Math.max(0,Math.floor(s)); return ('0'+Math.floor(s/60)).slice(-2)+':'+('0'+(s%60)).slice(-2); }
+function dayKey(d){ return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+
+function save(){
+  try{
+    localStorage.setItem(STORE, JSON.stringify({
+      astro:S.astro, pin:S.pin, notifs:S.notifs,
+      online:S.online, settings:S.settings
+    }));
+    /* the website and the customer app read these same two keys */
+    localStorage.setItem('lrAppOrders', JSON.stringify(S.orders.slice(-300)));
+    localStorage.setItem('lrWalletTxns', JSON.stringify(S.tx.slice(-300)));
+  }catch(e){ /* storage full or blocked */ }
+}
+function load(){
+  try{
+    var raw = localStorage.getItem(STORE);
+    if(!raw) return;
+    var d = JSON.parse(raw);
+    S.astro = d.astro || null;
+    S.pin = d.pin || '';
+    S.orders = lsGet('lrAppOrders', d.orders || []);
+    S.tx = lsGet('lrWalletTxns', d.tx || []);
+    S.notifs = d.notifs || [];
+    S.online = !!d.online;
+    S.settings = d.settings || {appId:'', tokenServer:''};
+  }catch(e){ /* corrupt store */ }
+}
+load();
+
+/* =========================================================
+   chrome
+   ========================================================= */
+var screens = document.getElementById('screens');
+var tabsEl = document.getElementById('tabs');
+var overlay = document.getElementById('overlay');
+var toastEl = document.getElementById('toast');
+var whoEl = document.getElementById('who');
+
+var TABS = [
+  {id:'home', n:'హోమ్'},
+  {id:'orders', n:'ఆర్డర్లు'},
+  {id:'wallet', n:'వాలెట్'},
+  {id:'notif', n:'తెలియజేయి'},
+  {id:'profile', n:'ప్రొఫైల్'}
+];
+
+var toastTimer = null;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toastEl.classList.remove('on'); }, 2600);
+}
+function go(id){ S.screen = id; render(); try{ window.scrollTo(0,0); }catch(e){} }
+function showOnly(id){
+  Array.prototype.forEach.call(screens.querySelectorAll('.screen'), function(el){
+    el.classList.toggle('on', el.id === 'scr-' + id);
+  });
+}
+function unreadCount(){ return S.notifs.filter(function(n){ return !n.read; }).length; }
+
+function renderTabs(){
+  if(!S.astro || !S.unlocked){ tabsEl.classList.remove('on'); tabsEl.innerHTML=''; return; }
+  tabsEl.classList.add('on');
+  var u = unreadCount();
+  tabsEl.innerHTML = TABS.map(function(tb){
+    var badge = (tb.id === 'notif' && u) ? '<span class="badge">'+u+'</span>' : '';
+    return '<button data-tab="'+tb.id+'" class="'+(S.screen===tb.id?'act':'')+'">'+tb.n+badge+'</button>';
+  }).join('');
+}
+
+function render(){
+  if(whoEl) whoEl.textContent = S.astro ? (S.astro.name + ' · ' + S.astro.id) : 'జ్యోతిష్కుల యాప్';
+  if(!S.astro || !S.pin){ renderEntry(); }
+  else if(!S.unlocked){ renderPin(); }
+  else {
+    renderHome(); renderOrders(); renderWallet(); renderNotif(); renderProfile();
+    showOnly(S.screen);
+  }
+  renderTabs();
+}
+
+/* =========================================================
+   entry + pin
+   ========================================================= */
+function renderEntry(){
+  var el = document.getElementById('scr-entry');
+  var e = S.entry;
+  var html = '<div class="panel" style="margin-top:8px"><h2>LR Astrology</h2>'
+    + '<div class="muted">జ్యోతిష్కుల యాప్ · స్వాగతం</div></div>';
+
+  if(e.step === 1){
+    var rosterList = roster();
+    var opts = '<option value="">— ఎంచుకోండి —</option>' + rosterList.map(function(a){
+      return '<option value="'+a.id+'"'+(e.id===a.id?' selected':'')+'>'+esc(a.name)+' · '+esc(a.id)+'</option>';
+    }).join('');
+    html += '<h1>మీ పేరు ఎంచుకోండి</h1>'
+      + '<label class="f" for="x-id">జ్యోతిష్కుడు</label>'
+      + '<select class="i" id="x-id">'+opts+'</select>'
+      + '<p class="muted" style="margin:8px 0 0">అడ్మిన్ ఇచ్చిన ఐడీ ఉంటే కింద నమోదు చేయండి.</p>'
+      + '<label class="f" for="x-id2">ఐడీ</label>'
+      + '<input class="i" id="x-id2" type="text" placeholder="a1" value="'+esc(e.id)+'">'
+      + '<div class="btn-row"><button class="btn block" id="x-next">కొనసాగించు</button></div>';
+  } else if(e.step === 2){
+    html += '<h1>మొబైల్ నంబర్</h1>'
+      + '<div class="card"><div class="muted">'+esc(e.name)+' · '+esc(e.id)+'</div></div>'
+      + '<label class="f" for="x-mob">మొబైల్ నంబర్</label>'
+      + '<input class="i" id="x-mob" type="tel" inputmode="numeric" maxlength="10" placeholder="9876543210" value="'+esc(e.mobile)+'">'
+      + '<div class="btn-row"><button class="btn ghost" id="x-back">వెనుకకు</button>'
+      + '<button class="btn" id="x-next2">కొనసాగించు</button></div>';
+  } else {
+    html += '<h1>PIN సెట్ చేయండి</h1>'
+      + '<p class="muted">ఈ PIN తోనే మీరు తర్వాత యాప్ తెరుస్తారు. గుర్తుంచుకోండి.</p>'
+      + '<label class="f" for="x-pin">PIN (4 అంకెలు)</label>'
+      + '<input class="i" id="x-pin" type="tel" inputmode="numeric" maxlength="4" placeholder="0000">'
+      + '<label class="f" for="x-pin2">PIN మళ్లీ</label>'
+      + '<input class="i" id="x-pin2" type="tel" inputmode="numeric" maxlength="4" placeholder="0000">'
+      + '<div class="btn-row"><button class="btn ghost" id="x-back2">వెనుకకు</button>'
+      + '<button class="btn block" id="x-finish">ప్రారంభించు</button></div>';
+  }
+  el.innerHTML = html;
+  showOnly('entry');
+}
+
+function renderPin(){
+  var el = document.getElementById('scr-entry');
+  el.innerHTML = '<div class="panel" style="margin-top:8px"><h2>'+esc(S.astro.name)+'</h2>'
+    + '<div class="muted">'+esc(S.astro.id)+'</div></div>'
+    + '<h1>PIN నమోదు చేయండి</h1>'
+    + '<label class="f" for="p-in">PIN</label>'
+    + '<input class="i" id="p-in" type="tel" inputmode="numeric" maxlength="4" placeholder="0000" autofocus>'
+    + '<div class="btn-row"><button class="btn block" id="p-go">తెరవండి</button></div>'
+    + '<p class="stamp">PIN మర్చిపోతే, సైన్ అవుట్ చేసి మళ్లీ సెట్ చేసుకోవచ్చు.</p>';
+  showOnly('entry');
+}
+
+/* =========================================================
+   home
+   ========================================================= */
+function myOrders(){ return S.orders.filter(function(o){ return o.astrologerId === S.astro.id; }); }
+function todayStats(){
+  var k = dayKey(new Date()), calls = 0, secs = 0, earn = 0;
+  myOrders().forEach(function(o){
+    if(dayKey(new Date(o.start)) !== k) return;
+    if(o.status === 'done'){ calls++; secs += o.seconds; earn += o.astrologerShare; }
+  });
+  return {calls:calls, secs:secs, earn:earn};
+}
+
+function renderHome(){
+  var el = document.getElementById('scr-home');
+  var st = todayStats();
+  var recent = myOrders().slice(-4).reverse();
+  var html = '';
+
+  html += '<button class="switchbar '+(S.online?'on':'')+'" data-act="toggle">'
+    + '<span class="track"><span class="knob"></span></span>'
+    + '<span class="grow"><span class="lbl">'+(S.online?'ఆన్‌లైన్':'ఆఫ్‌లైన్')+'</span>'
+    + '<span class="muted" style="display:block;font-size:14px">'
+    + (S.online ? 'కాల్స్ అందుకుంటున్నారు' : 'కాల్స్ రావు') + '</span></span></button>';
+
+  var pc = panchangamFor(APP_PLACE);
+  html += '<div class="card" style="margin-top:14px">'
+    + '<div class="row"><div class="grow"><b style="color:var(--sand)">నేటి పంచాంగం</b>'
+    + '<div class="muted" style="font-size:14px">' + pc.vara + ' · ' + pc.tithi + ' · ' + pc.masa + '</div></div>'
+    + '<span class="chip">' + pc.samvatsara + '</span></div>'
+    + '<div class="row" style="margin-top:8px;gap:16px;flex-wrap:wrap">'
+    + '<span class="muted" style="font-size:14px">సూర్యోదయం ' + pc.sunrise + '</span>'
+    + '<span class="muted" style="font-size:14px">సూర్యాస్తమయం ' + pc.sunset + '</span>'
+    + '<span class="muted" style="font-size:14px">నక్షత్రం ' + pc.nak + '</span>'
+    + '</div></div>';
+
+  html += '<div class="panel" style="margin-top:14px">'
+    + '<div class="muted" style="font-size:14px">నేటి ఆదాయం</div>'
+    + '<div class="big-num">'+rupee(st.earn)+'</div>'
+    + '<div class="row" style="margin-top:10px;gap:22px">'
+    +   '<div><div class="muted" style="font-size:13px">కాల్స్</div><div style="font-size:19px;font-weight:700">'+st.calls+'</div></div>'
+    +   '<div><div class="muted" style="font-size:13px">నిమిషాలు</div><div style="font-size:19px;font-weight:700">'+Math.round(st.secs/60)+'</div></div>'
+    +   '<div><div class="muted" style="font-size:13px">నిమిషం ఫీజు</div><div style="font-size:19px;font-weight:700">'+rupee(S.astro.fee)+'</div></div>'
+    + '</div></div>';
+
+  html += '<h2>ఇటీవలి కాల్స్</h2>';
+  if(!recent.length){
+    html += '<div class="card"><p class="muted" style="margin:0">ఇంకా ఆర్డర్లు లేవు. ఆన్‌లైన్ అయితే కాల్ వస్తుంది.</p></div>';
+  } else {
+    html += '<div class="card">' + recent.map(orderRow).join('') + '</div>';
+  }
+  html += '<div class="btn-row"><button class="btn ghost block" data-tab="orders">అన్ని ఆర్డర్లు</button></div>';
+  el.innerHTML = html;
+}
+
+function statusChip(status){
+  var m = {done:['పూర్తయింది','green'], missed:['తప్పిపోయింది','kum'], cancelled:['రద్దు',''], refunded:['రీఫండ్','']};
+  var v = m[status] || ['—',''];
+  return '<span class="chip '+v[1]+'">'+v[0]+'</span>';
+}
+
+function orderRow(o){
+  var c = CUSTOMERS.filter(function(x){return x.id===o.customerId;})[0];
+  return '<div class="stat"><span class="k">'
+    + '<b style="color:var(--sand)">'+esc(c?c.name:'కస్టమర్')+'</b><br>'
+    + '<span style="font-size:13px">'+esc(fmtDT(o.start))+' · '+mmss(o.seconds)+'</span></span>'
+    + '<span class="v">'+rupee(o.astrologerShare)+'<br>'+statusChip(o.status)+'</span></div>';
+}
+
+/* =========================================================
+   orders / wallet / notifs / profile
+   ========================================================= */
+function renderOrders(){
+  var el = document.getElementById('scr-orders');
+  var list = myOrders().slice().reverse();
+  var html = '<h1>ఆర్డర్లు</h1>';
+  if(!list.length){
+    html += '<div class="card"><p class="muted" style="margin:0">ఇంకా ఆర్డర్లు లేవు.</p></div>';
+  } else {
+    html += '<div class="card">' + list.map(function(o){
+      return '<div class="stat"><span class="k">'
+        + '<b style="color:var(--sand)">'+esc((CUSTOMERS.filter(function(x){return x.id===o.customerId;})[0]||{}).name || 'కస్టమర్')+'</b><br>'
+        + '<span style="font-size:13px">'+esc(fmtDT(o.start))+' · నిడివి '+mmss(o.seconds)+'</span><br>'
+        + '<span style="font-size:13px">మొత్తం '+rupee(o.amount)+' · కమిషన్ '+rupee(o.commission)+'</span></span>'
+        + '<span class="v">'+rupee(o.astrologerShare)+'<br>'+statusChip(o.status)+'</span></div>';
+    }).join('') + '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function renderWallet(){
+  var el = document.getElementById('scr-wallet');
+  var now = new Date();
+  var weekStart = new Date(now.getTime() - 6*86400000);
+  var total = 0, week = 0, month = 0, comm = 0;
+  myOrders().forEach(function(o){
+    if(o.status !== 'done') return;
+    var d = new Date(o.start);
+    total += o.astrologerShare;
+    comm += o.commission;
+    if(d >= weekStart) week += o.astrologerShare;
+    if(d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()) month += o.astrologerShare;
+  });
+  var withdrawn = S.tx.filter(function(x){ return x.type === 'payout'; }).reduce(function(a,b){ return a + Math.abs(b.amount); }, 0);
+
+  var html = '<h1>వాలెట్</h1>'
+    + '<div class="panel"><div class="muted" style="font-size:14px">చెల్లించవలసినది</div>'
+    + '<div class="big-num">'+rupee(Math.max(0, total - withdrawn))+'</div></div>'
+    + '<div class="grid2">'
+    +   '<div class="mini"><div class="lab">మొత్తం ఆదాయం</div><div class="num">'+rupee(total)+'</div></div>'
+    +   '<div class="mini"><div class="lab">కమిషన్ ('+S.astro.commission+'%)</div><div class="num">'+rupee(comm)+'</div></div>'
+    +   '<div class="mini"><div class="lab">ఈ వారం</div><div class="num">'+rupee(week)+'</div></div>'
+    +   '<div class="mini"><div class="lab">ఈ నెల</div><div class="num">'+rupee(month)+'</div></div>'
+    + '</div>';
+
+  html += '<h2>లావాదేవీలు</h2>';
+  if(!S.tx.length){
+    html += '<div class="card"><p class="muted" style="margin:0">ఇంకా లావాదేవీలు లేవు.</p></div>';
+  } else {
+    html += '<div class="card">' + S.tx.slice().reverse().slice(0,30).map(function(x){
+      var pos = x.amount > 0;
+      return '<div class="stat"><span class="k">'+esc(x.note)+'<br>'
+        + '<span style="font-size:13px;opacity:.8">'+esc(fmtDT(x.at))+'</span></span>'
+        + '<span class="v" style="color:'+(pos?'var(--green)':'var(--kumkum)')+'">'+(pos?'+':'−')+rupee(Math.abs(x.amount))+'</span></div>';
+    }).join('') + '</div>';
+  }
+  html += '<div class="card"><h3>కమిషన్ వివరం</h3>'
+    + '<p class="muted" style="margin:0">ప్రతి కాల్ మొత్తం నుంచి '+S.astro.commission+'% కమిషన్ తగ్గించి, మిగిలినది మీ వాలెట్‌కు జమ అవుతుంది.</p></div>';
+  el.innerHTML = html;
+}
+
+function renderNotif(){
+  var el = document.getElementById('scr-notif');
+  var html = '<h1>తెలియజేయి</h1>';
+  if(!S.notifs.length){
+    html += '<div class="card"><p class="muted" style="margin:0">ఇంకా తెలియజేయడాలు లేవు.</p></div>';
+  } else {
+    html += '<div class="card">' + S.notifs.slice().reverse().slice(0,40).map(function(n){
+      return '<div class="notif">' + (n.read ? '<span style="width:8px;flex:0 0 8px"></span>' : '<span class="unread"></span>')
+        + '<div class="grow"><div style="font-weight:600;color:var(--sand)">'+esc(n.title)+'</div>'
+        + '<div class="muted" style="font-size:14px">'+esc(n.body)+'</div>'
+        + '<div class="muted" style="font-size:12px">'+esc(fmtDT(n.at))+'</div></div></div>';
+    }).join('') + '</div>';
+  }
+  el.innerHTML = html;
+  /* mark read once the screen is opened */
+  setTimeout(function(){
+    var changed = false;
+    S.notifs.forEach(function(n){ if(!n.read){ n.read = true; changed = true; } });
+    if(changed){ save(); renderTabs(); }
+  }, 700);
+}
+
+function renderProfile(){
+  var el = document.getElementById('scr-profile');
+  var a = S.astro;
+  var photo = a.photo ? 'background-image:url('+a.photo+')' : '';
+  var html = '<h1>ప్రొఫైల్</h1>'
+    + '<div class="card"><div class="row">'
+    +   '<div class="avatar" style="width:64px;height:64px;flex:0 0 64px;font-size:24px;'+photo+'">'+(a.photo?'':esc(a.name.trim().charAt(0)))+'</div>'
+    +   '<div class="grow"><div style="font-weight:700;font-size:19px;color:var(--sand)">'+esc(a.name)+'</div>'
+    +   '<div class="muted">'+esc(a.id)+' · '+esc(a.mobile||'')+'</div></div>'
+    +   '<button class="btn sm ghost" data-act="photo">ఫోటో</button>'
+    + '</div></div>'
+    + '<input type="file" id="photo-in" accept="image/*" style="display:none">';
+
+  html += '<div class="card">'
+    + '<div class="stat"><span class="k">ఐడీ</span><span class="v">'+esc(a.id)+'</span></div>'
+    + '<div class="stat"><span class="k">భాషలు</span><span class="v">'+esc(a.languages.join(', '))+'</span></div>'
+    + '<div class="stat"><span class="k">అనుభవం</span><span class="v">'+a.exp+' సంవత్సరాలు</span></div>'
+    + '<div class="stat"><span class="k">ప్రత్యేకత</span><span class="v" style="max-width:60%">'+esc(a.spec)+'</span></div>'
+    + '<div class="stat"><span class="k">కమిషన్</span><span class="v">'+a.commission+'%</span></div>'
+    + '</div>';
+
+  html += '<label class="f" for="pf-fee">నిమిషం ఫీజు (₹)</label>'
+    + '<input class="i" id="pf-fee" type="number" inputmode="numeric" min="50" step="50" value="'+a.fee+'">'
+    + '<label class="f" for="pf-hours">అందుబాటు గంటలు</label>'
+    + '<input class="i" id="pf-hours" type="text" value="'+esc(a.hours||'09:00 – 21:00')+'">'
+    + '<label class="f" for="pf-langs">భాషలు (కామాతో వేరు చేయండి)</label>'
+    + '<input class="i" id="pf-langs" type="text" value="'+esc(a.languages.join(', '))+'">'
+    + '<label class="f" for="pf-spec">ప్రత్యేకత</label>'
+    + '<input class="i" id="pf-spec" type="text" value="'+esc(a.spec)+'">'
+    + '<div class="btn-row"><button class="btn block" id="pf-save">భద్రపరచు</button></div>';
+
+  html += '<h2 style="margin-top:20px">Agora సెట్టింగ్‌లు</h2><div class="card">'
+    + '<label class="f" for="pf-appid" style="margin-top:0">App ID</label>'
+    + '<input class="i" id="pf-appid" type="text" placeholder="Agora App ID" value="'+esc(S.settings.appId)+'">'
+    + '<label class="f" for="pf-token">టోకెన్ సర్వర్</label>'
+    + '<input class="i" id="pf-token" type="url" placeholder="https://…/api/token" value="'+esc(S.settings.tokenServer)+'">'
+    + '<p class="muted" style="margin:10px 0 0;font-size:14px">App ID, టోకెన్ సర్వర్ రెండూ ఉంటేనే నిజమైన వాయిస్ కాల్ పనిచేస్తుంది. ఇవి లేకుండా యాప్ డెమో మోడ్‌లో నడుస్తుంది.</p>'
+    + '<div class="btn-row"><button class="btn block" id="pf-save2">భద్రపరచు</button></div></div>';
+
+  html += '<div class="btn-row"><button class="btn block kum" data-act="signout">సైన్ అవుట్</button></div>';
+  html += '<p class="stamp">v1.0 · 2026-11-23 · డెమో మోడ్ — డేటా ఈ ఫోన్‌లో మాత్రమే</p>';
+  el.innerHTML = html;
+}
+
+/* =========================================================
+   overlays
+   ========================================================= */
+function closeOverlay(){ overlay.classList.remove('on'); overlay.innerHTML=''; }
+function openSheet(html){ overlay.innerHTML = '<div class="sheet">'+html+'</div>'; overlay.classList.add('on'); }
+
+/* ---- audio ---- */
+var AC = null;
+function audioCtx(){
+  var C = window.AudioContext || window.webkitAudioContext;
+  if(!C) return null;
+  if(!AC){ try{ AC = new C(); }catch(e){ AC = null; } }
+  return AC;
+}
+function tone(ctx, freq, at, dur, vol, type){
+  var o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = type || 'sine';
+  o.frequency.value = freq;
+  g.gain.setValueAtTime(0, at);
+  g.gain.linearRampToValueAtTime(vol, at + 0.03);
+  g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+  o.connect(g); g.connect(ctx.destination);
+  o.start(at); o.stop(at + dur + 0.05);
+}
+function announce(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'te-IN'; u.rate = 0.95;
+    window.speechSynthesis.speak(u);
+  }catch(e){ /* speech unavailable */ }
+}
+function stopAudio(){
+  try{ if('speechSynthesis' in window) window.speechSynthesis.cancel(); }catch(e){}
+  try{ if(AC && AC.state === 'running') AC.suspend(); }catch(e){}
+  AC = null;
+}
+
+var ringTimer = null, ringTimeout = null;
+
+function ringStart(customer){
+  var ctx = audioCtx();
+  if(ctx && ctx.state === 'suspended'){ try{ ctx.resume(); }catch(e){} }
+  var burst = function(){
+    var c = audioCtx();
+    if(!c) return;
+    var n = c.currentTime + 0.02;
+    tone(c, 740, n, 0.42, 0.09, 'sine');
+    tone(c, 587, n + 0.24, 0.42, 0.09, 'sine');
+  };
+  burst();
+  ringTimer = setInterval(burst, 1500);
+  announce('కొత్త కాల్ వస్తోంది. ' + customer.name + ' గారి నుండి.');
+}
+function ringStop(){ clearInterval(ringTimer); ringTimer = null; stopAudio(); }
+
+var demoCallTimer = null;
+function scheduleDemoCall(){
+  clearTimeout(demoCallTimer);
+  if(!S.online || !S.unlocked || S.call) return;
+  demoCallTimer = setTimeout(function(){
+    if(!(S.online && S.unlocked && !S.call && !overlay.classList.contains('on'))) return;
+    var req = pendingConsult();
+    if(req) showIncoming(req); else showIncoming();
+  }, 6000);
+}
+
+var lastConsultAt = null;
+function initConsultCursor(){
+  var all = lsGet('lrConsultRequests', []);
+  /* anything already waiting is history; only newer requests ring */
+  lastConsultAt = (Array.isArray(all) && all.length && all[all.length-1].at)
+    ? all[all.length-1].at
+    : new Date().toISOString();
+}
+function pendingConsult(){
+  var all = lsGet('lrConsultRequests', []);
+  if(!Array.isArray(all) || !all.length) return null;
+  var last = all[all.length-1];
+  if(!last || !last.at) return null;
+  if(last.at > lastConsultAt){ lastConsultAt = last.at; return last; }
+  return null;
+}
+
+function showIncoming(req){
+  var c = req
+    ? { id:'c_' + (req.at || Date.now()),
+        name: req.mobile ? ('కస్టమర్ ' + String(req.mobile).slice(-4)) : 'కస్టమర్',
+        mobile: req.mobile || '' }
+    : CUSTOMERS[Math.floor(Math.random()*CUSTOMERS.length)];
+  S.call = {customer:c, seconds:0, muted:false, connected:false, phase:'ringing'};
+  overlay.innerHTML = '<div class="full"><div class="callscr">'
+    + '<div style="font-size:15px;color:var(--wheat)">ఇన్‌కమింగ్ కాల్</div>'
+    + '<div class="avatar ring" style="margin:14px 0 10px">'+esc(c.name.trim().charAt(0))+'</div>'
+    + '<div style="font-size:22px;font-weight:700;text-align:center">'+esc(c.name)+'</div>'
+    + '<div style="color:var(--wheat);font-size:15px;margin-top:2px">'+esc(c.mobile)+'</div>'
+    + '<div style="color:var(--wheat);font-size:15px;margin-top:8px">'+rupee(S.astro.fee)+' / నిమిషం</div>'
+    + '<div class="timer" id="call-timer" style="margin-top:22px;font-size:30px">రింగ్ అవుతోంది…</div>'
+    + '<div class="callbtns">'
+    +   '<button class="cbtn end" id="btn-reject">తిరస్కరించు</button>'
+    +   '<button class="cbtn answer" id="btn-accept">స్వీకరించు</button>'
+    + '</div></div></div>';
+  overlay.classList.add('on');
+  ringStart(c);
+
+  ringTimeout = setTimeout(function(){
+    if(S.call && S.call.phase === 'ringing') finishCall('missed');
+  }, 26000);
+}
+
+var callTimer = null, callStartAt = 0;
+
+function acceptCall(){
+  if(!S.call) return;
+  clearTimeout(ringTimeout);
+  ringStop();
+  S.call.phase = 'in';
+  S.call.connected = true;
+  callStartAt = Date.now();
+
+  var el = overlay.querySelector('.callscr');
+  el.innerHTML = '<div style="font-size:15px;color:var(--wheat)">కాల్‌లో ఉంది</div>'
+    + '<div class="avatar" style="margin:14px 0 10px">'+esc(S.call.customer.name.trim().charAt(0))+'</div>'
+    + '<div style="font-size:22px;font-weight:700;text-align:center">'+esc(S.call.customer.name)+'</div>'
+    + '<div class="timer" id="call-timer" style="margin-top:22px">00:00</div>'
+    + '<div style="color:var(--wheat);font-size:14px;margin-top:4px">'+rupee(S.astro.fee)+' / నిమిషం</div>'
+    + '<div class="callbtns">'
+    +   '<button class="cbtn mute" id="btn-mute">మ్యూట్</button>'
+    +   '<button class="cbtn end" id="btn-end">ముగించు</button>'
+    + '</div>';
+
+  callTimer = setInterval(function(){
+    if(!S.call) return;
+    S.call.seconds = Math.floor((Date.now() - callStartAt)/1000);
+    var t = document.getElementById('call-timer');
+    if(t) t.textContent = mmss(S.call.seconds);
+  }, 500);
+}
+
+function finishCall(status){
+  if(!S.call) return;
+  var call = S.call;
+  S.call = null;
+  clearInterval(callTimer); callTimer = null;
+  clearTimeout(ringTimeout);
+  ringStop();
+
+  var secs = call.connected ? Math.max(1, call.seconds) : 0;
+  var mins = Math.max(1, Math.ceil(secs/60));
+  var amount = call.connected ? mins * S.astro.fee : 0;
+  var commission = Math.round(amount * (S.astro.commission/100));
+  var share = amount - commission;
+
+  var order = {
+    id:'o' + Date.now(),
+    customerId: call.customer.id,
+    astrologerId: S.astro.id,
+    type:'call',
+    start: new Date().toISOString(),
+    seconds: secs,
+    amount: amount,
+    commission: commission,
+    astrologerShare: share,
+    status: status
+  };
+  S.orders.push(order);
+
+  if(share > 0){
+    S.tx.push({amount: share, type:'credit', party:'astrologer', astrologerId: S.astro.id,
+               note:'కాల్ · ' + call.customer.name, at: order.start});
+  }
+  S.notifs.push({
+    title: status === 'done' ? 'కాల్ పూర్తయింది' : (status === 'missed' ? 'కాల్ తప్పిపోయింది' : 'కాల్ రద్దు'),
+    body: call.customer.name + ' · ' + mmss(secs) + (share > 0 ? ' · ' + rupee(share) + ' జమ' : ''),
+    at: order.start, read: false
+  });
+  save();
+  closeOverlay();
+  toast(status === 'done' ? 'కాల్ ముగిసింది · ' + rupee(share) : 'కాల్ తప్పిపోయింది');
+  render();
+  scheduleDemoCall();
+}
+
+/* =========================================================
+   events
+   ========================================================= */
+document.addEventListener('click', function(ev){
+  var el = ev.target.closest ? ev.target.closest('[data-tab],[data-act],#x-next,#x-next2,#x-back,#x-back2,#x-finish,#p-go,#pf-save,#pf-save2,#btn-accept,#btn-reject,#btn-mute,#btn-end') : null;
+  if(!el) return;
+
+  if(el.hasAttribute('data-tab')){ go(el.getAttribute('data-tab')); return; }
+
+  if(el.id === 'btn-accept'){ acceptCall(); return; }
+  if(el.id === 'btn-reject'){ finishCall('cancelled'); return; }
+  if(el.id === 'btn-end'){ finishCall('done'); return; }
+  if(el.id === 'btn-mute'){
+    if(!S.call) return;
+    S.call.muted = !S.call.muted;
+    el.classList.toggle('on', S.call.muted);
+    return;
+  }
+
+  /* entry */
+  if(el.id === 'x-next'){
+    var sel = (document.getElementById('x-id')||{}).value || '';
+    var typed = ((document.getElementById('x-id2')||{}).value || '').trim();
+    var id = typed || sel;
+    var found = roster().filter(function(a){ return a.id === id; })[0];
+    if(!found){ toast('జ్యోతిష్కుడిని ఎంచుకోండి లేదా సరైన ఐడీ ఇవ్వండి'); return; }
+    S.entry.id = found.id; S.entry.name = found.name; S.entry.step = 2; renderEntry(); return;
+  }
+  if(el.id === 'x-back'){ S.entry.step = 1; renderEntry(); return; }
+  if(el.id === 'x-back2'){ S.entry.step = 2; renderEntry(); return; }
+  if(el.id === 'x-next2'){
+    var mb = ((document.getElementById('x-mob')||{}).value || '').replace(/\D/g,'');
+    if(!/^[6-9]\d{9}$/.test(mb)){ toast('సరైన మొబైల్ నంబర్ ఇవ్వండి'); return; }
+    S.entry.mobile = mb; S.entry.step = 3; renderEntry(); return;
+  }
+  if(el.id === 'x-finish'){
+    var p1 = ((document.getElementById('x-pin')||{}).value || '').trim();
+    var p2 = ((document.getElementById('x-pin2')||{}).value || '').trim();
+    if(!/^\d{4}$/.test(p1)){ toast('PIN 4 అంకెలు ఉండాలి'); return; }
+    if(p1 !== p2){ toast('రెండు PIN ఒకటే ఉండాలి'); return; }
+    var base = roster().filter(function(a){ return a.id === S.entry.id; })[0];
+    S.astro = {
+      id: base.id, name: base.name, languages: base.languages.slice(),
+      fee: base.fee, exp: base.exp, spec: base.spec, photo: '',
+      mobile: S.entry.mobile,
+      commission: (typeof base.commission === 'number' ? base.commission : COMMISSION_DEFAULT),
+      hours: '09:00 – 21:00'
+    };
+    S.pin = p1; S.unlocked = true; S.entry = {step:1,name:'',id:'',mobile:'',pin:'',pin2:''};
+    save(); S.screen = 'home'; render();
+    toast('స్వాగతం, ' + S.astro.name);
+    scheduleDemoCall();
+    return;
+  }
+  if(el.id === 'p-go'){
+    var v = ((document.getElementById('p-in')||{}).value || '').trim();
+    if(v !== S.pin){ toast('PIN తప్పు'); return; }
+    S.unlocked = true; render(); scheduleDemoCall(); return;
+  }
+
+  /* profile saves */
+  if(el.id === 'pf-save' || el.id === 'pf-save2'){
+    var fee = Number((document.getElementById('pf-fee')||{}).value) || S.astro.fee;
+    var hours = ((document.getElementById('pf-hours')||{}).value || '').trim();
+    var langs = ((document.getElementById('pf-langs')||{}).value || '').split(',').map(function(x){return x.trim();}).filter(Boolean);
+    var spec = ((document.getElementById('pf-spec')||{}).value || '').trim();
+    S.astro.fee = Math.max(50, fee);
+    S.astro.hours = hours || '09:00 – 21:00';
+    S.astro.languages = langs.length ? langs : S.astro.languages;
+    S.astro.spec = spec || S.astro.spec;
+    S.settings.appId = ((document.getElementById('pf-appid')||{}).value || '').trim();
+    S.settings.tokenServer = ((document.getElementById('pf-token')||{}).value || '').trim();
+    save(); render(); toast('భద్రపరచబడింది');
+    return;
+  }
+
+  /* data-act */
+  var act = el.getAttribute('data-act');
+  if(act === 'toggle'){
+    S.online = !S.online;
+    save(); render();
+    if(S.online){ toast('ఆన్‌లైన్'); scheduleDemoCall(); }
+    else { clearTimeout(demoCallTimer); toast('ఆఫ్‌లైన్'); }
+    return;
+  }
+  if(act === 'photo'){
+    var inp = document.getElementById('photo-in');
+    if(inp) inp.click();
+    return;
+  }
+  if(act === 'signout'){
+    S.unlocked = false;
+    S.astro = null; S.pin = ''; S.online = false;
+    S.orders = []; S.tx = []; S.notifs = [];
+    clearTimeout(demoCallTimer);
+    save(); S.screen = 'home'; render(); return;
+  }
+});
+
+/* photo upload, downscaled so localStorage stays small */
+document.addEventListener('change', function(ev){
+  if(ev.target && ev.target.id === 'photo-in'){
+    var f = ev.target.files && ev.target.files[0];
+    if(!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      var img = new Image();
+      img.onload = function(){
+        var c = document.createElement('canvas');
+        c.width = 200; c.height = 200;
+        var g = c.getContext('2d');
+        var s = Math.min(img.width, img.height);
+        g.drawImage(img, (img.width-s)/2, (img.height-s)/2, s, s, 0, 0, 200, 200);
+        S.astro.photo = c.toDataURL('image/jpeg', 0.8);
+        save(); render(); toast('ఫోటో మార్చబడింది');
+      };
+      img.src = r.result;
+    };
+    r.readAsDataURL(f);
+  }
+});
+
+/* start */
+initConsultCursor();
+render();
+})();
+</script>
+</body>
+</html>
