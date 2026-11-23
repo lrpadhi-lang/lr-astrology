@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fdf7ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LR Admin">
+<meta name="description" content="LR Astrology — Admin app">
+<title>LR Astrology · Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italianno&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fdf7ec; --wheat:#e9d1a8; --sand:#6f4a2e; --sand2:#8b5e3c;
+  --kumkum:#b3221f; --gold:#d97706; --green:#1f6f43; --ink:#3a2415;
+  --tint:rgba(111,74,46,.12);
+  --ui-font:'Noto Serif',Georgia,serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:rgba(233,209,168,.5)}
+html,body{margin:0;padding:0;background:var(--cream)}
+body{font-family:var(--ui-font);font-size:18px;line-height:1.55;color:var(--ink);
+  -webkit-text-size-adjust:100%;text-size-adjust:100%}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+::selection{background:var(--wheat);color:var(--ink)}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit;line-height:inherit}
+button{cursor:pointer}
+.brand-name,.brand-disc{font-family:'Italianno','Segoe Script',cursive !important;font-weight:400 !important}
+
+#app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--cream);position:relative;overflow-x:hidden}
+#hdr{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;padding:10px 14px;
+  background:var(--cream);border-bottom:1px solid var(--wheat)}
+.disc{width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:var(--sand);color:var(--cream);
+  display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;border:2px solid var(--kumkum);padding-bottom:4px}
+.brand-name{font-size:30px;line-height:1;color:var(--sand);padding-bottom:2px}
+#hdr .grow{flex:1 1 auto;min-width:0}
+#hdr .who{font-size:13px;color:var(--sand2);margin-top:-2px}
+.lockbtn{border:0;border-radius:999px;padding:7px 14px;background:var(--tint);
+  color:var(--sand);font-size:14px;font-weight:600}
+
+.screen{display:none;padding:14px 14px 96px}
+.screen.on{display:block}
+h1,h2,h3{font-weight:700;color:var(--sand);margin:0 0 10px;line-height:1.35}
+h1{font-size:23px} h2{font-size:20px} h3{font-size:18px}
+.muted{color:var(--sand2);font-size:15px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;
+  padding:13px 20px;background:linear-gradient(90deg,var(--cream) 0%,var(--wheat) 100%);
+  color:var(--sand);font-size:18px;font-weight:700;text-decoration:none}
+.btn:active{background:linear-gradient(90deg,var(--wheat) 0%,var(--cream) 100%)}
+.btn.block{display:flex;width:100%}
+.btn.dark{background:linear-gradient(90deg,var(--sand2) 0%,var(--sand) 100%);color:var(--cream)}
+.btn.kum{background:linear-gradient(90deg,var(--kumkum) 0%,#8f1a17 100%);color:var(--cream)}
+.btn.green{background:linear-gradient(90deg,#2a8b57 0%,var(--green) 100%);color:var(--cream)}
+.btn.sm{padding:9px 14px;font-size:16px;border-radius:10px}
+.btn.ghost{background:var(--tint);color:var(--sand)}
+.btn-row{display:flex;gap:10px;margin-top:14px}
+.btn-row .btn{flex:1 1 0}
+
+.panel{background:var(--sand);color:var(--cream);border-left:4px solid var(--kumkum);
+  border-radius:0 12px 12px 0;padding:14px 16px;margin-bottom:14px}
+.panel h2,.panel h3{color:var(--cream)}
+.panel .muted{color:var(--wheat)}
+.card{background:#fffaf1;border:1px solid var(--wheat);border-radius:12px;padding:14px;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:10px}
+.grow{flex:1 1 auto;min-width:0}
+.wrap{display:flex;flex-wrap:wrap;gap:8px}
+
+.chip{display:inline-block;border:0;border-radius:999px;padding:4px 12px;background:var(--tint);
+  color:var(--sand);font-size:14px;font-weight:600}
+.chip.gold{background:rgba(217,119,6,.16);color:#8a4a05}
+.chip.kum{background:rgba(179,34,31,.12);color:var(--kumkum)}
+.chip.green{background:rgba(31,111,67,.14);color:var(--green)}
+.chip.sel{background:var(--sand);color:var(--cream)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px}
+.chips::-webkit-scrollbar{display:none}
+.chips.wrap{flex-wrap:wrap;overflow:visible}
+.chips.wrap .chip{padding:8px 14px;font-size:15px}
+.chips .chip{flex:0 0 auto;padding:8px 16px;font-size:16px}
+
+.stat{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(233,209,168,.9)}
+.stat:last-child{border-bottom:0}
+.stat .k{color:var(--sand2);font-size:16px}
+.stat .v{font-weight:700;color:var(--sand);text-align:right}
+.panel .stat{border-bottom-color:rgba(233,209,168,.32)}
+.panel .stat .k{color:var(--wheat)}
+.panel .stat .v{color:var(--cream)}
+
+.big-num{font-size:34px;font-weight:700;color:var(--cream);line-height:1.1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mini{background:#fffaf1;border:1px solid var(--wheat);border-radius:12px;padding:12px}
+.mini .lab{font-size:14px;color:var(--sand2)}
+.mini .num{font-size:24px;font-weight:700;color:var(--sand);line-height:1.2}
+
+.avatar{width:46px;height:46px;flex:0 0 46px;border-radius:50%;background:var(--sand);color:var(--cream);
+  display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;border:2px solid var(--wheat)}
+
+label.f{display:block;font-size:15px;font-weight:600;color:var(--sand);margin:12px 0 6px}
+input.i,select.i,textarea.i{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--wheat);
+  background:#fffaf1;font-size:18px}
+input.i::placeholder{color:#a08a72}
+
+#tabs{position:fixed;left:0;right:0;bottom:0;z-index:45;display:none;max-width:480px;margin:0 auto;
+  background:var(--cream);border-top:1px solid var(--wheat);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+#tabs.on{display:flex}
+#tabs button{flex:1 1 0;border:0;background:transparent;padding:8px 2px 6px;border-radius:10px;
+  color:var(--sand2);font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;border-bottom:3px solid transparent}
+#tabs button.act{color:var(--kumkum);border-bottom-color:var(--gold)}
+
+#overlay{position:fixed;inset:0;z-index:60;display:none;background:rgba(58,36,21,.45)}
+#overlay.on{display:block}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;background:var(--cream);
+  border-radius:18px 18px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto}
+
+#toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);max-width:420px;width:calc(100% - 40px);
+  background:var(--sand);color:var(--cream);border-left:4px solid var(--kumkum);border-radius:10px;
+  padding:12px 16px;font-size:16px;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+
+.idbox{font-family:'Noto Serif',Georgia,serif;font-size:20px;font-weight:700;color:var(--kumkum);letter-spacing:1px}
+.stamp{font-size:12px;color:var(--sand2);opacity:.8;text-align:center;margin-top:18px;line-height:1.5}
+.pub{background:rgba(31,111,67,.10);border-left:4px solid var(--green)}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <header id="hdr">
+    <div class="disc brand-disc">LR</div>
+    <div class="grow">
+      <div class="brand-name">LR Astrology</div>
+      <div class="who" id="who">Admin app</div>
+    </div>
+    <button class="lockbtn" id="lockBtn" style="display:none">Lock</button>
+  </header>
+
+  <main id="screens">
+    <section class="screen" id="scr-gate"></section>
+    <section class="screen" id="scr-home"></section>
+    <section class="screen" id="scr-astro"></section>
+    <section class="screen" id="scr-tx"></section>
+    <section class="screen" id="scr-orders"></section>
+  </main>
+
+  <nav id="tabs"></nav>
+</div>
+
+<div id="overlay"></div>
+<div id="toast"></div>
+
+<noscript><p style="padding:20px">This app needs JavaScript.</p></noscript>
+
+<script>
+(function(){
+'use strict';
+
+/* =====================================================================
+   Keys shared with the website, the customer app and the astrologer app
+   ===================================================================== */
+var KEY = {
+  pin:      'lrAdminPin',
+  managers: 'lrAdminManagers',
+  registry: 'lrAstrologerRegistry',
+  settings: 'lrAppSettings',
+  orders:   'lrAppOrders',
+  txns:     'lrWalletTxns',
+  consults: 'lrConsultRequests',
+  profiles: 'vedic_saved_profiles',
+  astroUser:'lrAstroUser',
+  auth:     'lrAuthUser'
+};
+
+function lsGet(key, fb){ try{ var r = localStorage.getItem(key); return r ? JSON.parse(r) : fb; }catch(e){ return fb; } }
+function lsSet(key, v){ try{ localStorage.setItem(key, JSON.stringify(v)); }catch(e){} }
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+function rupee(n){ return '₹' + Number(Math.round(n||0)).toLocaleString('en-IN'); }
+function fmtDT(iso){ var d = new Date(iso); if(isNaN(d)) return '—';
+  var p = function(x){return (x<10?'0':'')+x;};
+  return p(d.getDate())+'/'+p(d.getMonth()+1)+'/'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes()); }
+
+/* =====================================================================
+   State
+   ===================================================================== */
+var DEFAULT_COMMISSION = 30;
+
+var SEED = [
+  {name:'Pandit Venkata Ramana Sharma', languages:['Telugu','Hindi'], fee:500, exp:22, spec:'Horoscope, marriage matching'},
+  {name:'Smt. Lakshmi Kantham',         languages:['Telugu'], fee:350, exp:15, spec:'Women\u2019s charts, children'},
+  {name:'Pandit Suryanarayana Sastry',  languages:['Telugu','English'], fee:700, exp:28, spec:'Muhurta, house warming'},
+  {name:'Sri Raghavendra Acharya',      languages:['Telugu','Hindi'], fee:450, exp:18, spec:'Career, business'},
+  {name:'Subrahmanya Sharma',           languages:['Telugu'], fee:300, exp:10, spec:'Education, exams'},
+  {name:'Pandit Madhavi Devi',          languages:['Telugu','Odia'], fee:400, exp:12, spec:'Marriage, dosha remedies'},
+  {name:'Sri Narasimha Murthy',         languages:['Telugu','English','Hindi'], fee:900, exp:32, spec:'Karma secrets, dasha analysis'},
+  {name:'Venkateswara Sharma',          languages:['Telugu'], fee:250, exp:8, spec:'Panchangam, gochara'}
+];
+
+/* the four departments — one role holds each one */
+var SECTIONS = [
+  {id:'home',   role:'CEO',        n:'Summary',      desc:'Totals, commission income'},
+  {id:'astro',  role:'Manager',    n:'Astrologers',  desc:'Names, IDs, fee, commission'},
+  {id:'tx',     role:'Accountant', n:'Transactions', desc:'Customer and astrologer ledgers'},
+  {id:'orders', role:'Employee',   n:'Orders',       desc:'Every call, commission, status'}
+];
+function sectionById(id){ return SECTIONS.filter(function(s){return s.id===id;})[0] || null; }
+function sectionName(id){ var x = sectionById(id); return x ? x.n : id; }
+function sectionRole(id){ var x = sectionById(id); return x ? x.role : ''; }
+
+var S = {
+  unlocked: false,
+  role: null,          /* 'owner' or 'staff' */
+  sections: [],        /* which tabs this PIN may open */
+  who: '',
+  screen: 'home',
+  txFilter: 'customer',
+  editing: null
+};
+
+/* =====================================================================
+   Storage
+   ===================================================================== */
+function getPin(){ var p = lsGet(KEY.pin, ''); return typeof p === 'string' ? p : ''; }
+function setPin(v){ lsSet(KEY.pin, v); }
+
+function getManagers(){
+  var m = lsGet(KEY.managers, null);
+  if(!Array.isArray(m)) return [];
+  return m.filter(function(x){ return x && x.section; });
+}
+function setManagers(list){ lsSet(KEY.managers, list); }
+function managerFor(section){
+  return getManagers().filter(function(m){ return m.section === section; })[0] || null;
+}
+function setManagerFor(section, name, pin){
+  var list = getManagers().filter(function(m){ return m.section !== section; });
+  if(name) list.push({section: section, name: name, pin: pin, at: new Date().toISOString()});
+  setManagers(list);
+}
+
+function getRegistry(){
+  var r = lsGet(KEY.registry, null);
+  return Array.isArray(r) ? r : null;
+}
+function setRegistry(list){ lsSet(KEY.registry, list); }
+function getSettings(){ return lsGet(KEY.settings, {}) || {}; }
+function saveSettings(patch){
+  var s = getSettings();
+  Object.keys(patch).forEach(function(k){ s[k] = patch[k]; });
+  lsSet(KEY.settings, s);
+  return s;
+}
+function getOrders(){ var o = lsGet(KEY.orders, []); return Array.isArray(o) ? o : []; }
+function getTxns(){ var t = lsGet(KEY.txns, []); return Array.isArray(t) ? t : []; }
+function getConsults(){ var c = lsGet(KEY.consults, []); return Array.isArray(c) ? c : []; }
+
+function ensureRegistry(){
+  if(getRegistry()) return;
+  var commission = getSettings().defaultCommission || DEFAULT_COMMISSION;
+  var seeded = SEED.map(function(a, i){
+    return {
+      id: 'a' + (i + 1),
+      name: a.name, mobile: '',
+      languages: a.languages.slice(), fee: a.fee, exp: a.exp, spec: a.spec,
+      commission: commission, active: i % 3 !== 2, assigned: false, publishedAt: null
+    };
+  });
+  setRegistry(seeded);
+}
+ensureRegistry();
+
+function registry(){ return getRegistry() || []; }
+function byId(id){ return registry().filter(function(a){ return a.id === id; })[0] || null; }
+
+function nextFreeId(){
+  var used = {};
+  registry().forEach(function(a){ used[a.id] = true; });
+  for(var i = 1; i < 999; i++){
+    var id = 'a' + i;
+    if(!used[id]) return id;
+  }
+  return 'a' + Date.now();
+}
+
+function partyOf(t){ return t.party === 'astrologer' ? 'astrologer' : 'customer'; }
+
+/* =====================================================================
+   Chrome
+   ===================================================================== */
+var screens = document.getElementById('screens');
+var tabsEl = document.getElementById('tabs');
+var overlay = document.getElementById('overlay');
+var toastEl = document.getElementById('toast');
+var whoEl = document.getElementById('who');
+
+var TABS = [
+  {id:'home',   n:'Home'},
+  {id:'astro',  n:'Astrologers'},
+  {id:'tx',     n:'Transactions'},
+  {id:'orders', n:'Orders'}
+];
+
+var toastTimer = null;
+function toast(msg){
+  toastEl.textContent = msg; toastEl.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toastEl.classList.remove('on'); }, 2600);
+}
+function go(id){ S.screen = id; render(); try{ window.scrollTo(0,0); }catch(e){} }
+function showOnly(id){
+  Array.prototype.forEach.call(screens.querySelectorAll('.screen'), function(el){
+    el.classList.toggle('on', el.id === 'scr-' + id);
+  });
+}
+function renderTabs(){
+  if(!S.unlocked){ tabsEl.classList.remove('on'); tabsEl.innerHTML = ''; return; }
+  tabsEl.classList.add('on');
+  var allowed = TABS.filter(function(tb){ return S.sections.indexOf(tb.id) >= 0; });
+  tabsEl.innerHTML = allowed.map(function(tb){
+    return '<button data-tab="'+tb.id+'" class="'+(S.screen===tb.id?'act':'')+'">'+tb.n+'</button>';
+  }).join('');
+}
+
+function render(){
+  var lockEl = document.getElementById('lockBtn');
+  if(lockEl) lockEl.style.display = S.unlocked ? 'inline-block' : 'none';
+  if(whoEl) whoEl.textContent = S.unlocked
+    ? (S.role === 'owner' ? 'Owner · all four departments' : S.who + ' · ' + sectionRole(S.sections[0]))
+    : 'Admin app';
+
+  if(!S.unlocked){ renderGate(); }
+  else {
+    if(S.sections.indexOf(S.screen) < 0) S.screen = S.sections[0] || 'home';
+    renderHome(); renderAstro(); renderTx(); renderOrders();
+    showOnly(S.screen);
+  }
+  renderTabs();
+}
+
+/* =====================================================================
+   PIN gate
+   ===================================================================== */
+function renderGate(){
+  var el = document.getElementById('scr-gate');
+  var has = !!getPin();
+  el.innerHTML = '<div class="panel" style="margin-top:8px"><h2>LR Astrology</h2>'
+    + '<div class="muted">Admin app · four departments</div></div>'
+    + '<h1>' + (has ? 'Enter your PIN' : 'Set the owner PIN') + '</h1>'
+    + (has
+        ? '<p class="muted">Enter your department PIN. The owner PIN opens all four departments.</p>'
+          + '<div class="card" style="margin-top:12px"><div class="muted" style="font-size:14px">Departments</div>'
+          + SECTIONS.map(function(sec){
+              var m = managerFor(sec.id);
+              return '<div class="stat"><span class="k"><b style="color:var(--sand)">' + esc(sec.role) + '</b>'
+                + '<br><span style="font-size:13px">' + esc(sec.n) + '</span></span>'
+                + '<span class="v" style="font-size:14px">'
+                + (m ? esc(m.name) : '<span style="color:var(--sand2);font-weight:400">Vacant</span>')
+                + '</span></div>';
+            }).join('')
+          + '</div>'
+        : '<p class="muted">First time — set a 4-digit owner PIN. It stays on this phone.</p>')
+    + '<label class="f" for="g-pin">PIN</label>'
+    + '<input class="i" id="g-pin" type="tel" inputmode="numeric" maxlength="4" placeholder="0000">'
+    + (has ? '' : '<label class="f" for="g-pin2">PIN again</label>'
+        + '<input class="i" id="g-pin2" type="tel" inputmode="numeric" maxlength="4" placeholder="0000">')
+    + '<div class="btn-row"><button class="btn block" id="g-go">Open</button></div>'
+    + '<p class="stamp">If the owner PIN is lost, this phone\u2019s data has to be cleared.</p>';
+  showOnly('gate');
+}
+
+/* =====================================================================
+   Home
+   ===================================================================== */
+function totals(){
+  var orders = getOrders(), txns = getTxns(), reg = registry();
+  var spend = 0, earn = 0, commission = 0, done = 0;
+  orders.forEach(function(o){
+    if(o.status !== 'done') return;
+    done++;
+    spend += Number(o.amount) || 0;
+    commission += Number(o.commission) || 0;
+    earn += Number(o.astrologerShare) || 0;
+  });
+  var custCredit = 0, custDebit = 0, astroCredit = 0;
+  txns.forEach(function(t){
+    var a = Math.abs(Number(t.amount) || 0);
+    if(partyOf(t) === 'customer'){
+      if(t.type === 'credit' || (t.type == null && t.amount > 0)) custCredit += a; else custDebit += a;
+    } else {
+      astroCredit += a;
+    }
+  });
+  return {
+    astros: reg.length,
+    online: reg.filter(function(a){ return a.active; }).length,
+    assigned: reg.filter(function(a){ return a.assigned; }).length,
+    orders: orders.length, done: done,
+    spend: spend, earn: earn, commission: commission,
+    custCredit: custCredit, custDebit: custDebit, astroCredit: astroCredit,
+    consults: getConsults().length
+  };
+}
+
+function renderHome(){
+  var el = document.getElementById('scr-home');
+  var s = totals();
+  var last = getSettings().publishedAt;
+
+  var html = '<div class="row" style="margin-bottom:6px"><h1 class="grow" style="margin:0">Summary</h1>'
+    + roleChip('home') + '</div>';
+
+  html += '<div class="panel"><div class="muted" style="font-size:14px">Total commission earned</div>'
+    + '<div class="big-num">' + rupee(s.commission) + '</div>'
+    + '<div class="muted" style="margin-top:6px;font-size:14px">Completed calls ' + s.done
+    + ' · billed ' + rupee(s.spend) + '</div></div>';
+
+  html += '<div class="grid2">'
+    + '<div class="mini"><div class="lab">Astrologers</div><div class="num">' + s.astros + '</div></div>'
+    + '<div class="mini"><div class="lab">Online</div><div class="num">' + s.online + '</div></div>'
+    + '<div class="mini"><div class="lab">IDs assigned</div><div class="num">' + s.assigned + '/' + s.astros + '</div></div>'
+    + '<div class="mini"><div class="lab">Consult requests</div><div class="num">' + s.consults + '</div></div>'
+    + '</div>';
+
+  html += '<div class="card"><h3>Ledger summary</h3>'
+    + '<div class="stat"><span class="k">Customers recharged</span><span class="v" style="color:var(--green)">' + rupee(s.custCredit) + '</span></div>'
+    + '<div class="stat"><span class="k">Customers spent</span><span class="v" style="color:var(--kumkum)">' + rupee(s.custDebit) + '</span></div>'
+    + '<div class="stat"><span class="k">Credited to astrologers</span><span class="v">' + rupee(s.astroCredit) + '</span></div>'
+    + '</div>';
+
+  html += '<div class="card ' + (last ? 'pub' : '') + '">'
+    + '<h3>' + (last ? 'Published' : 'Not published yet') + '</h3>'
+    + '<p class="muted" style="margin:0">' + (last
+        ? 'Last sent to the astrologer app on ' + fmtDT(last) + '.'
+        : 'Assign an ID, then tap Publish — only then do the names and IDs reach the astrologer app.') + '</p>'
+    + '</div>';
+
+  if(S.role === 'owner'){
+    var filled = SECTIONS.filter(function(sec){ return managerFor(sec.id); }).length;
+    html += '<h2 style="margin-top:18px">Departments</h2>'
+      + '<div class="card"><div class="muted" style="font-size:14px;margin-bottom:6px">'
+      + filled + ' of ' + SECTIONS.length + ' departments have a person. '
+      + 'CEO, Manager, Accountant, Employee — one department each.</div>';
+    html += SECTIONS.map(function(sec){
+      var m = managerFor(sec.id);
+      return '<div class="stat"><span class="k">'
+        + '<b style="color:var(--sand)">' + esc(sec.role) + ' · ' + esc(sec.n) + '</b><br>'
+        + '<span style="font-size:13px">' + esc(sec.desc) + '</span><br>'
+        + '<span style="font-size:13px;color:' + (m ? 'var(--green)' : 'var(--kumkum)') + '">'
+        + (m ? esc(m.name) : 'Vacant') + '</span></span>'
+        + '<button class="btn sm ghost" data-mgr="' + sec.id + '">'
+        + (m ? 'Change' : 'Assign') + '</button></div>';
+    }).join('');
+    html += '</div>';
+  }
+
+  html += '<div class="btn-row"><button class="btn block" data-tab="astro">Manage astrologers</button></div>';
+  el.innerHTML = html;
+}
+
+/* =====================================================================
+   Department manager
+   ===================================================================== */
+function managerSheet(section){
+  var m = managerFor(section);
+  overlay.innerHTML = '<div class="sheet">'
+    + '<h2>' + esc(sectionRole(section)) + ' — ' + esc(sectionName(section)) + '</h2>'
+    + '<div class="muted">Name and PIN of the person who runs this department.</div>'
+    + '<label class="f" for="m-name">Person\u2019s name</label>'
+    + '<input class="i" id="m-name" value="' + esc(m ? m.name : '') + '" placeholder="Name">'
+    + '<label class="f" for="m-pin">PIN (4 digits)</label>'
+    + '<input class="i" id="m-pin" type="tel" inputmode="numeric" maxlength="4" value="" placeholder="0000">'
+    + '<div class="muted" style="font-size:14px;margin-top:8px">'
+    + (m ? 'Enter a new PIN to change it. Leave it blank to keep the old one.'
+         : 'With this PIN that person opens only this department.') + '</div>'
+    + '<div class="btn-row"><button class="btn ghost" data-close="1">Cancel</button>'
+    + '<button class="btn block" id="m-save" data-sec="' + esc(section) + '">Save</button></div>'
+    + (m ? '<div class="btn-row" style="margin-top:6px"><button class="btn sm kum block" data-mgr-del="'
+         + esc(section) + '">Remove</button></div>' : '')
+    + '</div>';
+  overlay.classList.add('on');
+}
+
+function roleChip(secId){
+  var sec = sectionById(secId);
+  if(!sec || S.role === 'owner') return '';
+  return '<span class="chip gold">' + esc(sec.role) + '</span>';
+}
+
+/* =====================================================================
+   Astrologer roster
+   ===================================================================== */
+function renderAstro(){
+  var el = document.getElementById('scr-astro');
+  var reg = registry();
+  var last = getSettings().publishedAt;
+
+  var html = '<div class="row" style="margin-bottom:10px">'
+    + '<h1 class="grow" style="margin:0">Astrologers</h1>' + roleChip('astro')
+    + '<button class="btn sm" data-act="add">+ Add</button></div>';
+
+  html += '<div class="card ' + (last ? 'pub' : '') + '" style="padding:12px">'
+    + '<div class="muted" style="font-size:14px">' + (last
+        ? 'Last published ' + fmtDT(last)
+        : 'Assign an ID, then publish — only then does it appear in the astrologer app.') + '</div>'
+    + '<div class="btn-row" style="margin-top:10px"><button class="btn block green" data-act="publish">Publish</button></div>'
+    + '</div>';
+
+  if(!reg.length){
+    html += '<div class="card"><p class="muted" style="margin:0">The list is empty.</p></div>';
+  } else {
+    html += reg.map(function(a){
+      return '<div class="card">'
+        + '<div class="row" style="align-items:flex-start">'
+        +   '<div class="avatar">' + esc(a.name.trim().charAt(0)) + '</div>'
+        +   '<div class="grow">'
+        +     '<div style="font-weight:700;color:var(--sand);font-size:17px">' + esc(a.name) + '</div>'
+        +     '<div class="row" style="gap:8px;margin-top:4px">'
+        +       '<span class="idbox">' + esc(a.id) + '</span>'
+        +       (a.assigned ? '<span class="chip green">Assigned</span>' : '<span class="chip kum">Not assigned</span>')
+        +       '<span class="chip ' + (a.active ? 'green' : '') + '">' + (a.active ? 'Active' : 'Inactive') + '</span>'
+        +     '</div>'
+        +     '<div class="muted" style="font-size:14px;margin-top:4px">' + esc(a.languages.join(' · '))
+        +       ' · ' + rupee(a.fee) + '/min · ' + a.commission + '% commission</div>'
+        +     (a.mobile ? '<div class="muted" style="font-size:14px">' + esc(a.mobile) + '</div>' : '')
+        +   '</div>'
+        + '</div>'
+        + '<div class="btn-row" style="margin-top:10px">'
+        +   '<button class="btn sm ghost" data-edit="' + esc(a.id) + '">Edit</button>'
+        +   '<button class="btn sm" data-assign="' + esc(a.id) + '">' + (a.assigned ? 'Change ID' : 'Assign ID') + '</button>'
+        + '</div>'
+        + '</div>';
+    }).join('');
+  }
+  el.innerHTML = html;
+}
+
+function editSheet(id){
+  var a = id ? byId(id) : null;
+  var isNew = !a;
+  var langs = a ? a.languages.join(', ') : 'Telugu';
+  var commission = getSettings().defaultCommission || DEFAULT_COMMISSION;
+
+  overlay.innerHTML = '<div class="sheet">'
+    + '<h2>' + (isNew ? 'Add an astrologer' : 'Edit details') + '</h2>'
+    + (isNew ? '<div class="muted">Publish after assigning an ID.</div>' : '')
+    + '<label class="f" for="e-name">Name</label>'
+    + '<input class="i" id="e-name" value="' + esc(a ? a.name : '') + '">'
+    + '<label class="f" for="e-mobile">Mobile number</label>'
+    + '<input class="i" id="e-mobile" type="tel" inputmode="numeric" maxlength="10" value="' + esc(a ? (a.mobile||'') : '') + '">'
+    + '<label class="f" for="e-langs">Languages (comma separated)</label>'
+    + '<input class="i" id="e-langs" value="' + esc(langs) + '">'
+    + '<label class="f" for="e-fee">Fee per minute (₹)</label>'
+    + '<input class="i" id="e-fee" type="number" inputmode="numeric" min="50" step="50" value="' + (a ? a.fee : 500) + '">'
+    + '<label class="f" for="e-exp">Experience (years)</label>'
+    + '<input class="i" id="e-exp" type="number" inputmode="numeric" min="0" value="' + (a ? a.exp : 10) + '">'
+    + '<label class="f" for="e-spec">Specialisation</label>'
+    + '<input class="i" id="e-spec" value="' + esc(a ? a.spec : '') + '">'
+    + '<label class="f" for="e-comm">Commission (%)</label>'
+    + '<input class="i" id="e-comm" type="number" inputmode="numeric" min="0" max="90" value="' + (a ? a.commission : commission) + '">'
+    + '<label class="f" for="e-active">Status</label>'
+    + '<select class="i" id="e-active">'
+    +   '<option value="1"' + (a && a.active ? ' selected' : '') + '>Active (receives calls)</option>'
+    +   '<option value="0"' + (a && !a.active ? ' selected' : '') + '>Inactive</option>'
+    + '</select>'
+    + '<div class="btn-row">'
+    +   '<button class="btn ghost" data-close="1">Cancel</button>'
+    +   '<button class="btn block" id="e-save" data-newid="' + (isNew ? '1' : '0') + '">Save</button>'
+    + '</div>'
+    + (isNew ? '' : '<div class="btn-row" style="margin-top:6px"><button class="btn sm kum block" data-del="' + esc(a.id) + '">Delete</button></div>')
+    + '</div>';
+  overlay.classList.add('on');
+  S.editing = id || null;
+}
+
+/* =====================================================================
+   Transactions
+   ===================================================================== */
+function renderTx(){
+  var el = document.getElementById('scr-tx');
+  var all = getTxns();
+  var mine = all.filter(function(t){ return partyOf(t) === S.txFilter; });
+
+  var credit = 0, debit = 0;
+  mine.forEach(function(t){
+    var a = Math.abs(Number(t.amount)||0);
+    if(t.type === 'credit' || (t.type == null && t.amount > 0)) credit += a; else debit += a;
+  });
+
+  var html = '<div class="row" style="margin-bottom:6px"><h1 class="grow" style="margin:0">Transactions</h1>'
+    + roleChip('tx') + '</div>';
+  html += '<div class="chips wrap">'
+    + '<button class="chip ' + (S.txFilter==='customer'?'sel':'') + '" data-txf="customer">Customer transactions</button>'
+    + '<button class="chip ' + (S.txFilter==='astrologer'?'sel':'') + '" data-txf="astrologer">Astrologer transactions</button>'
+    + '</div>';
+
+  html += '<div class="grid2">'
+    + '<div class="mini"><div class="lab">Credit</div><div class="num" style="color:var(--green)">' + rupee(credit) + '</div></div>'
+    + '<div class="mini"><div class="lab">Debit</div><div class="num" style="color:var(--kumkum)">' + rupee(debit) + '</div></div>'
+    + '</div>';
+
+  if(!mine.length){
+    html += '<div class="card"><p class="muted" style="margin:0">No transactions yet.</p></div>';
+  } else {
+    html += '<div class="card">' + mine.slice().reverse().slice(0, 60).map(function(t){
+      var isCredit = t.type === 'credit' || (t.type == null && t.amount > 0);
+      var who = S.txFilter === 'astrologer'
+        ? (t.astrologerId ? ((byId(t.astrologerId)||{}).name || t.astrologerId) : (t.note || '—'))
+        : (t.customerMobile ? ('••••' + String(t.customerMobile).slice(-4)) : 'Customer');
+      return '<div class="stat"><span class="k">'
+        + '<b style="color:var(--sand)">' + esc(who) + '</b><br>'
+        + '<span style="font-size:13px">' + esc(t.note || t.gateway || '—') + '</span><br>'
+        + '<span style="font-size:12px;opacity:.8">' + esc(fmtDT(t.at)) + '</span></span>'
+        + '<span class="v" style="color:' + (isCredit?'var(--green)':'var(--kumkum)') + '">'
+        + (isCredit?'+':'−') + rupee(Math.abs(t.amount)) + '</span></div>';
+    }).join('') + '</div>';
+  }
+  el.innerHTML = html;
+}
+
+/* =====================================================================
+   Orders
+   ===================================================================== */
+function renderOrders(){
+  var el = document.getElementById('scr-orders');
+  var orders = getOrders().slice().reverse();
+
+  var html = '<div class="row" style="margin-bottom:6px"><h1 class="grow" style="margin:0">Orders</h1>'
+    + roleChip('orders') + '</div>';
+  if(!orders.length){
+    html += '<div class="card"><p class="muted" style="margin:0">No orders yet.</p></div>';
+  } else {
+    html += '<div class="card">' + orders.slice(0, 60).map(function(o){
+      var a = byId(o.astrologerId);
+      var st = o.status === 'done' ? ['Completed','green']
+             : o.status === 'missed' ? ['Missed','kum']
+             : o.status === 'cancelled' ? ['Cancelled',''] : ['Refunded',''];
+      return '<div class="stat"><span class="k">'
+        + '<b style="color:var(--sand)">' + esc(a ? a.name : (o.astrologerId || '—')) + '</b><br>'
+        + '<span style="font-size:13px">' + esc(fmtDT(o.start)) + ' · '
+        + Math.round((o.seconds||0)/60*10)/10 + ' min</span><br>'
+        + '<span style="font-size:13px">Billed ' + rupee(o.amount) + ' · commission ' + rupee(o.commission) + '</span></span>'
+        + '<span class="v">' + rupee(o.astrologerShare) + '<br><span class="chip ' + st[1] + '">' + st[0] + '</span></span></div>';
+    }).join('') + '</div>';
+  }
+  el.innerHTML = html;
+}
+
+/* =====================================================================
+   Events
+   ===================================================================== */
+document.addEventListener('click', function(ev){
+  var el = ev.target.closest ? ev.target.closest(
+    '[data-tab],[data-act],[data-edit],[data-assign],[data-del],[data-close],[data-txf],' +
+    '[data-mgr],[data-mgr-del],#g-go,#e-save,#m-save,#lockBtn') : null;
+  if(!el) return;
+
+  if(el.id === 'lockBtn'){
+    S.unlocked = false; S.role = null; S.sections = []; S.who = ''; S.screen = 'home';
+    overlay.classList.remove('on'); overlay.innerHTML = '';
+    render(); return;
+  }
+  if(el.hasAttribute('data-tab')){ go(el.getAttribute('data-tab')); return; }
+  if(el.hasAttribute('data-close')){ overlay.classList.remove('on'); overlay.innerHTML=''; return; }
+  if(el.hasAttribute('data-txf')){ S.txFilter = el.getAttribute('data-txf'); renderTx(); return; }
+
+  if(el.id === 'g-go'){
+    var has = !!getPin();
+    var p1 = ((document.getElementById('g-pin')||{}).value || '').trim();
+    if(!/^\d{4}$/.test(p1)){ toast('PIN must be 4 digits'); return; }
+
+    if(!has){
+      var p2 = ((document.getElementById('g-pin2')||{}).value || '').trim();
+      if(p1 !== p2){ toast('The two PINs must match'); return; }
+      setPin(p1);
+      S.role = 'owner'; S.who = 'Owner';
+      S.sections = SECTIONS.map(function(x){ return x.id; });
+      S.unlocked = true; S.screen = 'home'; render();
+      toast('Owner PIN set — now give each department a person');
+      return;
+    }
+
+    if(p1 === getPin()){
+      S.role = 'owner'; S.who = 'Owner';
+      S.sections = SECTIONS.map(function(x){ return x.id; });
+      S.unlocked = true; S.screen = 'home'; render(); return;
+    }
+
+    var mgr = getManagers().filter(function(m){ return m.pin === p1; })[0];
+    if(mgr){
+      S.role = 'staff'; S.who = mgr.name;
+      S.sections = [mgr.section];
+      S.unlocked = true; S.screen = mgr.section; render(); return;
+    }
+
+    toast('Wrong PIN'); return;
+  }
+
+  if(el.hasAttribute('data-mgr')){ managerSheet(el.getAttribute('data-mgr')); return; }
+  if(el.hasAttribute('data-mgr-del')){
+    var sec = el.getAttribute('data-mgr-del');
+    setManagerFor(sec, null, null);
+    overlay.classList.remove('on'); overlay.innerHTML='';
+    render(); toast('Person removed'); return;
+  }
+
+  if(el.id === 'm-save'){
+    var secId = el.getAttribute('data-sec');
+    var mName = ((document.getElementById('m-name')||{}).value || '').trim();
+    var mPin  = ((document.getElementById('m-pin')||{}).value || '').trim();
+    var existing = managerFor(secId);
+    if(mName.length < 2){ toast('Enter a name'); return; }
+    if(!mPin){
+      if(!existing){ toast('Enter a 4-digit PIN'); return; }
+      mPin = existing.pin;
+    }
+    if(!/^\d{4}$/.test(mPin)){ toast('PIN must be 4 digits'); return; }
+    if(mPin === getPin()){ toast('That is the owner PIN — use a different one'); return; }
+    var clash = getManagers().filter(function(m){ return m.pin === mPin && m.section !== secId; })[0];
+    if(clash){ toast('That PIN is already used by ' + sectionName(clash.section)); return; }
+    setManagerFor(secId, mName, mPin);
+    overlay.classList.remove('on'); overlay.innerHTML='';
+    render(); toast(mName + ' — ' + sectionRole(secId)); return;
+  }
+
+  if(el.hasAttribute('data-edit')){ editSheet(el.getAttribute('data-edit')); return; }
+
+  if(el.hasAttribute('data-assign')){
+    var id = el.getAttribute('data-assign');
+    var reg = registry();
+    var item = reg.filter(function(x){ return x.id === id; })[0];
+    if(!item) return;
+    if(!item.assigned){
+      item.assigned = true;
+      item.publishedAt = null;
+      setRegistry(reg);
+      toast('ID ' + id + ' assigned — now publish');
+    } else {
+      var fresh = nextFreeId();
+      var old = item.id;
+      item.id = fresh; item.assigned = true; item.publishedAt = null;
+      setRegistry(reg);
+      toast('ID ' + old + ' → ' + fresh);
+    }
+    render(); return;
+  }
+
+  if(el.hasAttribute('data-del')){
+    var did = el.getAttribute('data-del');
+    setRegistry(registry().filter(function(x){ return x.id !== did; }));
+    overlay.classList.remove('on'); overlay.innerHTML='';
+    render(); toast('Deleted'); return;
+  }
+
+  if(el.id === 'e-save'){
+    var isNew = el.getAttribute('data-newid') === '1';
+    var name = ((document.getElementById('e-name')||{}).value || '').trim();
+    var mobile = ((document.getElementById('e-mobile')||{}).value || '').replace(/\D/g,'');
+    var langs = ((document.getElementById('e-langs')||{}).value || '').split(',')
+                  .map(function(x){ return x.trim(); }).filter(Boolean);
+    var fee = Number((document.getElementById('e-fee')||{}).value) || 500;
+    var exp = Number((document.getElementById('e-exp')||{}).value) || 0;
+    var spec = ((document.getElementById('e-spec')||{}).value || '').trim();
+    var comm = Number((document.getElementById('e-comm')||{}).value);
+    var active = (document.getElementById('e-active')||{}).value === '1';
+
+    if(name.length < 3){ toast('Enter a name'); return; }
+    if(mobile && !/^[6-9]\d{9}$/.test(mobile)){ toast('Enter a valid mobile number'); return; }
+    if(isNaN(comm) || comm < 0 || comm > 90){ toast('Commission must be between 0 and 90'); return; }
+
+    var list = registry();
+    if(isNew){
+      list.push({
+        id: nextFreeId(), name: name, mobile: mobile,
+        languages: langs.length ? langs : ['Telugu'],
+        fee: fee, exp: exp, spec: spec || 'Horoscope',
+        commission: comm, active: active, assigned: false, publishedAt: null
+      });
+    } else {
+      list = list.map(function(a){
+        if(a.id !== S.editing) return a;
+        return Object.assign({}, a, {
+          name: name, mobile: mobile,
+          languages: langs.length ? langs : a.languages,
+          fee: fee, exp: exp, spec: spec || a.spec,
+          commission: comm, active: active, publishedAt: null
+        });
+      });
+    }
+    setRegistry(list);
+    overlay.classList.remove('on'); overlay.innerHTML='';
+    render(); toast('Saved'); return;
+  }
+
+  var act = el.getAttribute('data-act');
+  if(act === 'add'){ editSheet(null); return; }
+  if(act === 'publish'){
+    var reg2 = registry();
+    var unassigned = reg2.filter(function(a){ return !a.assigned; });
+    if(unassigned.length === reg2.length && reg2.length){
+      toast('Assign an ID to at least one person first'); return;
+    }
+    var now = new Date().toISOString();
+    reg2 = reg2.map(function(a){ return Object.assign({}, a, { publishedAt: now }); });
+    setRegistry(reg2);
+    saveSettings({ publishedAt: now, defaultCommission: getSettings().defaultCommission || DEFAULT_COMMISSION });
+    render(); toast('Sent to the astrologer app'); return;
+  }
+});
+
+render();
+})();
+</script>
+</body>
+</html>
