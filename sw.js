@@ -1,18 +1,15 @@
-/* sw.js — offline shell for LR Astrology.
-   Network-first for the page (so updates arrive), cache-first for static assets.
+/* sw.js — offline shell for LR Astrology v3.2 (single-file build).
+   Network-first for the page (so updates arrive), cache-first for icons.
    API calls (Sarvam, Agora, Razorpay, geocoding, visitor counter) are never cached. */
-const CACHE = 'lr-astrology-v2.0';
+const CACHE = 'lr-astrology-v3.2';
 const SHELL = [
     './',
     './index.html',
     './manifest.webmanifest',
-    './assets/ui.js?v=2.0',
-    './assets/app.js?v=2.0',
-    './assets/payments.js?v=2.0',
-    './assets/vendor/astronomy-engine.js?v=2.0',
-    './assets/icon-192.png'
+    './assets/icon-192.png',
+    './assets/icon-512.png'
 ];
-const NEVER_CACHE = /(api\.sarvam\.ai|agora\.io|razorpay\.com|open-meteo\.com|workers\.dev|qrserver\.com|googleapis\.com|gstatic\.com)/;
+const NEVER_CACHE = /(api\.sarvam\.ai|agora\.io|razorpay\.com|open-meteo\.com|workers\.dev|qrserver\.com|googleapis\.com|gstatic\.com|abacus\.jasoncameron\.dev)/;
 
 self.addEventListener('install', function (event) {
     event.waitUntil(
