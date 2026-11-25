@@ -17,7 +17,7 @@
     <link rel="icon" href="assets/icon-192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="assets/icon-192.png">
     <link rel="manifest" href="manifest.webmanifest">
-    <!-- build: lr-astrology-v3.2 single-file, 2026-11-25 14:19 -->
+    <!-- build: lr-astrology-v3.3 single-file, 2026-11-25 14:54 -->
     <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
     <style>
         html { font-size: 18px; }   /* యాప్ మొత్తం టెక్స్ట్ స్కేల్ — బేస్ 18px */
@@ -6207,7 +6207,12 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         }
     }
 
-    const DASHA_YEAR_DAYS = 365.2425;   // విమ్శోత్తరి సంవత్సర ప్రమాణం (రోజులు)
+    // విమ్శోత్తరి సంవత్సర ప్రమాణం (రోజులు).
+    // 365.25 = జూలియన్ సంవత్సరం — JHora, పరాశర లైట్, ప్రచురిత దశా పట్టికలు దాదాపు అన్నీ
+    // ఇదే వాడతాయి. 365.2425 (గ్రెగోరియన్) వాడితే ప్రతి 19 సం. మహాదశలో ~3.5 గంటలు,
+    // 40 సం. తర్వాత ప్రత్యంతర దశల్లో ~7 గంటల తేడా వస్తుంది. మార్చాలంటే ఇక్కడ ఒకే విలువ మార్చండి:
+    // 365.25 (జూలియన్) | 365.2425 (గ్రెగోరియన్) | 365.256363 (సైడీరియల్) | 360 (సావన)
+    const DASHA_YEAR_DAYS = 365.25;
     const DASHA_LORDS = [
         { name: "కేతువు", short: "కే", years: 7 },
         { name: "శుక్రుడు", short: "శు", years: 20 },
@@ -10605,7 +10610,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         });
     });
 })();
-console.info('LR Astrology build v3.2 single-file — 2026-11-25 14:19');
+console.info('LR Astrology build v3.3 single-file — 2026-11-25 14:54');
 </script>
 </body>
 </html>
