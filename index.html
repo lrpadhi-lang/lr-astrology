@@ -857,6 +857,55 @@
             gap: 8px;
             margin-top: 6px;
         }
+        .action-row-jk {
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+        .gc-generate-btn.gc-generate-btn {
+            display: block;
+            margin: 14px auto 4px auto;
+            width: 100%;
+            max-width: 420px;
+            padding: 13px 18px !important;
+            border-radius: 14px !important;
+            font-size: 0.95rem !important;
+            font-weight: 800;
+            text-align: center;
+            background-image: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 5px 14px rgba(217, 119, 6, 0.28) !important;
+            border: none !important;
+        }
+
+        .action-row-jk .save-btn,
+        .action-row-jk .primary-btn {
+            flex: 1 1 0;
+            width: auto;
+            min-width: 0;
+            margin: 0;
+            padding: 13px 8px !important;
+            border-radius: 14px !important;
+            font-size: 0.92rem !important;
+            font-weight: 800;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+        .action-row-jk .primary-btn {
+            background-image: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 5px 14px rgba(217, 119, 6, 0.28) !important;
+            border: none !important;
+        }
+        .save-btn-sm {
+            flex: 0 0 auto !important;
+            width: 76px;
+            padding: 8px 6px !important;
+            border-radius: 11px !important;
+            font-size: 0.74rem !important;
+            font-weight: 800;
+            line-height: 1.15;
+        }
 
         .primary-btn {
             flex: 1.5;
@@ -1116,6 +1165,13 @@
             width: 44%;
         }
 
+        .info-grid tr.pk-hl td {
+            background: #fff3d6 !important;
+            font-weight: 800;
+            color: #7a3b12;
+        }
+        .info-grid tr.pk-hl td:first-child { color: #7a3b12; }
+
         .sookshma-note {
             background: linear-gradient(90deg, #f0f9ff, #fff7ed);
             border: 1px solid #bae6fd;
@@ -1269,6 +1325,17 @@
             box-shadow: 0 8px 20px rgba(217, 119, 6, 0.28);
         }
         .header-cta:hover { filter: brightness(1.05); }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            margin-left: auto;
+            background: #fff7ea; color: #7a3b12;
+            border: 1px solid #e6c79b; border-radius: 999px;
+            padding: 7px 12px; font-size: 0.78rem; font-weight: 800; cursor: pointer;
+            transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+        }
+        .back-btn svg { width: 15px; height: 15px; }
+        .back-btn:hover { background: #fff1d6; transform: translateX(-2px); box-shadow: 0 6px 14px rgba(122,59,18,.14); }
+        .back-btn:active { transform: translateX(0) scale(.97); }
 
         .site-main { flex: 1; width: 100%; }
 
@@ -1326,7 +1393,18 @@
             margin-bottom: 28px;
         }
 
-        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+        .hero-copy { margin-top: -12px; }
+        .hero-bar-btn {
+            display: block; width: 100%; margin: 0 0 26px 0;
+            padding: 14px 18px; border-radius: 14px; cursor: pointer;
+            font-size: 1rem; font-weight: 800; letter-spacing: .2px;
+            text-align: center;
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+        .hero-bar-btn:hover { transform: translateY(-1px); }
+        .hero-bar-btn:active { transform: translateY(0); }
+        .hero-bar-btn-inline { flex: 1 1 auto; }
 
         .hero-btn {
             flex: 0 0 auto !important;
@@ -1431,8 +1509,9 @@
             margin-bottom: 20px;
             box-shadow: 0 16px 40px rgba(11, 60, 93, 0.18);
         }
-        .page-banner h2 { font-size: 1.55rem; font-weight: 800; margin-bottom: 7px; }
-        .page-banner p { font-size: 0.92rem; color: #cfe9f8; line-height: 1.65; }
+        .page-banner { text-align: center; }
+        .page-banner h2 { font-size: 1.55rem; font-weight: 800; margin-bottom: 7px; text-align: center; }
+        .page-banner p { font-size: 0.92rem; color: #cfe9f8; line-height: 1.65; text-align: center; }
 
         #jatakamPage, #gocharamPage, #muhurtamPage {
             max-width: 1020px;
@@ -1587,6 +1666,20 @@
         .drawer-link:hover { background: #f0f9ff; }
         .drawer-link.active { background: #e0f2fe; color: #0369a1; }
         .drawer-link svg { width: 19px; height: 19px; flex-shrink: 0; }
+        .drawer-saved-toggle { justify-content: flex-start; }
+        .drawer-saved-label { flex: 1; }
+        .drawer-saved-arrow { font-size: 0.72rem; transition: transform .2s ease; color: #8a93a6; }
+        .drawer-saved.open .drawer-saved-arrow { transform: rotate(180deg); }
+        .drawer-saved-list { padding: 4px 0 8px 0; }
+        .drawer-saved-item {
+            display: flex; align-items: center; justify-content: space-between; gap: 8px;
+            margin: 4px 12px; padding: 8px 12px; border-radius: 10px;
+            background: #fffaf0; border: 1px solid #f0dfc2; cursor: pointer;
+            font-size: 0.82rem; color: #6f4a2e; font-weight: 700;
+        }
+        .drawer-saved-item:hover { background: #fff3d6; }
+        .drawer-saved-item .dsc-name { flex: 1; line-height: 1.35; }
+        .drawer-saved-item .dsc-del { color: #b3221f; font-weight: 800; padding: 0 4px; }
         .drawer-sep { height: 1px; background: #e2eef7; margin: 8px 12px; }
         .drawer-foot { padding: 14px 20px; border-top: 1px solid #e2eef7; font-size: 0.75rem; color: #94a3b8; line-height: 1.6; }
 
@@ -3481,20 +3574,25 @@
         <button type="button" class="drawer-close" onclick="closeDrawer()" aria-label="మూసివేయి">&#10005;</button>
     </div>
 
-    <div class="drawer-user" id="drawerUser">
-        <strong>మీరు లాగిన్ అవలేదు</strong>
-        జాతక వివరాలు సేవ్ చేసుకోవడానికి లాగిన్ అవ్వండి.
-    </div>
-
     <nav class="drawer-nav">
         <a class="drawer-link active" data-page="homePage" onclick="drawerGo('homePage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg> హోమ్</a>
         <a class="drawer-link" data-page="jatakamPage" onclick="drawerGo('jatakamPage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="2"/><path d="M3.5 12h17M12 3.5v17M3.5 3.5 20.5 20.5M20.5 3.5 3.5 20.5"/></svg> జాతకం</a>
         <a class="drawer-link" data-page="gocharamPage" onclick="drawerGo('gocharamPage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-25 12 12)"/></svg> పంచాంగం &amp; గోచారం</a>
-        <a class="drawer-link" data-page="muhurtamPage" onclick="drawerGo('muhurtamPage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> ముహూర్తం</a>
+        <a class="drawer-link" data-page="muhurtamPage" onclick="drawerGo('muhurtamPage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> ముహూర్త దర్పణం</a>
+        <a class="drawer-link" href="https://lr-astrology.lrpadhi.workers.dev/Astrology" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20.5c0-3.6 3.1-5.6 7-5.6s7 2 7 5.6"/></svg> జ్యోతిష్కులు</a>
         <a class="drawer-link" data-page="karmaPage" onclick="drawerGo('karmaPage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v9M7.5 12h9"/></svg> కర్మ రహస్యం</a>
         <a class="drawer-link" data-page="booksPage" onclick="drawerGo('booksPage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M50 24C40 16 24 16 14 21v57c10-5 26-5 36 3 10-8 26-8 36-3V21C76 16 60 16 50 24z" transform="scale(0.4)"/></svg> పుస్తకాలు</a>
         <div class="drawer-sep"></div>
-        <a class="drawer-link" onclick="drawerGo('jatakamPage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a1 1 0 0 1 1 1v17l-6-4.2L6 21V4a1 1 0 0 1 1-1z"/></svg> సేవ్ చేసిన జాతకాలు</a>
+        <div class="drawer-saved">
+            <a class="drawer-link drawer-saved-toggle" onclick="toggleDrawerSaved(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10a1 1 0 0 1 1 1v17l-6-4.2L6 21V4a1 1 0 0 1 1-1z"/></svg>
+                <span class="drawer-saved-label">సేవ్ చేసిన జాతకాలు</span>
+                <span class="drawer-saved-arrow" id="drawerSavedArrow">▼</span>
+            </a>
+            <div id="drawerSavedList" class="drawer-saved-list" style="display: none;">
+                <div class="hint-text" style="padding: 6px 14px; font-size: 0.78rem;">ఇంకా సేవ్ చేసిన జాతకాలు లేవు.</div>
+            </div>
+        </div>
         <a class="drawer-link" id="drawerLogoutItem" style="display: none;" onclick="doLogout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12H4m0 0 3.5-3.5M4 12l3.5 3.5"/><path d="M10 4h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-8"/></svg> లాగ్ అవుట్</a>
     </nav>
 
@@ -3529,7 +3627,7 @@
                 <span></span><span></span><span></span>
             </button>
             <a class="site-brand" href="#home" onclick="showPage('homePage'); return false;">
-                <div class="logo-sun-lr" role="img" aria-label="శ్రీ లింగరాజ్ సూర్యరామ్ శర్మ">
+                <div class="logo-sun-lr" role="img" aria-label="బ్రాహ్మశ్రీ లింగరాజ్ సూర్యరామ్ శాస్త్రి">
                 <svg class="logo-rays" viewBox="0 0 100 100" aria-hidden="true">
                 <g fill="none" stroke="#b45309" stroke-linecap="round" opacity="0.92">
                 <line x1="50.0" y1="12.0" x2="50.0" y2="1.0" stroke-width="3.4"/>
@@ -3566,12 +3664,17 @@
                 <a class="nav-link active" data-page="homePage" onclick="showPage('homePage')">హోమ్</a>
                 <a class="nav-link" data-page="jatakamPage" onclick="showPage('jatakamPage')">జాతకం</a>
                 <a class="nav-link" data-page="gocharamPage" onclick="showPage('gocharamPage')">పంచాంగం &amp; గోచారం</a>
-                <a class="nav-link" data-page="muhurtamPage" onclick="showPage('muhurtamPage')">ముహూర్తం</a>
+                <a class="nav-link" data-page="muhurtamPage" onclick="showPage('muhurtamPage')">ముహూర్త దర్పణం</a>
+                <a class="nav-link" href="https://lr-astrology.lrpadhi.workers.dev/Astrology" target="_blank" rel="noopener">జ్యోతిష్కులు</a>
                 <a class="nav-link" data-page="karmaPage" onclick="showPage('karmaPage')">కర్మ రహస్యం</a>
                 <a class="nav-link" data-page="booksPage" onclick="showPage('booksPage')">పుస్తకాలు</a>
             </nav>
 
             <button type="button" class="header-cta" onclick="showPage('jatakamPage')">జాతకం చూడండి</button>
+            <button type="button" class="back-btn" id="backBtn" onclick="showPage('homePage')" aria-label="హోమ్" title="హోమ్">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>
+                <span>హోమ్</span>
+            </button>
         </div>
     </header>
 
@@ -3585,7 +3688,10 @@
                 <div class="hero-deco" aria-hidden="true"><svg class="deco-k1" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="6" y="6" width="88" height="88" rx="5"/><path d="M6 6 94 94M94 6 6 94M6 50h88M50 6v88"/><rect x="29" y="29" width="42" height="42" transform="rotate(45 50 50)"/></svg><svg class="deco-k2" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="8" y="8" width="84" height="84" rx="6"/><path d="M8 8 92 92M92 8 8 92"/></svg><svg class="deco-leaf" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M50 6C22 28 22 72 50 94c28-22 28-66 0-88z"/><path d="M50 14v74"/><path d="M38 32h9M38 46h9M38 60h9M53 32h9M53 46h9M53 60h9"/></svg><svg class="deco-book" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M50 24C40 16 24 16 14 21v57c10-5 26-5 36 3 10-8 26-8 36-3V21C76 16 60 16 50 24z"/><path d="M50 24v57"/><path d="M23 35h15M23 47h15M62 35h15M62 47h15"/></svg><svg class="deco-star" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><circle cx="50" cy="50" r="11"/><path d="M50 6v18M50 76v18M6 50h18M76 50h18M20 20l13 13M67 67l13 13M80 20L67 33M33 67L20 80"/></svg></div>
                 
                 <div class="hero-copy">
-                    <div class="hero-badge">🙏 శుభమస్తు · సంపూర్ణ ఖగోళ కాలగణన వేదిక</div>
+                    <div class="hero-badge hero-badge-2" style="margin-top: -14px;">
+                        <span style="display: block; line-height: 1.35;">🙏 శుభమస్తు</span>
+                        <span style="display: block; line-height: 1.35; margin-top: 2px;">వేదజ్యోతిష్య జ్ఞానదీపం</span>
+                    </div>
                     <h1 class="hero-title">మీ భవిష్యత్ <span>మీ చేతిలో</span></h1>
                     <p class="hero-text">
                         జన్మ కుండలి, పంచాంగం, గోచారం మరియు ముహూర్తం — అన్నీ ఒకే వేదికపై.
@@ -3593,8 +3699,9 @@
                     </p>
                     <div class="hero-actions">
                         <button type="button" class="primary-btn hero-btn" onclick="showPage('jatakamPage')">✨ జాతకం చూడండి</button>
-                        <button type="button" class="ghost-btn" onclick="showPage('gocharamPage')">ఈరోజు పంచాంగం</button>
+                        <button type="button" class="ghost-btn hero-bar-btn-inline" onclick="showPage('gocharamPage')">🌤️ ఈరోజు పంచాంగం</button>
                     </div>
+                    <button type="button" class="ghost-btn hero-bar-btn" onclick="showPage('muhurtamPage')">🕉️ ముహూర్త దర్పణం</button>
                 </div>
                 <div class="hero-art">
                     <div class="sun-stage" role="img" aria-label="LR Astrology">
@@ -3661,10 +3768,16 @@
                     </div>
                     <div class="service-card" onclick="showPage('muhurtamPage')">
                         <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div>
-                        <h3>ముహూర్తం</h3>
+                        <h3>ముహూర్త దర్పణం</h3>
                         <p>వివాహం, గృహప్రవేశం వంటి శుభ కార్యాలకు అనువైన ముహూర్త సమయాలను కనుగొనండి.</p>
-                        <div class="service-link">ముహూర్తం చూడండి →</div>
+                        <div class="service-link">ముహూర్త దర్పణం చూడండి →</div>
                     </div>
+                    <a class="service-card" href="https://lr-astrology.lrpadhi.workers.dev/Astrology" target="_blank" rel="noopener" style="text-decoration: none; display: block;">
+                        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20.5c0-3.6 3.1-5.6 7-5.6s7 2 7 5.6"/></svg></div>
+                        <h3>జ్యోతిష్కులు</h3>
+                        <p>అనుభవజ్ఞులైన జ్యోతిష్కులతో నేరుగా మాట్లాడి, మీ జాతకం గురించి వ్యక్తిగత సలహా తీసుకోండి.</p>
+                        <div class="service-link">సంప్రదించండి →</div>
+                    </a>
                     <div class="service-card" onclick="showPage('karmaPage')">
                         <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v9M7.5 12h9"/></svg></div>
                         <h3>కర్మ రహస్యం</h3>
@@ -3699,9 +3812,9 @@
             </section>
 
             <section class="about-card" id="aboutSection">
-                <div class="about-avatar about-avatar-photo"><img class="about-photo" alt="శ్రీ లింగరాజ్ సూర్యరామ్ శర్మ" src="data:image/jpeg;base64,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"></div>
+                <div class="about-avatar about-avatar-photo"><img class="about-photo" alt="బ్రాహ్మశ్రీ లింగరాజ్ సూర్యరామ్ శాస్త్రి" src="data:image/jpeg;base64,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"></div>
                 <div class="about-body">
-                    <div class="about-name">శ్రీ లింగరాజ్ సూర్యరామ్ శర్మ</div>
+                    <div class="about-name">బ్రాహ్మశ్రీ లింగరాజ్ సూర్యరామ్ శాస్త్రి</div>
                     
                     <p class="about-text">
                         నా మనస్సులో ఎప్పుడూ మెదులుతూ ఉండే ప్రశ్నలు చాలా సరళమైనవి, కానీ ఎంతో లోతైనవి —
@@ -3739,11 +3852,6 @@
             </div>
             <div class="card-box">
                 <div class="section-heading">జన్మ వివరాలు</div>
-
-                <div id="savedProfilesContainer" class="saved-profiles-box" style="display: none !important;">
-                    <div style="font-size: 0.85rem; font-weight: 800; color: #0369a1;">📂 సేవ్ చేసిన జన్మ వివరాలు:</div>
-                    <div id="savedProfilesList" class="saved-chip-list"></div>
-                </div>
 
                 <div class="row-split">
                     <div class="input-group" style="flex: 1.3;">
@@ -3823,7 +3931,7 @@
                     </div>
                 </div>
 
-                <div class="action-row">
+                <div class="action-row action-row-jk">
                     <button type="button" class="save-btn" onclick="saveBirthDetails()">💾 Save</button>
                     <button type="button" class="primary-btn" onclick="generateHoroscope()">✨ జాతకం చూపించు</button>
                 </div>
@@ -3841,7 +3949,7 @@
                 <!-- 1. జనన వివరములు -->
                 <div class="accordion-card">
                     <div class="accordion-header" onclick="toggleSection('jananaBody', this)">
-                        <span>జనన వివరములు</span>
+                        <span>🧾 జనన వివరములు</span>
                         <span class="accordion-arrow">▼</span>
                     </div>
                     <div class="accordion-body" id="jananaBody">
@@ -3852,7 +3960,7 @@
                 <!-- 2. పంచాంగ వివరములు -->
                 <div class="accordion-card">
                     <div class="accordion-header" onclick="toggleSection('panchangaBody', this)">
-                        <span>పంచాంగ వివరములు</span>
+                        <span>🗓️ పంచాంగ వివరములు</span>
                         <span class="accordion-arrow">▼</span>
                     </div>
                     <div class="accordion-body" id="panchangaBody">
@@ -3860,32 +3968,36 @@
                     </div>
                 </div>
 
-                <!-- 3. THREE CHART STYLES -->
-                <div class="card-box">
-                    <div class="section-heading" style="text-align: center;">లగ్న కుండలి</div>
-                    <div class="style-tabs" data-chart="jatakamChartArea">
-                        <div class="style-tab active" onclick="switchChartStyle('east', this)">తూర్పు శైలి</div>
-                        <div class="style-tab" onclick="switchChartStyle('south', this)">దక్షిణ శైలి</div>
-                        <div class="style-tab" onclick="switchChartStyle('north', this)">ఉత్తర శైలి</div>
+                <!-- 3. లగ్న + నవాంశ కుండలి (ఒకే బార్ లోపల) -->
+                <div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('kundaliBody', this)">
+                        <span>🪔 లగ్న నవాంశ కుండలి</span>
+                        <span class="accordion-arrow">▼</span>
                     </div>
-                    <div class="chart-wrapper" id="jatakamChartArea"></div>
-                    <div class="legend-note" id="chartSubLabel">
-                        తుల లగ్నం | మిథున రాశి | (వ) = వక్రి | (అ) = అస్తంగత్వం
-                    </div>
-                </div>
+                    <div class="accordion-body" id="kundaliBody">
+                        <div class="section-heading" style="text-align: center;">లగ్న కుండలి</div>
+                        <div class="style-tabs" data-chart="jatakamChartArea">
+                            <div class="style-tab active" onclick="switchChartStyle('east', this)">తూర్పు శైలి</div>
+                            <div class="style-tab" onclick="switchChartStyle('south', this)">దక్షిణ శైలి</div>
+                            <div class="style-tab" onclick="switchChartStyle('north', this)">ఉత్తర శైలి</div>
+                        </div>
+                        <div class="chart-wrapper" id="jatakamChartArea"></div>
+                        <div class="legend-note" id="chartSubLabel">
+                            తుల లగ్నం | మిథున రాశి | (వ) = వక్రి | (అ) = అస్తంగత్వం
+                        </div>
 
-                <div class="card-box">
-                    <div class="section-heading" style="text-align: center;">నవాంశ కుండలి (D9)</div>
-                    <div class="chart-wrapper" id="navamshaChartArea"></div>
-                    <div class="legend-note">
-                        ప్రతి రాశిని 9 భాగాలుగా (3°20′) విభజించిన నవాంశ చక్రం | (వ) = వక్రి
+                        <div class="section-heading" style="text-align: center; margin-top: 18px;">నవాంశ కుండలి (D9)</div>
+                        <div class="chart-wrapper" id="navamshaChartArea"></div>
+                        <div class="legend-note">
+                            ప్రతి రాశిని 9 భాగాలుగా (3°20′) విభజించిన నవాంశ చక్రం | (వ) = వక్రి
+                        </div>
                     </div>
                 </div>
 
                 <!-- 4. GRAHA SHTITI COLLAPSIBLE BAR (Degree & Nakshatra Padam) -->
                 <div class="accordion-card">
                     <div class="accordion-header" onclick="toggleSection('grahaSthitiBody', this)">
-                        <span>గ్రహ స్థితి</span>
+                        <span>🪐 గ్రహ స్థితి</span>
                         <span class="accordion-arrow">▼</span>
                     </div>
                     <div class="accordion-body" id="grahaSthitiBody">
@@ -3919,7 +4031,7 @@
                 <!-- 5. వింశోత్తరి దశ -->
                 <div class="accordion-card">
                     <div class="accordion-header" onclick="toggleSection('vimshottariBody', this)">
-                        <span>వింశోత్తరి దశ</span>
+                        <span>⏳ వింశోత్తరి దశ</span>
                         <span class="accordion-arrow">▼</span>
                     </div>
                     <div class="accordion-body" id="vimshottariBody">
@@ -3932,7 +4044,7 @@
                 <!-- 6. సూక్ష్మదశ -->
                 <div class="accordion-card">
                     <div class="accordion-header" onclick="toggleSection('sookshmaBody', this)">
-                        <span>సూక్ష్మదశ</span>
+                        <span>🔍 సూక్ష్మదశ</span>
                         <span class="accordion-arrow">▼</span>
                     </div>
                     <div class="accordion-body" id="sookshmaBody">
@@ -3983,6 +4095,13 @@
                             <div class="hint-text">జాతకం చూపించిన తర్వాత ఇక్కడ మీ వ్యక్తిగత ఫలితాలు కనిపిస్తాయి.</div>
                         </div>
                     </div>
+                </div>
+
+                <!-- జాతక ఫలితాలు బార్ తర్వాత — తదుపరి చర్యలు -->
+                <div id="phalaActions" class="card-box" style="display: none; text-align: center;">
+                    <button type="button" class="primary-btn" onclick="showPage('karmaPage')">📜 కర్మ రహస్యం చదవండి</button>
+                    <a class="primary-btn" href="https://lr-astrology.lrpadhi.workers.dev/Astrology" target="_blank" rel="noopener"
+                       style="display: inline-block; text-decoration: none; margin-top: 8px;">🪔 జ్యోతిష్కులను సంప్రదించండి</a>
                 </div>
 
             </div>
@@ -4052,7 +4171,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="primary-btn" onclick="generatePanchangam()">✨ పంచాంగం & గోచారము చూపించు</button>
+                <button type="button" class="primary-btn gc-generate-btn" onclick="generatePanchangam()">✨ పంచాంగం & గోచారము చూపించు</button>
             </div>
 
             <div id="gcResultsContainer" style="display: none;">
@@ -4065,7 +4184,7 @@
                         <span>📅 పంచాంగ వివరములు</span>
                         <span class="accordion-arrow">▼</span>
                     </div>
-                    <div class="accordion-body" id="gcPanchangBody" style="display: block;">
+                    <div class="accordion-body" id="gcPanchangBody">
                         <div class="tap-hint">యోగం, కరణం వరుసలో చివరన ఉన్న 👆 గుర్తుపై నొక్కితే వివరాలు కనిపిస్తాయి</div>
                         <table class="info-grid" id="gcPanchangTable"></table>
                     </div>
@@ -4130,7 +4249,7 @@
         <!-- MUHURTAM PAGE -->
         <div id="muhurtamPage" style="display: none;">
             <div class="page-banner">
-                <h2>శుభ ముహూర్తాలు</h2>
+                <h2>ముహూర్త దర్పణం</h2>
                 <p>శుభ కార్యాలకు అనువైన ముహూర్త సమయాలను తేదీ ప్రకారం చూడండి.</p>
             </div>
             <div class="card-box">
@@ -4255,31 +4374,317 @@
                     కర్మ భారం తగ్గుతుంది.
                 </p>
             </div>
-
             <div class="card-box">
-                <div class="karma-item">
-                    <h3>మనం ఎందుకు పుడతాము?</h3>
-                    <p>మన సుఖదుఃఖాలు ఎక్కడి నుండి వస్తాయి అనే ప్రశ్నే జ్యోతిషం వైపు నడిపిస్తుంది.
-                       జాతకం ఆ ప్రశ్నకు భయపెట్టే సమాధానం ఇవ్వదు — అర్థం చేసుకునే దారిని చూపుతుంది.</p>
+                <div class="section-heading" style="margin-bottom: 10px;">🕉️ జ్యోతిష తత్వశాస్త్రం</div>
+                <p class="karma-lead" style="margin-bottom: 12px;">నక్షత్రం, రాశి, గ్రహం, భావం — ఈ నాలుగూ కలిసి ఒక వ్యక్తి స్వభావాన్ని, ప్రకృతిని, కర్మ దిశను నిర్ణయిస్తాయి. గ్రహం తన శక్తిని, రాశి తన తత్వాన్ని ఇస్తుంది; రెండూ కలిసినప్పుడే ఫలితం పుడుతుంది. మొదట ఈ ఆధారాలు తెలుసుకుందాం.</p>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('ttNakBody', this)">
+                        <span>1. నక్షత్ర తత్వం — 27 నక్షత్రాలు</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="ttNakBody">
+                        <p class="info-meaning" style="line-height: 1.8; margin-bottom: 8px;">
+                            ప్రతి నక్షత్రానికి ఒక అధిపతి గ్రహం, ఒక గుణం, ఒక తత్వం, ఒక గణం, ఒక జాతి,
+                            ఒక దోషం మరియు ఒక దిశ ఉంటాయి. జన్మ నక్షత్రం మన సహజ ప్రవృత్తిని చూపుతుంది.
+                        </p>
+                        <div style="overflow-x:auto;">
+                            <table class="clean-table">
+                                <thead><tr><th>నక్షత్రం</th><th>అధిపతి</th><th>గుణం</th><th>తత్వం</th><th>గణం</th><th>జాతి</th><th>దోషం</th><th>దిశ</th></tr></thead>
+                                <tbody id="ttNakTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="karma-item">
-                    <h3>కర్మ అంటే ఏమిటి?</h3>
-                    <p>మనం ఇప్పుడు అనుభవిస్తున్నది గత కర్మల ప్రతిబింబం. అది శిక్ష కాదు, ఒక లెక్క.
-                       లెక్క తెలిస్తే భయం పోతుంది; భయం పోతే స్వేచ్ఛ మిగులుతుంది.</p>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('ttRasiBody', this)">
+                        <span>2. రాశి తత్వం — పన్నెండు రాశులు</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="ttRasiBody">
+                        <p class="info-meaning" style="line-height: 1.8; margin-bottom: 8px;">
+                            చర రాశులు మార్పును కోరుకుంటాయి; స్థిర రాశులు పట్టుదలతో నిలుస్తాయి;
+                            ద్విస్వభావ రాశులు రెండింటినీ కలిపి సమన్వయం చేస్తాయి.
+                        </p>
+                        <div style="overflow-x:auto;">
+                            <table class="clean-table">
+                                <thead><tr><th>రాశి</th><th>అధిపతి</th><th>తత్వం</th><th>స్వభావం</th></tr></thead>
+                                <tbody id="ttRasiTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="karma-item">
-                    <h3>గ్రహాల పాత్ర</h3>
-                    <p>గ్రహాలు కారణం కావు, సూచన మాత్రమే. అవి మన కర్మ రాసిన చోటును చూపుతాయి;
-                       ఆ రాతను చెరిపే కలం మన చేతిలోనే ఉంటుంది.</p>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('ttGrahaBody', this)">
+                        <span>3. నవగ్రహ తత్వం</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="ttGrahaBody">
+                        <p class="info-meaning" style="line-height: 1.8; margin-bottom: 8px;">
+                            ప్రతి గ్రహానికి ఒక గుణం (సత్వ, రజస్, తమస్), ఒక కారకత్వం, ఒక స్వభావం ఉంటాయి.
+                            గ్రహం ఏ రాశిలో ఉందో ఆ రాశి తత్వం దాని ఫలితానికి రంగు పులుముతుంది.
+                        </p>
+                        <div id="ttGrahaList"></div>
+                    </div>
                 </div>
-                <div class="karma-item">
-                    <h3>కర్మ భారం తగ్గే మార్గం</h3>
-                    <p>ధర్మం, సేవ, భక్తి — ఈ మూడూ కర్మ భారాన్ని తగ్గిస్తాయి. ఈ జ్ఞానం భయపెట్టకుండా
-                       నిర్భయమైన అవగాహనను ప్రసాదించాలి.</p>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('ttBhavaBody', this)">
+                        <span>4. ద్వాదశ భావాలు — కారకత్వం మరియు శరీర భాగాలు</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="ttBhavaBody">
+                        <div style="overflow-x:auto;">
+                            <table class="clean-table">
+                                <thead><tr><th>భావం</th><th>కారకత్వం</th><th>శరీర భాగం</th></tr></thead>
+                                <tbody id="ttBhavaTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('ttSrishtiBody', this)">
+                        <span>5. సృష్టి క్రమం — మహత్ నుండి పంచకోశాల వరకు</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="ttSrishtiBody">
+                        <p class="info-meaning" style="line-height: 1.85;">
+                            నిర్గుణ బ్రహ్మం నుండి త్రిగుణాలు పుడతాయి. త్రిగుణాల కలయికతో మహత్ తత్వం,
+                            దాని నుండి అహంకారం, అహంకారం నుండి పంచ తన్మాత్రలు, వాటి నుండి పంచ మహాభూతలు
+                            (ఆకాశం, వాయువు, అగ్ని, జలం, పృథ్వి) ఏర్పడతాయి. ఈ పంచభూతాల కలయికతోనే
+                            మన స్థూల శరీరం, సూక్ష్మ శరీరం, కారణ శరీరం ఏర్పడతాయి.
+                        </p>
+                        <p class="info-meaning" style="line-height: 1.85; margin-top: 8px;">
+                            అన్నమయ, ప్రాణమయ, మనోమయ, విజ్ఞానమయ, ఆనందమయ — ఈ పంచకోశాలే మన
+                            అనుభవ లోకాలు. జ్యోతిషం ఈ కోశాలలో ఏది ఏ గ్రహానికి అనుసంధానమో చూపుతుంది.
+                        </p>
+                    </div>
+                </div>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('ttSubhaBody', this)">
+                        <span>6. శుభ–అశుభ గ్రహాలు మరియు గ్రహ మైత్రి</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="ttSubhaBody">
+                        <p class="info-meaning" style="line-height: 1.85;">
+                            గురువు అత్యంత శుభ గ్రహం; శుక్రుడు శుభుడు; చంద్రుడు శుభుడు (క్షీణ చంద్రుడు
+                            కొంత బలహీనం); సూర్యుడు, కుజుడు, శని, రాహువు, కేతువు క్రూర గ్రహాలు.
+                            బుధుడు శుభ గ్రహం కానీ క్రూర గ్రహాలతో కలిస్తే అశుభంగా మారతాడు.
+                        </p>
+                        <p class="info-meaning" style="line-height: 1.85; margin-top: 8px;">
+                            గ్రహ మైత్రి: సూర్యుడు — చంద్ర, కుజ, గురు మిత్రులు; శుక్ర, శని శత్రువులు.
+                            చంద్రుడు — సూర్యుడు మిత్రుడు, ఇతరులతో సమానం. కుజుడు — సూర్య, చంద్ర, గురు
+                            మిత్రులు; బుధుడు శత్రువు. బుధుడు — సూర్యుడు మిత్రుడు, చంద్రుడు శత్రువు.
+                            గురువు — సూర్య, చంద్ర, కుజ మిత్రులు; బుధ, శుక్ర శత్రువులు. శుక్రుడు —
+                            బుధ, శని మిత్రులు; సూర్య, చంద్ర శత్రువులు. శని — బుధ, శుక్ర మిత్రులు;
+                            సూర్య, చంద్ర, కుజ శత్రువులు.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-box">
+                <div class="section-heading" style="margin-bottom: 10px;">📜 కర్మ ఫల రహస్యం</div>
+                <p class="karma-lead" style="margin-bottom: 12px;">ఇప్పుడు కర్మ ఎలా పనిచేస్తుందో, ఏ గ్రహం ఏ కర్మను మోసుకొస్తుందో, ఏ ఇల్లు ఏ రంగాన్ని నిర్ణయిస్తుందో చూద్దాం. తర్వాత దోషాలు, చివరిగా పరిహార మార్గాలు.</p>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('kbKarmaBody', this)">
+                        <span>1. గ్రహాలు యమదూతలు — కర్మ ఎలా ఫలిస్తుంది?</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="kbKarmaBody">
+                        <p class="info-meaning" style="line-height: 1.85;">
+                            గ్రహాలు కేవలం శుభాశుభాలను చెప్పే సూచనలు కావు — గతంలో మనం ఏ గుణంతో కర్మ చేశామో,
+                            దాని ఫలాన్ని ఇప్పుడు ఎలా అనుభవించాలో తెలిపే ఒక డిజైన్. యమధర్మరాజు ఆజ్ఞ ప్రకారం
+                            గ్రహాల స్థానాలు మరియు కదలికలే కర్మ ఫలాన్ని సరైన సమయంలో బయటకు తెస్తాయి.
+                            లగనం మరియు రాశులు మన ప్రారబ్ధ కర్మ స్వరూపాన్ని వివరిస్తాయి.
+                        </p>
+                        <p class="info-meaning" style="line-height: 1.85; margin-top: 8px;">
+                            ఈ శాస్త్రం లక్ష్యం భయపెట్టడం కాదు — జరిగేది ఎందుకు జరుగుతుందో అర్థం చేసుకుని,
+                            దాన్ని మించి నడవడం నేర్చుకోవడం. జాతకం ఒక విధి శాసనం కాదు; అది ఒక పాఠ్యపుస్తకం.
+                        </p>
+                    </div>
+                </div>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('kbGunaBody', this)">
+                        <span>2. త్రిగుణాలు — సత్త్వ, రజస్, తమస్</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="kbGunaBody">
+                        <div class="karma-item">
+                            <h3>సత్త్వ గుణం</h3>
+                            <p>సత్త్వంతో వచ్చే ఫలం దృఢమైన సంతోషాన్ని ఇస్తుంది. అయితే చివరకు దాని పట్ల
+                               అతుకు మిగులుతుంది — అదే తర్వాతి బంధానికి బీజం.</p>
+                        </div>
+                        <div class="karma-item">
+                            <h3>రజో గుణం</h3>
+                            <p>రజస్ ఇచ్చే నిరంతర క్రియ, కోరికల ఆశ, మనిషిని తాత్కాలిక సుఖం మరియు
+                               కోరికల చక్రంలో నిలిపి ఉంచుతుంది.</p>
+                        </div>
+                        <div class="karma-item">
+                            <h3>తమో గుణం</h3>
+                            <p>తమస్ ఇచ్చే ఆలస్యం, అజ్ఞానం, దుఃఖం — ఇవి ఆత్మను కిందకి లాగుతాయి.
+                               అయితే ఇవే మనల్ని లోతుగా ఆలోచించేలా చేసే గురువులు కూడా.</p>
+                        </div>
+                        <div class="karma-item">
+                            <h3>గుణాతీత స్థితి</h3>
+                            <p>ఫలాన్ని అనుభవిస్తూనే దానికి అతుక్కోకపోవడమే కర్మ యోగం. గుణాలను
+                               మించినవాడు కర్మ ఫలాన్ని భరిస్తూనే స్వేచ్ఛగా ఉంటాడు.</p>
+                        </div>
+                    </div>
+                </div>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('kbKarakBody', this)">
+                        <span>3. కర్మ కారకులు — శని, రాహు, కేతువు</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="kbKarakBody">
+                        <p class="info-meaning" style="line-height: 1.85;">
+                            ఈ మూడు గ్రహాలు మనకు ఎదురయ్యే ప్రతి అనుభవాన్ని కర్మ ఫలంగా మార్చే కీలక కారకులు.
+                        </p>
+                        <div class="karma-item" style="margin-top: 10px;">
+                            <h3>శని — క్రమశిక్షణ ఇచ్చే కర్మ కారకుడు</h3>
+                            <p>శని ఇచ్చే కష్టాలు కొంతకాలం బాధను కలిగించినా, దాని అంతిమ ఉద్దేశం
+                               ఓర్పు, క్రమశిక్షణ మరియు పరిపక్వత. శని ఏది ఇస్తే అది నెమ్మదిగా, కానీ స్థిరంగా ఇస్తాడు.</p>
+                        </div>
+                        <div class="karma-item">
+                            <h3>రాహువు — కోరికల కర్మ కారకుడు</h3>
+                            <p>రాహువు ఇచ్చే ఫలాన్ని అనుభవించిన తర్వాత, ఆ కోరికల్లో అర్థం మిగలదు.
+                               అది మనల్ని మరింత లోతుగా ఆలోచించేలా చేసే ఒక గుప్త బోధ.</p>
+                        </div>
+                        <div class="karma-item">
+                            <h3>కేతువు — విముక్తి కర్మ కారకుడు</h3>
+                            <p>కేతువు ఇచ్చే బాధల తర్వాత జ్ఞానం, వైరాగ్యం, స్వేచ్ఛ మిగులుతాయి.
+                               అతని దారి కఠినమైనా, మోక్షం వైపు నడిపిస్తుంది.</p>
+                        </div>
+                    </div>
+                </div>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('kbNakBody', this)">
+                        <span>4. నక్షత్ర కర్మ సిద్ధాంతం</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="kbNakBody">
+                        <p class="info-meaning" style="line-height: 1.85;">
+                            ఒక గ్రహం ఉన్న నక్షత్రం యొక్క అధిపతి, ఆ గ్రహం ఇచ్చే కర్మ ఫలానికి రంగు పులుముతాడు.
+                            నక్షత్రం యొక్క గుణం వ్యక్తి సహజ ప్రవృత్తిని, ప్రపంచాన్ని చూసే దృష్టిని చూపుతుంది.
+                            నక్షత్రాలు గత జన్మ బంధాలను సూచిస్తాయి.
+                        </p>
+                        <p class="info-meaning" style="line-height: 1.85; margin-top: 8px;">
+                            కర్మ ఫల రహస్యాన్ని తెలుసుకోవడంలో నక్షత్రాలు ముఖ్యం — ఒక కర్మ ఫలాన్ని
+                            అనుభవించిన తర్వాత కొత్తగా ఎలాంటి కర్మ బంధాన్ని ఏర్పరచకుండా ఉండటానికి
+                            ఈ జ్ఞానం సహాయపడుతుంది.
+                        </p>
+                    </div>
+                </div>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('kbPurushBody', this)">
+                        <span>5. పురుషార్థాలు — ధర్మ, అర్థ, కామ, మోక్ష</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="kbPurushBody">
+                        <div class="karma-item"><h3>ధర్మం</h3><p>బాధ్యత, విలువలు, విశ్వాసం — 1, 5, 9 భావాలు.</p></div>
+                        <div class="karma-item"><h3>అర్థం</h3><p>సంపద, వృత్తి, సంపాదన — 2, 6, 10 భావాలు.</p></div>
+                        <div class="karma-item"><h3>కామం</h3><p>కోరిక, సుఖం, సంబంధాలు — 3, 7, 11 భావాలు.</p></div>
+                        <div class="karma-item"><h3>మోక్షం</h3><p>విముక్తి, అంతర్ముఖత, వైరాగ్యం — 4, 8, 12 భావాలు.</p></div>
+                        <p class="info-meaning" style="line-height: 1.85; margin-top: 8px;">
+                            సత్త్వ గుణం + కామం, రజో గుణం + అర్థం, తమో గుణం + మోక్షం — ఈ కలయికలు
+                            కర్మ ఫలాన్ని ఏ దిశలో అనుభవిస్తారో నిర్ణయిస్తాయి.
+                        </p>
+                    </div>
+                </div>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('kbBhavaBody', this)">
+                        <span>6. కర్మ లిఖనం — పన్నెండు ఇళ్లు</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="kbBhavaBody">
+                        <div style="overflow-x:auto;">
+                            <table class="clean-table">
+                                <thead><tr><th>ఇల్లు</th><th>కర్మ రంగం</th></tr></thead>
+                                <tbody id="kbBhavaTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="hint-text" style="margin-top: 10px;">
+                            జాతకంలో ఏ గ్రహం ఏ ఇంట్లో ఉందో చూసి, ఆ ఇంటి కర్మ రంగంలో ఆ గ్రహం ఏ పని చేస్తుందో
+                            "జాతకం → కర్మ ఫల విశ్లేషణ" లో చూడవచ్చు.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-box">
+                <div class="section-heading" style="margin-bottom: 10px;">🕳️ దోష విచారం</div>
+                <p class="karma-lead" style="margin-bottom: 12px;">జాతకంలో కనిపించే ప్రధాన దోషాలు — కాలసర్ప దోషం, కుజ దోషం, ఏలినాటి శని. ఇవి శాపాలు కావు; జాగ్రత్తగా నడవాల్సిన మార్గ సూచనలు.</p>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('kbKalaBody', this)">
+                        <span>1. కాలసర్ప దోషం — పన్నెండు రకాలు</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="kbKalaBody">
+                        <p class="info-meaning" style="line-height: 1.85;">
+                            జాతక చక్రంలో రాహువు మరియు కేతువుల మధ్య మిగిలిన ఏడు గ్రహాలు (సూర్యుడు, చంద్రుడు,
+                            కుజుడు, బుధుడు, గురుడు, శుక్రుడు, శని) బంధీ అయితే కాలసర్ప దోషం ఏర్పడుతుంది.
+                            రాహువు భోగానికి, కేతువు మోక్షానికి కారకులు — వీరిద్దరి మధ్య గ్రహాలన్నీ
+                            చిక్కుకోవడం మన ఆత్మ ఎదుగుదలలో ఎదురయ్యే పరీక్షలకు సంకేతం.
+                        </p>
+                        <p class="info-meaning" style="line-height: 1.85; margin-top: 8px;">
+                            ఈ దోషం ఉన్నవారికి సరైన మేధస్సు ఉన్నప్పటికీ సరైన సమయంలో గుర్తింపు పొందడంలో
+                            జాప్యం జరుగుతుంది. దీన్ని భయపడాల్సిన అంశంగా కాకుండా, అంతరంగంలోని లోపాలను
+                            సరిదిద్దుకుని క్రమశిక్షణతో జీవితం గడపాల్సిన అవసరంగా గుర్తించాలి.
+                        </p>
+                        <div style="overflow-x:auto; margin-top: 10px;">
+                            <table class="clean-table">
+                                <thead><tr><th>రాహువు ఇల్లు</th><th>దోష నామం</th></tr></thead>
+                                <tbody id="kbKalaTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('ttDoshaBody', this)">
+                        <span>2. కుజ దోషం మరియు ఏలినాటి శని</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="ttDoshaBody">
+                        <p class="info-meaning" style="line-height: 1.85;">
+                            <b>కుజ దోషం:</b> జాతకంలో కుజుడు లగ్నం నుండి 2, 4, 7, 8, 12 భావాలలో ఉంటే
+                            కుజ దోషం ఏర్పడుతుంది. ఇది వైవాహిక జీవితంలో ఆవేశపూరిత మాటలు, ఘర్షణలు,
+                            అసంతృప్తి కలిగిస్తుంది. కుజుడు శక్తికి, ధైర్యానికి, ఆవేశానికి కారకుడు కాబట్టి,
+                            ఈ శక్తిని సృజనాత్మక పనులకు, సేవకు మళ్లించడమే పరిహారం. లగ్నం నుండే కాక,
+                            చంద్రుడు మరియు శుక్రుడు ఉన్న స్థానం నుండి కూడా పరిగణిస్తారు.
+                        </p>
+                        <p class="info-meaning" style="line-height: 1.85; margin-top: 8px;">
+                            <b>ఏలినాటి శని:</b> శని తన గోచారంలో జన్మ చంద్ర రాశికి 12వ, 1వ, 2వ రాశుల
+                            గుండా ప్రయాణించే ఏడున్నర సంవత్సరాల కాలాన్ని ఏలినాటి శని అంటారు.
+                            మూడు దశలు — ఆరంభ దశ (12వ రాశి), మధ్య దశ (చంద్ర రాశి), ముగింపు దశ (2వ రాశి),
+                            ఒక్కోటీ రెండున్నర సంవత్సరాలు. ఇది కష్టాలను ఇచ్చినా, చివరకు క్రమశిక్షణను,
+                            వృత్తిలో స్థిరత్వాన్ని ఇస్తుంది. శని ఉచ్చ లేదా స్వక్షేత్రంలో బలంగా ఉంటే
+                            ఈ కాలం సహనంగా గడుస్తుంది.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-box">
+                <div class="section-heading" style="margin-bottom: 10px;">🕯️ పరిహార మార్గాలు</div>
+                <p class="karma-lead" style="margin-bottom: 12px;">చివరిగా — కర్మ భారాన్ని తగ్గించుకునే ఆచరణ మార్గం. జ్ఞానం మాత్రమే కాదు, ఆచరణ కూడా ముఖ్యం.</p>
+<div class="accordion-card">
+                    <div class="accordion-header" onclick="toggleSection('kbPariharBody', this)">
+                        <span>1. పరిహార మార్గాలు</span>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body" id="kbPariharBody">
+                        <div class="karma-item"><h3>నిష్కామ సేవ</h3><p>రోగులకు, బలహీనులకు ప్రతిఫలం ఆశించకుండా సేవ చేయడం — కేతువు కర్మను అనుగ్రహిస్తుంది.</p></div>
+                        <div class="karma-item"><h3>దానం</h3><p>సంపదను కేవలం విలాసాల కోసం కాకుండా పుణ్య కార్యాల కోసం, ధర్మ ప్రచారం కోసం వెచ్చించడం.</p></div>
+                        <div class="karma-item"><h3>ధ్యానం మరియు మంత్ర జపం</h3><p>లోపలి గ్రహ శక్తులను క్రమబద్ధం చేయడానికి ధ్యానం, మంత్ర జపం శక్తివంతమైన సాధనం.</p></div>
+                        <div class="karma-item"><h3>క్షమా గుణం</h3><p>తనపై అపకారం చేసినవారిని క్షమించడం. పగ పెంచుకోవడం వల్ల కర్మ బంధాలు ఇంకా బలపడతాయి.</p></div>
+                        <div class="karma-item"><h3>ఆహార నియమాలు</h3><p>దేహమే దేవాలయం — గ్రహాల తత్వాలకు అనుగుణంగా సాత్విక ఆహారం తీసుకోవడం ఒక శారీరక పరిహారం.</p></div>
+                        <div class="karma-item"><h3>సమతౌల్యం</h3><p>రాహువు ఇచ్చే భ్రమలను పక్కన పెట్టి, కేతువు ఇచ్చే వివేకాన్ని (విచక్షణను) ఆశ్రయించడం.</p></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="card-box" style="text-align: center;">
+<div class="card-box" style="text-align: center;">
+                <div class="section-heading" style="margin-bottom: 8px;">మీ జాతకంలో ఈ శాస్త్రం ఎలా పనిచేస్తుందో చూడండి</div>
+                <button type="button" class="primary-btn" onclick="showPage('jatakamPage')">🪔 జాతకం → కర్మ ఫల విశ్లేషణ</button>
+            </div>
+
+<div class="card-box" style="text-align: center;">
                 <div class="section-heading" style="margin-bottom: 8px;">ఈ విషయాలు పుస్తకంలో విస్తరించి ఉన్నాయి</div>
                 <button type="button" class="primary-btn" onclick="showPage('booksPage')">📖 పుస్తకాలు చూడండి</button>
             </div>
@@ -4289,7 +4694,7 @@
         <div id="booksPage" style="display: none;">
             <div class="page-banner">
                 <h2>పుస్తకాలు</h2>
-                <p>శ్రీ లింగరాజ్ సూర్యరామ్ శర్మ రచించిన జ్యోతిష్య గ్రంథాలు — ఈ-బుక్ రూపంలో.</p>
+                <p>బ్రాహ్మశ్రీ లింగరాజ్ సూర్యరామ్ శాస్త్రి రచించిన జ్యోతిష్య గ్రంథాలు — ఈ-బుక్ రూపంలో.</p>
             </div>
 
             <div class="card-box">
@@ -4297,14 +4702,14 @@
                     <div class="book-card">
                         <div class="book-cover">జ్యోతిష తత్వశాస్త్రం</div>
                         <div class="book-title">జ్యోతిష తత్వశాస్త్రం</div>
-                        <div class="book-author">రచన: శ్రీ లింగరాజ్ సూర్యరామ్ శర్మ</div>
+                        <div class="book-author">రచన: బ్రాహ్మశ్రీ లింగరాజ్ సూర్యరామ్ శాస్త్రి</div>
                         <div class="book-desc">జ్యోతిష్య శాస్త్రం వెనుక ఉన్న తత్వం, కర్మ సిద్ధాంతం మరియు గ్రహాల ప్రభావం గురించిన లోతైన వివరణ.</div>
                         <button type="button" class="primary-btn book-buy" onclick="buyBook(1)">📘 కొనండి</button>
                     </div>
                     <div class="book-card">
                         <div class="book-cover">జ్యోతిష కర్మఫల రహస్యం</div>
                         <div class="book-title">జ్యోతిష కర్మఫల రహస్యం</div>
-                        <div class="book-author">రచన: శ్రీ లింగరాజ్ సూర్యరామ్ శర్మ</div>
+                        <div class="book-author">రచన: బ్రాహ్మశ్రీ లింగరాజ్ సూర్యరామ్ శాస్త్రి</div>
                         <div class="book-desc">జాతకం విధి శాసనం కాదు — అది గత కర్మల ప్రతిబింబం. కర్మ భారాన్ని తగ్గించుకునే మార్గాన్ని వివరించే గ్రంథం.</div>
                         <button type="button" class="primary-btn book-buy" onclick="buyBook(2)">📘 కొనండి</button>
                     </div>
@@ -4328,7 +4733,8 @@
                 <h4>సేవలు</h4>
                 <a onclick="showPage('jatakamPage')">జాతకం</a>
                 <a onclick="showPage('gocharamPage')">పంచాంగం &amp; గోచారం</a>
-                <a onclick="showPage('muhurtamPage')">ముహూర్తం</a>
+                <a onclick="showPage('muhurtamPage')">ముహూర్త దర్పణం</a>
+                <a href="https://lr-astrology.lrpadhi.workers.dev/Astrology" target="_blank" rel="noopener">జ్యోతిష్కులు</a>
                 <a onclick="showPage('karmaPage')">కర్మ రహస్యం</a>
                 <a onclick="showPage('booksPage')">పుస్తకాలు</a>
             </div>
@@ -5028,24 +5434,36 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         alert(`"${name}" గారి జన్మ వివరాలు సేవ్ చేయబడ్డాయి.`);
     }
 
-    function renderSavedProfiles() {
-        let existing = JSON.parse(localStorage.getItem('vedic_saved_profiles') || '[]');
-        const box = document.getElementById('savedProfilesContainer');
-        const list = document.getElementById('savedProfilesList');
+    // మెనూ బార్‌లో "సేవ్ చేసిన జాతకాలు" — త్రిభుజం నొక్కితే విచ్చుకుంటుంది
+    function toggleDrawerSaved(el) {
+        const wrap = el.closest('.drawer-saved');
+        const list = document.getElementById('drawerSavedList');
+        if (!wrap || !list) return;
+        const open = !wrap.classList.contains('open');
+        wrap.classList.toggle('open', open);
+        list.style.display = open ? 'block' : 'none';
+        if (open) renderSavedProfiles();
+    }
 
-        if (existing.length === 0) {
-            box.style.display = 'none';
+    function renderSavedProfiles() {
+        let existing = [];
+        try { existing = JSON.parse(localStorage.getItem('vedic_saved_profiles') || '[]'); } catch (e) { existing = []; }
+        const list = document.getElementById('drawerSavedList');
+        if (!list) return;
+
+        if (!existing.length) {
+            list.innerHTML = '<div class="hint-text" style="padding: 6px 14px; font-size: 0.78rem;">ఇంకా సేవ్ చేసిన జాతకాలు లేవు. జాతకం పేజీలో "💾 Save" నొక్కి సేవ్ చేయండి.</div>';
             return;
         }
 
-        box.style.display = 'block';
-        list.innerHTML = '';
-        existing.forEach(p => {
-            let chip = document.createElement('div');
-            chip.className = 'saved-chip';
-            chip.innerHTML = `<span onclick="loadSavedProfile(${p.id})">${p.name} (${p.day}-${p.month}-${p.year})</span> <span class="saved-chip-del" onclick="deleteSavedProfile(${p.id})">✕</span>`;
-            list.appendChild(chip);
-        });
+        list.innerHTML = existing.map(function (p) {
+            return '<div class="drawer-saved-item" onclick="loadSavedProfile(' + p.id + ')">'
+                + '<span class="dsc-name">' + (p.name || 'పేరు లేదు') + '<br>'
+                + '<span style="font-weight:600; font-size:0.75rem; color:#8a6a4a;">' + p.day + '-' + p.month + '-' + p.year
+                + ' · ' + (p.hour || '') + ':' + (p.min || '') + (p.city ? ' · ' + p.city : '') + '</span></span>'
+                + '<span class="dsc-del" onclick="event.stopPropagation(); deleteSavedProfile(' + p.id + ')" title="తీసేయండి">✕</span>'
+                + '</div>';
+        }).join('');
     }
 
     function loadSavedProfile(id) {
@@ -5066,7 +5484,11 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         document.getElementById('inLon').value = p.lon;
         document.getElementById('inTz').value = p.tz;
         updateCoordsBadge(parseFloat(p.lat), parseFloat(p.lon));
+        if (typeof closeDrawer === 'function') closeDrawer();
+        showPage('jatakamPage');
         generateHoroscope();
+        const rb = document.getElementById('resultsBox');
+        if (rb) rb.scrollIntoView({ behavior: 'smooth' });
     }
 
     function deleteSavedProfile(id) {
@@ -5204,8 +5626,26 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
     }
 
+    function goBack() {
+        if (history.length > 1) {
+            history.back();
+        } else {
+            showPage('homePage');
+        }
+    }
+
     function showPage(pageId) {
         if (pageId === 'jatakamPage') { try { profPrefillJatakam(); } catch (e) { } }
+        if (pageId === 'gocharamPage') {
+            const gcRes = document.getElementById('gcResultsContainer');
+            if (gcRes) gcRes.style.display = 'none';
+            const gcBar = document.getElementById('gcPanchangBody');
+            if (gcBar) gcBar.style.display = 'none';
+            const gcHdr = document.querySelector('[onclick*="gcPanchangBody"]');
+            if (gcHdr) gcHdr.classList.remove('open');
+        }
+        if (typeof renderKarmaTables === 'function') renderKarmaTables();
+        if (typeof renderTatvaTables === 'function') renderTatvaTables();
         ['homePage', 'jatakamPage', 'gocharamPage', 'muhurtamPage', 'booksPage', 'karmaPage', 'astroPanelPage'].forEach(id => {
             document.getElementById(id).style.display = 'none';
         });
@@ -5227,10 +5667,6 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
             if (homeBtn) homeBtn.style.display = 'inline-block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
             // పంచాంగం పేజీ తెరిచిన వెంటనే ఆ రోజు పంచాంగం కనిపించాలి
-            if (pageId === 'gocharamPage') {
-                const daySel = document.getElementById('gcDay');
-                if (daySel && daySel.options.length) generatePanchangam(false);
-            }
         }
     }
 
@@ -5627,43 +6063,410 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         { lord: 'గురుడు', day: 'గురువారం', colour: 'పసుపు', num: 3 }
     ];
 
-    function renderJatakaPhalalu() {
-        const box = document.getElementById('jatakaPhalalu');
-        if (!box || !currentPlanets || !currentPlanets.length) return;
 
-        const moon = currentPlanets[1] || {};
-        const lagna = currentLagnaRasi;
-        const lord = LAGNA_LORD_INFO[lagna] || LAGNA_LORD_INFO[0];
+    // ================= కర్మ ఫల రహస్యం (గ్రంథం ఆధారంగా) =================
+    const KARMA_HOUSE_SIG = [
+        'వ్యక్తిత్వం, శరీరం',
+        'కుటుంబం, సంపద, వాక్కు / మాట',
+        'ధైర్యం, శక్తి, చిన్న తోబుట్టువులు, స్వయం ప్రయత్నం',
+        'సుఖం, తల్లి, ఇల్లు, ఆస్తి, అంతరంగ శాంతి',
+        'బుద్ధి, సంతానం, పూర్వ పుణ్యం, సృజనాత్మకత',
+        'ఋణాలు, రోగాలు, శత్రువులు, సేవ',
+        'వివాహం, భాగస్వామ్యం, లౌకిక సంబంధాలు',
+        'ఆయుష్షు, ఆటంకాలు, రహస్యాలు, పరిశోధన, అతీంద్రియ జ్ఞానం',
+        'భాగ్యం, పితృ స్థానం, ధర్మం, విదేశీ ప్రయాణాలు',
+        'వృత్తి, సామాజిక హోదా, కీర్తి',
+        'లాభ స్థానం, ఆశయాలు, స్నేహితులు, పెద్ద సోదరులు',
+        'వ్యయం, నష్టం, మోక్షం, రహస్యాలు, విదేశీ వ్యవహారాలు'
+    ];
 
-        // ప్రస్తుతం నడుస్తున్న మహాదశ/భుక్తి
-        const cur = (typeof currentDashaLine === 'function') ? currentDashaLine() : '';
+    const KARMA_PLANET_SIG = {
+        'సూర్య': 'ఆత్మ, అధికారం',
+        'చంద్ర': 'సున్నితమైన మనస్సు, భావోద్వేగాలు',
+        'కుజ': 'శక్తి, ధైర్యం, ఆవేశం',
+        'బుధ': 'బుద్ధి',
+        'గురు': 'ధర్మం, అదృష్టం, గురువులు, ఉన్నత విద్య',
+        'శుక్ర': 'సౌందర్యం, ఆకర్షణ, సుఖం, ప్రేమ',
+        'శని': 'బాధ్యత, క్రమశిక్షణ, కష్టం, కాలం',
+        'రాహు': 'అతి-కోరిక, భ్రమ, అసాధారణత, మానసిక అశాంతి',
+        'కేతు': 'పరిధ్యోగం, విముఖత, విముక్తి, గత జన్మ నైపుణ్యం'
+    };
 
-        // బలహీన / ప్రత్యేక గ్రహాలు
-        const retro = currentPlanets.filter(p => p.retro && !p.isLagna).map(p => p.name);
-        const combust = currentPlanets.filter(p => p.combust && !p.isLagna).map(p => p.name);
+    // ఒక్కో గ్రహం ఒక్కో ఇంట్లో ఉన్నప్పుడు ఆ ఇంటి కర్మ రంగంలో అది చేసే పని
+    const KARMA_THEMES = {
+        'సూర్య': [
+            'ఆత్మ ధర్మం మరియు నాయకత్వ కర్మ',
+            'విలువలు మరియు వాక్ కర్మ',
+            'ఆత్మ ప్రయత్నం మరియు సంకల్ప కర్మ',
+            'మానసిక శాంతి మరియు గృహ కర్మ',
+            'సృష్టికర్త కర్మ మరియు జ్ఞాన కర్మ',
+            'సేవ మరియు వివాద కర్మ',
+            'సంబంధాల ధర్మం మరియు తాదాత్మ్య కర్మ',
+            'పరివర్తన మరియు రహస్య కర్మ',
+            'ఉత్తమ యజ్ఞ కర్మ మరియు అదృష్టం',
+            'అధికారం మరియు కీర్తి కర్మ',
+            'ఆశయ సాధన మరియు లాభ కర్మ',
+            'త్యాగం మరియు అంతర్ముఖ కర్మ'
+        ],
+        'చంద్ర': [
+            'మనస్సు మరియు భావోద్వేగ కర్మ',
+            'కుటుంబ పోషణ మరియు ఆర్థిక స్థిరత కర్మ',
+            'భావోద్వేగ సంభాషణ మరియు ఆసక్తి కర్మ',
+            'మాతృ భావ మరియు మానసిక శాంతి కర్మ',
+            'ప్రేమ, సృజనాత్మకత మరియు భోగ కర్మ',
+            'సేవ మరియు ఆందోళన కర్మ',
+            'సంబంధాల భావోద్వేగ కర్మ',
+            'రహస్య భావోద్వేగ మరియు పరివర్తన కర్మ',
+            'ధార్మిక భావ మరియు గురు కర్మ',
+            'వృత్తిపరమైన సుఖం మరియు బాధ్యత కర్మ',
+            'సామాజిక ఆనందం మరియు కోరికల కర్మ',
+            'విముక్తి మరియు మానసిక త్యాగ కర్మ'
+        ],
+        'కుజ': [
+            'ఆవేశపూర్ణ చర్య మరియు శక్తి కర్మ',
+            'కుటుంబ వివాద మరియు ఆర్థిక ఆవేశ కర్మ',
+            'తోబుట్టువుల మరియు పోరాట కర్మ',
+            'గృహ మరియు ఆస్తి వివాద కర్మ',
+            'ఆవేశపూరిత నిర్ణయాల కర్మ',
+            'పోరాట మరియు సేవ కర్మ',
+            'సంబంధాలలో క్రోధ మరియు పోటీ కర్మ',
+            'హింసాత్మక మార్గం మరియు రహస్య కర్మ',
+            'ధర్మం పట్ల ఆవేశం మరియు దివ్య జ్ఞాన కర్మ',
+            'వృత్తిలో ఆధిపత్యం మరియు చర్య కర్మ',
+            'లాభాల కోసం పోరాటం మరియు సామాజిక కర్మ',
+            'రహస్య క్రోధ మరియు త్యాగ కర్మ'
+        ],
+        'బుధ': [
+            'వాక్ చాతుర్యం మరియు ఆలోచనా కర్మ',
+            'వాక్కు, ధనం మరియు అర్థ సంపాదన కర్మ',
+            'కమ్యూనికేషన్ మరియు తోబుట్టువుల కర్మ',
+            'మానసిక చంచలత్వం మరియు గృహ కర్మ',
+            'విద్య, విద్యాభ్యాసం మరియు సంధాన కర్మ',
+            'విమర్శనాత్మక వాక్కు మరియు సేవ కర్మ',
+            'సంబంధాలలో కమ్యూనికేషన్, సమతౌల్యత కర్మ',
+            'రహస్య కమ్యూనికేషన్ మరియు పరిశోధనా కర్మ',
+            'ధార్మిక ఉపదేశం మరియు గురువుల కర్మ',
+            'వృత్తిలో వాక్కు మరియు విద్యా లక్షణ కర్మ',
+            'సామాజిక చర్చలు మరియు ఆర్థిక కర్మ',
+            'రహస్య ఆలోచనలు మరియు మోక్ష కర్మ'
+        ],
+        'గురు': [
+            'ఆత్మజ్ఞానం మరియు అహంకార కర్మ',
+            'ఆర్థిక ధర్మం మరియు వాక్ కర్మ',
+            'ప్రజ్ఞా ప్రసారం మరియు ఉపదేశ కర్మ',
+            'గృహ ధర్మం మరియు అంతరంగ శాంతి కర్మ',
+            'పూర్ణ పురుషార్థం మరియు సంతాన సృష్టి కర్మ',
+            'సేవ, న్యాయం మరియు పోటీ కర్మ',
+            'వైవాహిక ధర్మం మరియు సమతౌల్యత కర్మ',
+            'రహస్య జ్ఞానం మరియు అకస్మిక కర్మ',
+            'భాగ్య సంపద మరియు ఆధ్యాత్మిక అహంకార కర్మ',
+            'వృత్తి ధర్మం మరియు అధికార కర్మ',
+            'ఆర్థిక లాభాలు మరియు సామాజిక ధర్మ కర్మ',
+            'విముక్తి, దానం మరియు నష్టం కర్మ'
+        ],
+        'శుక్ర': [
+            'ఆకర్షణ మరియు సుఖ కర్మ',
+            'ఆర్థిక విలాసం మరియు మధుర వాక్ కర్మ',
+            'కళాత్మక కమ్యూనికేషన్ మరియు సున్నితత్వ కర్మ',
+            'గృహ సుఖం మరియు మానసిక శాంతి కర్మ',
+            'ప్రేమ, సృజనాత్మకత మరియు భోగ కర్మ',
+            'పోటీ, సేవ మరియు విలాస కర్మ',
+            'వైవాహిక సుఖం మరియు ఆకర్షణ కర్మ',
+            'రహస్య సంబంధాలు మరియు ఆకర్షణాత్మక విలాస కర్మ',
+            'ఉన్నత ధర్మం మరియు విదేశీ ఆకర్షణ కర్మ',
+            'వృత్తిపరమైన ఆకర్షణ మరియు విలాస కర్మ',
+            'ఆర్థిక లాభాలు మరియు సామాజిక ఆకర్షణ కర్మ',
+            'ఏకాంత ప్రేమ మరియు భోగ కర్మ'
+        ],
+        'శని': [
+            'బాధ్యత మరియు ఆత్మ-క్రమశిక్షణ కర్మ',
+            'ఆర్థిక క్రమశిక్షణ మరియు కుటుంబ బాధ్యతల కర్మ',
+            'స్వయం-ప్రయత్నం మరియు కమ్యూనికేషన్ కర్మ',
+            'గృహ సుఖం మరియు మాతృ బాధ్యతల కర్మ',
+            'సృజనాత్మక క్రమశిక్షణ మరియు సంధాన కర్మ',
+            'సేవ, విధి మరియు ఆరోగ్య కర్మ',
+            'వైవాహిక బాధ్యత మరియు న్యాయ కర్మ',
+            'ఇతరుల ధనం మరియు రహస్య కర్మ',
+            'విశ్వాసం, గురువులు మరియు ఉన్నత ధర్మ కర్మ',
+            'అధికారం, కీర్తి మరియు సామాజిక బాధ్యతల కర్మ',
+            'సామాజిక బాధ్యత మరియు ఆర్థిక లాభాల కర్మ',
+            'త్యాగం, ఏకాంతం మరియు నష్ట కర్మ'
+        ],
+        'రాహు': [
+            'ఆత్మ భ్రమలు మరియు అతి-వ్యామోహ కర్మ',
+            'ఆర్థిక అతి-కోరిక మరియు వాక్ మాయ కర్మ',
+            'ధైర్య అతిశయం మరియు కమ్యూనికేషన్ మాయ కర్మ',
+            'గృహ అతి-వ్యామోహం మరియు మానసిక అశాంతి కర్మ',
+            'సృజనాత్మక అతి-కోరిక మరియు పూర్ణ పురుషార్థ కర్మ',
+            'శత్రు మోసం మరియు సేవ అతి-కోరిక కర్మ',
+            'వైవాహిక భ్రమలు మరియు అతి-కోరిక కర్మ',
+            'రహస్య అతి-కోరిక మరియు ఇతరుల ధన కర్మ',
+            'అసాధారణ విశ్వాసం మరియు గురు భ్రమల కర్మ',
+            'వృత్తిపరమైన అతి-కీర్తి మరియు అధికార మాయ కర్మ',
+            'ఆర్థిక అతి-కోరిక మరియు సామాజిక వలయ కర్మ',
+            'ఏకాంత అతి-కోరిక మరియు దివ్యజ్ఞాన కర్మ'
+        ],
+        'కేతు': [
+            'ఆత్మ పరిధ్యోగం మరియు విముఖత కర్మ',
+            'ఆర్థిక విముఖత మరియు వాక్ పరిధ్యోగ కర్మ',
+            'కమ్యూనికేషన్ విముఖత కర్మ',
+            'గృహ పరిధ్యోగం మరియు మానసిక శాంతి విముఖత కర్మ',
+            'సంతాన విముఖత మరియు పూర్ణ పురుషార్థ పరిధ్యోగ కర్మ',
+            'శత్రు విముఖత మరియు సేవా పరిధ్యోగ కర్మ',
+            'వైవాహిక పరిధ్యోగం మరియు బంధాల విముఖత కర్మ',
+            'రహస్య విముఖత మరియు ఇతరుల ధన పరిధ్యోగ కర్మ',
+            'ధర్మ పరిధ్యోగం మరియు విశ్వాస విముఖత కర్మ',
+            'వృత్తి విముఖత మరియు అధికార పరిధ్యోగ కర్మ',
+            'కోరికల పరిధ్యోగం మరియు సామాజిక వలయ విముఖత కర్మ',
+            'మోక్ష విముఖత మరియు బంధాల విముక్తి కర్మ'
+        ]
+    };
 
-        const block = (title, body) => `<div class="card-box" style="margin-bottom: 10px;">
-            <div class="section-heading" style="font-size: 0.95rem; margin-bottom: 6px;">${title}</div>
-            <p class="info-meaning" style="line-height: 1.75;">${body}</p></div>`;
+    const KARMA_GUNA = {
+        'సత్త్వ': ['గురు', 'చంద్ర', 'సూర్య'],
+        'రజస్': ['శుక్ర', 'బుధ'],
+        'తమస్': ['శని', 'కుజ', 'రాహు', 'కేతు']
+    };
 
-        let html = '';
-        html += block('🪔 లగ్న స్వభావం', LAGNA_TRAITS[lagna] || '');
-        html += block('🌙 మనస్సు మరియు భావాలు', MOON_TRAITS[moon.rasiIdx] || '');
-        if (cur) {
-            const dLord = DASHA_LORDS.find(x => x.name === cur.maha);
-            const dText = 'ఇప్పుడు <b>' + cur.maha + ' మహాదశ</b>' + (cur.bhukti ? ' లో <b>' + cur.bhukti + '</b>' : '') + ' నడుస్తోంది.'
-                + (dLord ? ' ' + cur.maha + ' ' + dLord.name + ' గ్రహ స్వభావం ప్రకారం ఈ కాలంలో ' + (dLord.name === 'శని' ? 'ఓర్పు, క్రమశిక్షణ మరియు నెమ్మదైన పురోగతి' : dLord.name === 'గురు' ? 'జ్ఞానం, విస్తరణ మరియు శుభ యోగాలు' : dLord.name === 'శుక్ర' ? 'సంబంధాలు, సౌందర్యం మరియు సుఖాలు' : dLord.name === 'సూర్య' ? 'గౌరవం, నాయకత్వం మరియు ఆత్మవిశ్వాసం' : dLord.name === 'చంద్ర' ? 'మనస్సు, కుటుంబం మరియు భావోద్వేగాలు' : dLord.name === 'కుజ' ? 'ధైర్యం, పోరాటం మరియు ఆస్తి విషయాలు' : dLord.name === 'బుధ' ? 'బుద్ధి, వ్యాపారం మరియు మాటల నైపుణ్యం' : 'పరివర్తనలు మరియు లోతైన అనుభవాలు') + ' ముఖ్యమవుతాయి.' : '')
-                + ' కాల వ్యవధి: ' + cur.range + '.';
-            html += block('⏳ ప్రస్తుత దశ', dText);
+    const KALA_SARPA_NAMES = ['అనంత', 'కుళిక', 'వాసుకి', 'శంఖపాల', 'పద్మ', 'మహాపద్మ',
+        'తక్షక', 'కర్కోటక', 'శంఖచూడ', 'ఘటక', 'విషధర', 'శేషనాగ'];
+
+    // కర్మ రహస్యం పేజీలో పట్టికలు నింపడం
+    function renderKarmaTables() {
+        const bh = document.getElementById('kbBhavaTableBody');
+        if (bh && !bh.innerHTML.trim()) {
+            bh.innerHTML = KARMA_HOUSE_SIG.map(function (t, i) {
+                return '<tr><td><b>' + (i + 1) + '</b></td><td>' + t + '</td></tr>';
+            }).join('');
         }
+        const kl = document.getElementById('kbKalaTableBody');
+        if (kl && !kl.innerHTML.trim()) {
+            kl.innerHTML = KALA_SARPA_NAMES.map(function (n, i) {
+                return '<tr><td><b>' + (i + 1) + '</b></td><td>' + n + ' కాలసర్ప దోషం</td></tr>';
+            }).join('');
+        }
+    }
 
-        let grahaText = '';
-        if (retro.length) grahaText += 'వక్రి గతిలో ఉన్న గ్రహాలు: ' + retro.join(', ') + ' — ఈ విషయాల్లో నెమ్మదిగా, ఆలోచించి నిర్ణయం తీసుకోవడం మేలు. ';
-        if (combust.length) grahaText += 'అస్తంగత్వంలో ఉన్న గ్రహాలు: ' + combust.join(', ') + ' — వాటి ఫలితాలు కొద్దిగా బలహీనంగా ఉండవచ్చు. ';
-        if (!grahaText) grahaText = 'గ్రహాలన్నీ సాధారణ స్థితిలో ఉన్నాయి — ఇది శుభ సూచన.';
-        html += block('🪐 గ్రహ స్థితి', grahaText);
 
-        // గ్రహ స్థానాలు — భావం ప్రకారం విపుల వివరాలు
+    // ================= జ్యోతిష తత్వశాస్త్రం (గ్రంథం ఆధారంగా) =================
+    const TT_NAK = [
+        // [అధిపతి, గుణం, తత్వం, గణం, జాతి, దోషం, దిశ]
+        ['కేతు', 'సత్వ', 'భూ', 'దేవ', 'వైశ్య', 'వాత', 'తూర్పు'],
+        ['శుక్ర', 'రజస్', 'భూ', 'మానవ', 'శూద్ర', 'పిత్త', 'దక్షిణ'],
+        ['సూర్య', 'తమస్', 'భూ', 'రాక్షస', 'బ్రాహ్మణ', 'కఫ', 'దక్షిణ'],
+        ['చంద్ర', 'రజస్', 'భూ', 'మానవ', 'శూద్ర', 'కఫ', 'తూర్పు-దక్షిణ'],
+        ['కుజ', 'తమస్', 'భూ', 'దేవ', 'వైశ్య', 'కఫ', 'పశ్చిమ'],
+        ['రాహు', 'తమస్', 'జల', 'మానవ', 'శూద్ర', 'వాత', 'దక్షిణ-తూర్పు'],
+        ['గురు', 'సత్వ', 'జల', 'దేవ', 'వైశ్య', 'వాత', 'దక్షిణ'],
+        ['శని', 'సత్వ', 'జల', 'దేవ', 'బ్రాహ్మణ', 'కఫ', 'పశ్చిమ'],
+        ['బుధ', 'తమస్', 'జల', 'రాక్షస', 'శూద్ర', 'వాత', 'దక్షిణ'],
+        ['కేతు', 'తమస్', 'జల', 'రాక్షస', 'శూద్ర', 'కఫ', 'తూర్పు-దక్షిణ'],
+        ['శుక్ర', 'రజస్', 'భూ', 'మానవ', 'శూద్ర', 'పిత్త', 'తూర్పు'],
+        ['సూర్య', 'రజస్', 'భూ', 'మానవ', 'బ్రాహ్మణ', 'వాత', 'తూర్పు-దక్షిణ'],
+        ['చంద్ర', 'రజస్', 'జల', 'దేవ', 'వైశ్య', 'వాత', 'దక్షిణ'],
+        ['కుజ', 'తమస్', 'అగ్ని', 'రాక్షస', 'శూద్ర', 'పిత్త', 'పశ్చిమ'],
+        ['రాహు', 'తమస్', 'అగ్ని', 'దేవ', 'శూద్ర', 'పిత్త', 'తూర్పు-దక్షిణ'],
+        ['గురు', 'రజస్', 'అగ్ని', 'రాక్షస', 'శూద్ర', 'పిత్త', 'దక్షిణ'],
+        ['శని', 'తమస్', 'జల', 'దేవ', 'శూద్ర', 'కఫ', 'దక్షిణ'],
+        ['బుధ', 'రజస్', 'జల', 'రాక్షస', 'శూద్ర', 'వాత', 'తూర్పు'],
+        ['కేతు', 'తమస్', 'వాయు', 'రాక్షస', 'రాక్షస', 'వాత', 'తూర్పు-దక్షిణ'],
+        ['శుక్ర', 'రజస్', 'జల', 'మానవ', 'బ్రాహ్మణ', 'వాత', 'తూర్పు-దక్షిణ'],
+        ['సూర్య', 'సత్వ', 'వాయు', 'మానవ', 'బ్రాహ్మణ', 'కఫ', 'దక్షిణ'],
+        ['చంద్ర', 'సత్వ', 'వాయు', 'దేవ', 'శూద్ర', 'కఫ', 'దక్షిణ-పశ్చిమ'],
+        ['కుజ', 'తమస్', 'జల', 'రాక్షస', 'శూద్ర', 'పిత్త', 'దక్షిణ'],
+        ['రాహు', 'తమస్', 'వాయు', 'రాక్షస', 'శూద్ర', 'వాత', 'దక్షిణ-పశ్చిమ'],
+        ['గురు', 'తమస్', 'వాయు', 'మానవ', 'బ్రాహ్మణ', 'కఫ', 'దక్షిణ'],
+        ['శని', 'సత్వ', 'వాయు', 'మానవ', 'బ్రాహ్మణ', 'కఫ', 'తూర్పు'],
+        ['బుధ', 'సత్వ', 'వాయు', 'మానవ', 'శూద్ర', 'కఫ', 'తూర్పు']
+    ];
+    const TT_NAK_NATURE = ['చల', 'తీక్ష్ణ', 'తీక్ష్ణ', 'స్థిర', 'మృదు', 'తీక్ష్ణ', 'చల', 'మృదు', 'తీక్ష్ణ',
+        'తీక్ష్ణ', 'తీక్ష్ణ', 'స్థిర', 'చల', 'తీక్ష్ణ', 'చల', 'తీక్ష్ణ', 'మృదు', 'తీక్ష్ణ',
+        'తీక్ష్ణ', 'తీక్ష్ణ', 'స్థిర', 'చల', 'చల', 'చల', 'తీక్ష్ణ', 'స్థిర', 'తీక్ష్ణ'];
+
+    const TT_RASI = [
+        // [అధిపతి, తత్వం, స్వభావం]
+        ['కుజ', 'అగ్ని', 'చర'],
+        ['శుక్ర', 'భూ', 'స్థిర'],
+        ['బుధ', 'వాయు', 'ద్విస్వభావ'],
+        ['చంద్ర', 'జల', 'చర'],
+        ['సూర్య', 'అగ్ని', 'స్థిర'],
+        ['బుధ', 'భూ', 'ద్విస్వభావ'],
+        ['శుక్ర', 'వాయు', 'చర'],
+        ['కుజ', 'జల', 'స్థిర'],
+        ['గురు', 'అగ్ని', 'ద్విస్వభావ'],
+        ['శని', 'భూ', 'చర'],
+        ['శని', 'వాయు', 'స్థిర'],
+        ['గురు', 'జల', 'ద్విస్వభావ']
+    ];
+
+    const TT_GRAHA = {
+        'సూర్య': ['సత్వ', 'ఆత్మ, తండ్రి, అధికారం, ఆరోగ్యం'],
+        'చంద్ర': ['సత్వ', 'మనస్సు, తల్లి, భావోద్వేగాలు'],
+        'కుజ': ['తమస్', 'శక్తి, ధైర్యం, ఆవేశం, సోదరులు'],
+        'బుధ': ['రజస్', 'బుద్ధి, మాట, వ్యాపారం, విద్య'],
+        'గురు': ['సత్వ', 'ధర్మం, జ్ఞానం, అదృష్టం, గురువు'],
+        'శుక్ర': ['రజస్', 'ప్రేమ, సౌందర్యం, సుఖం, కళ'],
+        'శని': ['తమస్', 'క్రమశిక్షణ, కష్టం, కాలం, సేవ'],
+        'రాహు': ['తమస్', 'అతి-కోరిక, భ్రమ, విదేశీ ప్రభావం'],
+        'కేతు': ['తమస్', 'వైరాగ్యం, విముక్తి, గత జన్మ నైపుణ్యం']
+    };
+
+    const TT_BHAVA = [
+        ['శరీరం, వ్యక్తిత్వం, ఆత్మ', 'తల, మొత్తం శరీరం'],
+        ['ధనం, కుటుంబం, వాక్కు', 'ముఖం, కళ్ళు, నాలుక'],
+        ['ధైర్యం, సోదరులు, ప్రయత్నం', 'భుజాలు, చెవులు, ఊపిరితిత్తులు'],
+        ['సుఖం, తల్లి, గృహం, మనశ్శాంతి', 'హృదయం, రొమ్ము, రక్కటెముకలు'],
+        ['బుద్ధి, సంతానం, పూర్వ పుణ్యం', 'పేగులు, కడుపు ఎగువ భాగం'],
+        ['రోగం, శత్రువు, ఋణం, సేవ', 'కిడ్నీలు, నడుము, పేగులు'],
+        ['వివాహం, భాగస్వామ్యం', 'మూత్రాశయం, గుప్తాంగాలు'],
+        ['ఆయుష్షు, రహస్యం, పరివర్తన', 'మరణం, గుదం, గుప్త భాగాలు'],
+        ['భాగ్యం, ధర్మం, గురువు', 'తొడలు, పితృ స్థానం'],
+        ['వృత్తి, కీర్తి, అధికారం', 'మోకాళ్ళు, వెన్నెముక'],
+        ['లాభం, ఆశయాలు, స్నేహం', 'పిక్కలు, చీలమండలు'],
+        ['వ్యయం, మోక్షం, విదేశం', 'పాదాలు, కళ్ళు, శరీరం మొత్తం']
+    ];
+
+    // గ్రహ గుణం + రాశి తత్వం కలయిక
+    const TT_COMBO = {
+        'సత్వ-అగ్ని': 'జ్ఞానం ధైర్యంగా, నాయకత్వంగా వ్యక్తమవుతుంది.',
+        'సత్వ-భూ': 'జ్ఞానం స్థిరంగా, ఆచరణలో నిలుస్తుంది.',
+        'సత్వ-వాయు': 'జ్ఞానం ఆలోచనగా, సంబంధాల ద్వారా వ్యాపిస్తుంది.',
+        'సత్వ-జల': 'జ్ఞానం కరుణగా, భక్తిగా మారుతుంది.',
+        'రజస్-అగ్ని': 'కోరిక ఉద్వేగంగా, పోటీగా మారుతుంది.',
+        'రజస్-భూ': 'కోరిక భోగంగా, సంపాదనగా మారుతుంది.',
+        'రజస్-వాయు': 'కోరిక సంబంధాలలో, మాటల్లో తిరుగుతుంది.',
+        'రజస్-జల': 'కోరిక ప్రేమగా, ఆర్తిగా మారుతుంది.',
+        'తమస్-అగ్ని': 'క్రోధం, ఆవేశం, హింసా ప్రవృత్తి.',
+        'తమస్-భూ': 'మొండితనం, ఆలస్యం, భారం మోసే స్వభావం.',
+        'తమస్-వాయు': 'అనుమానం, చంచలత్వం, భ్రమ.',
+        'తమస్-జల': 'మోహం, భయం, ఆందోళన.'
+    };
+
+    function renderTatvaTables() {
+        const nak = document.getElementById('ttNakTableBody');
+        if (nak && !nak.innerHTML.trim()) {
+            nak.innerHTML = NAK_NAMES.map(function (n, i) {
+                const d = TT_NAK[i] || [];
+                return '<tr><td><b>' + n + '</b></td><td>' + (d[0] || '') + '</td><td>' + (d[1] || '') + '</td>'
+                    + '<td>' + (d[2] || '') + '</td><td>' + (d[3] || '') + '</td><td>' + (d[4] || '') + '</td>'
+                    + '<td>' + (d[5] || '') + '</td><td>' + (d[6] || '') + '</td></tr>';
+            }).join('');
+        }
+        const ra = document.getElementById('ttRasiTableBody');
+        if (ra && !ra.innerHTML.trim()) {
+            ra.innerHTML = RASI_FULL.map(function (n, i) {
+                const d = TT_RASI[i] || [];
+                return '<tr><td><b>' + n + '</b></td><td>' + (d[0] || '') + '</td><td>' + (d[1] || '') + '</td><td>' + (d[2] || '') + '</td></tr>';
+            }).join('');
+        }
+        const gr = document.getElementById('ttGrahaList');
+        if (gr && !gr.innerHTML.trim()) {
+            gr.innerHTML = Object.keys(TT_GRAHA).map(function (k) {
+                const d = TT_GRAHA[k];
+                return '<div style="margin-bottom: 6px;"><b>' + k + '</b> — ' + d[0] + ' గుణం · ' + d[1] + '</div>';
+            }).join('');
+        }
+        const bh = document.getElementById('ttBhavaTableBody');
+        if (bh && !bh.innerHTML.trim()) {
+            bh.innerHTML = TT_BHAVA.map(function (d, i) {
+                return '<tr><td><b>' + (i + 1) + '</b></td><td>' + d[0] + '</td><td>' + d[1] + '</td></tr>';
+            }).join('');
+        }
+    }
+
+    // ============ జాతక ఫలితం — క్రమబద్ధమైన విభాగాలు (ఒక్కో బ్లాక్ ఒక్కో ఫంక్షన్) ============
+    function karmaCtx(lagna) {
+        const all = (currentPlanets || []);
+        const planets = all.filter(function (p) { return !p.isLagna; });
+        const houseOf = function (p) { return ((p.rasiIdx - lagna + 12) % 12) + 1; };
+        const moon = planets.find(function (p) { return p.name === 'చంద్ర'; }) || all[1] || {};
+        return { all: all, planets: planets, houseOf: houseOf, moon: moon };
+    }
+
+    function jkBlock(title, body, mb) {
+        return '<div class="card-box" style="margin-bottom: ' + (mb || 10) + 'px;">'
+            + '<div class="section-heading" style="font-size: 0.95rem; margin-bottom: 6px;">' + title + '</div>'
+            + '<div class="info-meaning" style="line-height: 1.85;">' + body + '</div></div>';
+    }
+
+    // 1. సారాంశం
+    function jkSummary(lagna) {
+        const c = karmaCtx(lagna);
+        const lord = LAGNA_LORD_INFO[lagna] || LAGNA_LORD_INFO[0];
+        const cur = (typeof currentDashaLine === 'function') ? currentDashaLine() : '';
+        const ni = (typeof c.moon.nakIdx === 'number') ? c.moon.nakIdx : NAK_NAMES.indexOf(c.moon.nak);
+        const body = 'మీ లగ్నం <b>' + RASI_FULL[lagna] + '</b>, లగ్నాధిపతి <b>' + lord.lord + '</b>. '
+            + 'జన్మ రాశి <b>' + (c.moon.rasiFull || '') + '</b>, జన్మ నక్షత్రం <b>' + (NAK_NAMES[ni] || c.moon.nak || '') + '</b>'
+            + (c.moon.pada ? ' (' + c.moon.pada + 'వ పాదం)' : '') + '. '
+            + (cur ? 'ప్రస్తుతం <b>' + cur.maha + ' మహాదశ</b>' + (cur.bhukti ? ' — ' + cur.bhukti + ' భుక్తి' : '') + ' నడుస్తోంది. ' : '')
+            + 'ఈ జాతకం మొత్తం చదివేటప్పుడు — ముందు మీ స్వభావం, తర్వాత గ్రహ స్థితులు, '
+            + 'ఆ పైన కర్మ ఫలం, చివరిగా దోషాలు మరియు పరిహారం — ఈ క్రమంలో చూడండి.';
+        return jkBlock('🪔 జాతక సారాంశం', body);
+    }
+
+    // 2. లగ్నం
+    function jkLagna(lagna) {
+        const lord = LAGNA_LORD_INFO[lagna] || LAGNA_LORD_INFO[0];
+        const c = karmaCtx(lagna);
+        const lp = c.planets.find(function (p) { return p.name === lord.lord; });
+        const extra = lp ? ('లగ్నాధిపతి ' + lord.lord + ' ఈ జాతకంలో <b>' + c.houseOf(lp) + 'వ భావంలో</b> ఉన్నారు — '
+            + 'అంటే మీ జీవితానికి ప్రధాన కర్మ రంగం <b>' + (KARMA_HOUSE_SIG[c.houseOf(lp) - 1] || '') + '</b>. '
+            + 'ఈ రంగంలో మీరు ఎంత నిష్ఠతో పనిచేస్తే, అంత ఫలితం స్థిరంగా ఉంటుంది.') : '';
+        return jkBlock('🪔 లగ్న స్వభావం', (LAGNA_TRAITS[lagna] || '') + ' ' + extra);
+    }
+
+    // 3. నక్షత్ర తత్వం
+    function jkNak(lagna) {
+        const c = karmaCtx(lagna);
+        const ni = (typeof c.moon.nakIdx === 'number') ? c.moon.nakIdx : NAK_NAMES.indexOf(c.moon.nak);
+        if (!(ni >= 0) || !TT_NAK[ni]) return '';
+        const d = TT_NAK[ni];
+        const body = '<b>' + NAK_NAMES[ni] + (c.moon.pada ? ' (' + c.moon.pada + 'వ పాదం)' : '') + '</b> — '
+            + 'అధిపతి: <b>' + d[0] + '</b>, గుణం: ' + d[1] + ', తత్వం: ' + d[2] + ', గణం: ' + d[3]
+            + ', జాతి: ' + d[4] + ', దోషం: ' + d[5] + ', దిశ: ' + d[6] + ', ప్రకృతి: ' + (TT_NAK_NATURE[ni] || '') + '. '
+            + 'ఈ నక్షత్రం మీ సహజ ప్రవృత్తిని, శరీర స్వభావాన్ని, మానసిక ధోరణిని చూపుతుంది. '
+            + 'నక్షత్రాధిపతి <b>' + d[0] + '</b> మీ మనస్సుపై తన గుణాన్ని వేస్తారు — '
+            + (d[1] === 'సత్వ' ? 'శాంతి, జ్ఞానం, సేవ వైపు నడిపిస్తారు.'
+                : (d[1] === 'రజస్' ? 'కోరిక, క్రియ, సాధన వైపు నడిపిస్తారు.'
+                    : 'ఓర్పు, లోతైన అనుభవం ద్వారా పరిపక్వత వైపు నడిపిస్తారు.'))
+            + ' శరీర దృష్ట్యా ' + d[5] + ' దోష ప్రకృతి — ఆయా ఋతువుల్లో ఆహారం, విశ్రాంతిపై శ్రద్ధ వహించడం మేలు.';
+        return jkBlock('🌠 జన్మ నక్షత్ర తత్వం', body);
+    }
+
+    // 4. రాశి తత్వం
+    function jkRasi(lagna) {
+        const c = karmaCtx(lagna);
+        const ri = c.moon.rasiIdx;
+        if (typeof ri !== 'number' || !TT_RASI[ri]) return '';
+        const r = TT_RASI[ri];
+        const nature = r[2] === 'చర' ? 'మార్పును కోరుకునే, కొత్త పనులు ప్రారంభించే స్వభావం.'
+            : (r[2] === 'స్థిర' ? 'పట్టుదల, స్థిరత్వం, నిలకడ ఉన్న స్వభావం.'
+                : 'అనుకూలత, సర్దుబాటు, ఆలోచనాత్మక స్వభావం.');
+        const body = '<b>' + RASI_FULL[ri] + '</b> — అధిపతి: ' + r[0] + ', తత్వం: <b>' + r[1] + '</b>, స్వభావం: ' + r[2] + '. '
+            + nature + ' ' + r[1] + ' తత్వం కాబట్టి '
+            + (r[1] === 'అగ్ని' ? 'ధైర్యం, ఉద్వేగం, చొరవ మీ నిర్ణయాల్లో కనిపిస్తాయి.'
+                : (r[1] === 'భూ' ? 'ఓర్పు, ఆచరణ, భౌతిక స్థిరత్వం మీ నిర్ణయాల్లో కనిపిస్తాయి.'
+                    : (r[1] === 'వాయు' ? 'ఆలోచన, సంబంధాలు, చలనం మీ నిర్ణయాల్లో కనిపిస్తాయి.'
+                        : 'భావం, సున్నితత్వం, లోతు మీ నిర్ణయాల్లో కనిపిస్తాయి.')))
+            + ' మీ మనస్సు, భావోద్వేగాలు ఈ తత్వం ప్రకారం పనిచేస్తాయి.';
+        return jkBlock('🌙 జన్మ రాశి తత్వం', body);
+    }
+
+    // 5. మనస్సు
+    function jkMoon(lagna) {
+        const c = karmaCtx(lagna);
+        const m = c.moon;
+        const base = MOON_TRAITS[m.rasiIdx] || '';
+        const h = m.rasiIdx != null ? ((m.rasiIdx - lagna + 12) % 12) + 1 : 1;
+        return jkBlock('💭 మనస్సు మరియు భావాలు',
+            base + ' చంద్రుడు మీ లగ్నం నుండి <b>' + h + 'వ భావంలో</b> ఉన్నారు — '
+            + 'అంటే <b>' + (KARMA_HOUSE_SIG[h - 1] || '') + '</b> విషయాలపై మీ మనస్సు ఎక్కువగా ఆలోచిస్తుంది. '
+            + 'ఈ రంగంలో భావోద్వేగాలు ఎక్కువగా ఉంటాయి; అక్కడే మీకు ఆనందం, అక్కడే నొప్పి.');
+    }
+
+    // 6. గ్రహ స్థానాలు
+    function jkGrahaTable(lagna) {
+        const c = karmaCtx(lagna);
         const PLANET_MEANING = {
             'సూర్య': 'ఆత్మ, తండ్రి, ఆరోగ్యం, గౌరవం',
             'చంద్ర': 'మనస్సు, తల్లి, భావాలు, ప్రజాదరణ',
@@ -5675,32 +6478,287 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
             'రాహు': 'ఆశలు, విదేశ యోగం, అనుమానాలు',
             'కేతు': 'ఆధ్యాత్మికత, వైరాగ్యం, మోక్షం'
         };
-        let posRows = '';
-        currentPlanets.filter(p => !p.isLagna).forEach(p => {
-            const house = ((p.rasiIdx - lagna + 12) % 12) + 1;
+        let rows = '';
+        let best = null, worst = null;
+        c.planets.forEach(function (p) {
+            const h = c.houseOf(p);
             const st = planetStrength(p, lagna, true);
             const tone = st.score >= 60 ? 'అనుకూలం' : (st.score >= 40 ? 'మధ్యస్థం' : 'శ్రద్ధ అవసరం');
-            posRows += '<tr><td><b>' + p.name + '</b></td><td>' + p.rasiFull + '</td>'
-                + '<td style="text-align:center;">' + house + '</td>'
+            if (!best || st.score > best.s) best = { n: p.name, s: st.score };
+            if (!worst || st.score < worst.s) worst = { n: p.name, s: st.score };
+            rows += '<tr><td><b>' + p.name + '</b></td><td>' + p.rasiFull + '</td>'
+                + '<td style="text-align:center;">' + h + '</td>'
                 + '<td>' + (PLANET_MEANING[p.name] || '') + '</td>'
                 + '<td>' + tone + '</td></tr>';
         });
-        html += '<div class="card-box" style="margin-bottom:10px;">'
+        const note = 'భావం = లగ్నం నుంచి లెక్కించిన స్థానం; స్థితి = స్థూల గ్రహ బలం ఆధారంగా. '
+            + (best ? 'ఈ జాతకంలో <b>' + best.n + '</b> సాపేక్షంగా బలంగా, ' : '')
+            + (worst ? '<b>' + worst.n + '</b> సాపేక్షంగా బలహీనంగా ఉన్నారు. ' : '')
+            + 'బలమైన గ్రహం ఇచ్చే ఫలితాలు త్వరగా, స్థిరంగా వస్తాయి; బలహీన గ్రహం విషయంలో ఓర్పు, పరిహారం అవసరం.';
+        return '<div class="card-box" style="margin-bottom:10px;">'
             + '<div class="section-heading" style="font-size:0.95rem;margin-bottom:6px;">🧭 గ్రహ స్థానాలు — భావ ఫలితాలు</div>'
             + '<div style="overflow-x:auto;"><table class="clean-table"><thead><tr>'
             + '<th>గ్రహం</th><th>రాశి</th><th>భావం</th><th>సూచించే విషయాలు</th><th>స్థితి</th>'
-            + '</tr></thead><tbody>' + posRows + '</tbody></table></div>'
-            + '<div class="hint-text" style="margin-top:6px;">భావం = లగ్నం నుంచి లెక్కించిన స్థానం. స్థితి = స్థూల గ్రహ బలం ఆధారంగా.</div></div>';
+            + '</tr></thead><tbody>' + rows + '</tbody></table></div>'
+            + '<div class="hint-text" style="margin-top:6px;">' + note + '</div></div>';
+    }
 
-        html += block('🍀 శుభ సూచనలు',
-            'మీ లగ్నాధిపతి ' + lord.lord + '. శుభ దినం: ' + lord.day + '. శుభ రంగు: ' + lord.colour + '. శుభ సంఖ్య: ' + lord.num + '.');
+    // 7. గ్రహ స్థితి
+    function jkSthiti(lagna) {
+        const c = karmaCtx(lagna);
+        const retro = c.planets.filter(function (p) { return p.retro; }).map(function (p) { return p.name; });
+        const combust = c.planets.filter(function (p) { return p.combust; }).map(function (p) { return p.name; });
+        let t = '';
+        if (retro.length) t += 'వక్రి గతిలో ఉన్న గ్రహాలు: <b>' + retro.join(', ') + '</b> — ఈ గ్రహాల విషయాల్లో '
+            + 'నెమ్మదిగా, ఆలోచించి నిర్ణయం తీసుకోవడం మేలు; ఒకసారి మొదలుపెట్టిన పనిని పూర్తి చేయడం ముఖ్యం. ';
+        if (combust.length) t += 'అస్తంగత్వంలో (సూర్యుడికి దగ్గరగా) ఉన్న గ్రహాలు: <b>' + combust.join(', ') + '</b> — '
+            + 'వాటి ఫలితాలు కొద్దిగా బలహీనంగా ఉండవచ్చు; ఆ రంగాల్లో ఎదురుదెబ్బలను అంతగా మనసుకు తీసుకోకండి. ';
+        if (!t) t = 'గ్రహాలన్నీ సాధారణ స్థితిలో ఉన్నాయి — ఇది శుభ సూచన. '
+            + 'గ్రహ శక్తులు స్థిరంగా పనిచేస్తాయి; క్రమబద్ధమైన ప్రయత్నం త్వరగా ఫలిస్తుంది.';
+        return jkBlock('🪐 గ్రహ స్థితి', t);
+    }
 
-        html += block('🤲 సలహా',
-            'జాతకం విధి శాసనం కాదు — మన గత కర్మల ప్రతిబింబం. ధర్మం, సేవ, భక్తి ద్వారా కర్మ భారం తగ్గుతుంది. ' +
-            'ముఖ్యమైన నిర్ణయాలకు పురోహితులను సంప్రదించి, మీ కుటుంబ పంచాంగం ప్రకారం నిర్ణయించుకోండి.');
+    // 8. కర్మ ఫలం (గ్రహం × భావం)
+    function jkKarmaTable(lagna) {
+        const c = karmaCtx(lagna);
+        let rows = '';
+        c.planets.forEach(function (p) {
+            const h = c.houseOf(p);
+            const theme = (KARMA_THEMES[p.name] || [])[h - 1] || '';
+            rows += '<tr><td><b>' + p.name + '</b></td>'
+                + '<td style="text-align:center;">' + h + '</td>'
+                + '<td>' + (KARMA_HOUSE_SIG[h - 1] || '') + '</td>'
+                + '<td>' + theme + '</td></tr>';
+        });
+        const inBad = c.planets.filter(function (p) { return [6, 8, 12].indexOf(c.houseOf(p)) > -1; })
+            .map(function (p) { return p.name + ' (' + c.houseOf(p) + ')'; });
+        const note = 'ప్రతి గ్రహం తన భావంలో ఒక కర్మ చేస్తుంది — ఇది మీ ప్రారబ్ధ కర్మ స్వరూపం. '
+            + (inBad.length
+                ? '<b>' + inBad.join(', ') + '</b> భావాలు 6, 8, 12 (సేవ, పరివర్తన, త్యాగం) — ఇవి కష్టమనిపించినా, '
+                  + 'ఇక్కడ చేసిన పని ఆత్మను లోతుగా మారుస్తుంది.'
+                : '6, 8, 12 భావాల్లో ఎక్కువ గ్రహాలు లేవు — కర్మ భారం తులనాత్మకంగా తక్కువ.');
+        return '<div class="card-box" style="margin-bottom:10px;">'
+            + '<div class="section-heading" style="font-size:0.95rem;margin-bottom:6px;">📜 కర్మ ఫల విశ్లేషణ</div>'
+            + '<div style="overflow-x:auto;"><table class="clean-table"><thead><tr>'
+            + '<th>గ్రహం</th><th>భావం</th><th>ఇంటి కర్మ రంగం</th><th>కర్మ ఫలం</th>'
+            + '</tr></thead><tbody>' + rows + '</tbody></table></div>'
+            + '<div class="hint-text" style="margin-top:6px;">' + note + '</div></div>';
+    }
+
+    // 9. గ్రహ గుణం + రాశి తత్వం
+    function jkCombo(lagna) {
+        const c = karmaCtx(lagna);
+        let rows = '';
+        c.planets.forEach(function (p) {
+            const g = TT_GRAHA[p.name];
+            const r = TT_RASI[p.rasiIdx];
+            if (!g || !r) return;
+            rows += '<tr><td><b>' + p.name + '</b></td><td>' + p.rasiFull + '</td>'
+                + '<td>' + g[0] + ' / ' + r[1] + '</td><td>' + (TT_COMBO[g[0] + '-' + r[1]] || '') + '</td></tr>';
+        });
+        if (!rows) return '';
+        return '<div class="card-box" style="margin-bottom:10px;">'
+            + '<div class="section-heading" style="font-size:0.95rem;margin-bottom:6px;">🔯 గ్రహ గుణం + రాశి తత్వం</div>'
+            + '<div style="overflow-x:auto;"><table class="clean-table"><thead><tr>'
+            + '<th>గ్రహం</th><th>రాశి</th><th>గుణం / తత్వం</th><th>కలయిక ఫలితం</th>'
+            + '</tr></thead><tbody>' + rows + '</tbody></table></div>'
+            + '<div class="hint-text" style="margin-top:6px;">గ్రహం తన శక్తిని, రాశి తన తత్వాన్ని ఇస్తుంది — '
+            + 'ఈ కలయికే ఫలితపు రంగును నిర్ణయిస్తుంది.</div></div>';
+    }
+
+    // 10. కర్మ కారకులు
+    function jkKarak(lagna) {
+        const c = karmaCtx(lagna);
+        let t = '';
+        ['శని', 'రాహు', 'కేతు'].forEach(function (nm) {
+            const p = c.planets.find(function (x) { return x.name === nm; });
+            if (!p) return;
+            const h = c.houseOf(p);
+            const theme = (KARMA_THEMES[nm] || [])[h - 1] || '';
+            const note = nm === 'శని'
+                ? 'శని ఇక్కడ క్రమశిక్షణను పరీక్షిస్తాడు — ఓర్పుతో చేసిన పని మాత్రమే స్థిరంగా నిలుస్తుంది; ఆలస్యం అనిపించినా ఫలితం ఖాయం.'
+                : (nm === 'రాహు'
+                    ? 'రాహువు ఇక్కడ కోరికలను పెంచి, వాటి అంతం శూన్యమని తర్వాత తెలియజేస్తాడు — దాన్ని ముందే గుర్తిస్తే భ్రమ తగ్గుతుంది.'
+                    : 'కేతువు ఇక్కడ వైరాగ్యాన్ని, లోతైన జ్ఞానాన్ని ప్రసాదిస్తాడు — బాధల తర్వాత స్వేచ్ఛ.');
+            t += '<div style="margin-bottom: 8px;"><b>' + nm + ' — ' + h + 'వ ఇల్లు:</b> ' + theme
+                + ' <span class="since-note">' + note + '</span></div>';
+        });
+        if (!t) return '';
+        return jkBlock('🪐 కర్మ కారకులు', t);
+    }
+
+    // 11. త్రిగుణం
+    function jkGuna(lagna) {
+        const c = karmaCtx(lagna);
+        const counts = { 'సత్త్వ': 0, 'రజస్': 0, 'తమస్': 0 };
+        c.planets.forEach(function (p) {
+            Object.keys(KARMA_GUNA).forEach(function (g) {
+                if (KARMA_GUNA[g].indexOf(p.name) > -1) counts[g] += 1;
+            });
+        });
+        const dom = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; })[0];
+        const t = dom === 'సత్త్వ'
+            ? 'మీ జాతకంలో <b>సత్త్వ గుణం</b> ప్రధానంగా ఉంది — జ్ఞానం, శాంతి, సేవ వైపు సహజ ప్రవృత్తి. ఫలాల పట్ల అతుకు తగ్గించుకుంటే ఇది మోక్షానికి దారి.'
+            : (dom === 'రజస్'
+                ? 'మీ జాతకంలో <b>రజో గుణం</b> ప్రధానంగా ఉంది — కోరిక, క్రియ, సాధన ఎక్కువ. ఫలాన్ని అనుభవిస్తూనే కోరికల చక్రాన్ని గుర్తించడం ముఖ్యం.'
+                : 'మీ జాతకంలో <b>తమో గుణం</b> ప్రధానంగా ఉంది — ఆలస్యం, అజ్ఞానం, ఆందోళన ఎక్కువ. ఇదే గుణం లోతైన ఆలోచనకు, క్రమశిక్షణతో మారితే పరిపక్వతకు దారి.');
+        return jkBlock('🎭 త్రిగుణ సమతుల్యత',
+            t + ' <span class="since-note">(సత్త్వ ' + counts['సత్త్వ'] + ' · రజస్ ' + counts['రజస్'] + ' · తమస్ ' + counts['తమస్'] + ')</span>');
+    }
+
+    // 12. కాలసర్ప దోషం
+    function jkKalasarpa(lagna) {
+        const c = karmaCtx(lagna);
+        const rahu = c.planets.find(function (p) { return p.name === 'రాహు'; });
+        const ketu = c.planets.find(function (p) { return p.name === 'కేతు'; });
+        if (!rahu || !ketu) return '';
+        const seven = c.planets.filter(function (p) { return p.name !== 'రాహు' && p.name !== 'కేతు'; });
+        const inArc = function (from, to) {
+            return seven.every(function (p) {
+                const d = (p.rasiIdx - from + 12) % 12;
+                const span = (to - from + 12) % 12;
+                return d > 0 && d < span;
+            });
+        };
+        const isKala = inArc(rahu.rasiIdx, ketu.rasiIdx) || inArc(ketu.rasiIdx, rahu.rasiIdx);
+        const rh = c.houseOf(rahu);
+        const t = isKala
+            ? 'రాహువు మరియు కేతువుల మధ్య ఏడు గ్రహాలూ బంధీ అయ్యాయి — <b>' + (KALA_SARPA_NAMES[rh - 1] || '') + ' కాలసర్ప దోషం</b> ఏర్పడింది (రాహువు ' + rh + 'వ ఇంట్లో). '
+              + 'ఇది భయపడాల్సిన శాపం కాదు; సరైన సమయంలో గుర్తింపు ఆలస్యం కావడం, పదే పదే ఆటంకాలు రావడం ఈ దోష లక్షణాలు. '
+              + 'ఈ కాలంలో చేసిన ప్రయత్నం ఆలస్యంగా ఫలిస్తుంది — కానీ ఫలిస్తుంది. '
+              + 'నిష్కామ సేవ, క్షమ, ధ్యానం, సత్యం — ఇవే దీనికి పరిహారం. క్రమశిక్షణతో నడిస్తే ఈ దోషమే మీకు ఉన్నతమైన మార్గాన్ని చూపుతుంది.'
+            : 'రాహువు–కేతువుల మధ్య ఏడు గ్రహాలూ బంధీ కాలేదు — <b>కాలసర్ప దోషం లేదు</b>. '
+              + 'అంటే గ్రహ కర్మ రంగం మీ జీవితాన్ని ఒకే దిశలో బంధించడం లేదు; ప్రయత్నానికి తగిన ఫలితం త్వరగా వస్తుంది.';
+        return jkBlock('🐍 కాలసర్ప దోషం', t);
+    }
+
+    // 13. కుజ దోషం
+    function jkKuja(lagna) {
+        const c = karmaCtx(lagna);
+        const mars = c.planets.find(function (p) { return p.name === 'కుజ'; });
+        if (!mars) return '';
+        const mh = c.houseOf(mars);
+        const fromMoon = ((mars.rasiIdx - c.moon.rasiIdx + 12) % 12) + 1;
+        const bad = [2, 4, 7, 8, 12];
+        const hasKuja = bad.indexOf(mh) > -1 || bad.indexOf(fromMoon) > -1;
+        const t = 'కుజుడు లగ్నం నుండి <b>' + mh + 'వ</b> భావంలో, చంద్రుడి నుండి <b>' + fromMoon + 'వ</b> స్థానంలో ఉన్నాడు. '
+            + (hasKuja
+                ? 'ఇది కుజ దోష స్థానం — వైవాహిక జీవితంలో ఆవేశపూరిత మాటలు, ఘర్షణలు, అసంతృప్తి రావచ్చు. '
+                  + 'కుజుడు శక్తికి, ధైర్యానికి కారకుడు కాబట్టి — ఈ శక్తిని క్రీడ, వ్యాయామం, సృజనాత్మక పనులు, సేవకు మళ్లించడమే పరిహారం. '
+                  + 'మాట్లాడే ముందు రెండు క్షణాలు ఆగడం, భాగస్వామి మాటను పూర్తిగా వినడం — ఇవి చాలా పనిచేస్తాయి.'
+                : 'ఇది కుజ దోష స్థానం కాదు — ఆవేశాన్ని సరైన దిశలో ఉపయోగించగల స్థితి. '
+                  + 'ధైర్యం, నిర్ణయ శక్తి మీకు అనుకూలం; వాటిని నిర్మాణాత్మక పనులకు వినియోగించండి.');
+        return jkBlock('🔥 కుజ దోషం', t);
+    }
+
+    // 14. ప్రస్తుత దశ
+    function jkDasha(lagna) {
+        const cur = (typeof currentDashaLine === 'function') ? currentDashaLine() : '';
+        if (!cur) return '';
+        const dLord = DASHA_LORDS.find(function (x) { return x.name === cur.maha; });
+        const nature = dLord
+            ? (dLord.name === 'శని' ? 'ఓర్పు, క్రమశిక్షణ మరియు నెమ్మదైన పురోగతి'
+                : dLord.name === 'గురు' ? 'జ్ఞానం, విస్తరణ మరియు శుభ యోగాలు'
+                : dLord.name === 'శుక్ర' ? 'సంబంధాలు, సౌందర్యం మరియు సుఖాలు'
+                : dLord.name === 'సూర్య' ? 'గౌరవం, నాయకత్వం మరియు ఆత్మవిశ్వాసం'
+                : dLord.name === 'చంద్ర' ? 'మనస్సు, కుటుంబం మరియు భావోద్వేగాలు'
+                : dLord.name === 'కుజ' ? 'ధైర్యం, పోరాటం మరియు ఆస్తి విషయాలు'
+                : dLord.name === 'బుధ' ? 'బుద్ధి, వ్యాపారం మరియు మాటల నైపుణ్యం'
+                : 'పరివర్తనలు మరియు లోతైన అనుభవాలు') : '';
+        const t = 'ఇప్పుడు <b>' + cur.maha + ' మహాదశ</b>' + (cur.bhukti ? ' లో <b>' + cur.bhukti + '</b> భుక్తి' : '') + ' నడుస్తోంది. '
+            + (nature ? cur.maha + ' గ్రహ స్వభావం ప్రకారం ఈ కాలంలో ' + nature + ' ముఖ్యమవుతాయి. ' : '')
+            + 'కాల వ్యవధి: <b>' + cur.range + '</b>. '
+            + 'దశా కాలంలో ఏ గ్రహం నడుస్తున్నదో ఆ గ్రహానికి సంబంధించిన విషయాలే ప్రధానంగా తలెత్తుతాయి — '
+            + 'ఆ రంగంలో ఎక్కువ శ్రద్ధ పెడితే ఫలితం మెరుగ్గా ఉంటుంది.';
+        return jkBlock('⏳ ప్రస్తుత దశ', t);
+    }
+
+    // 15. శుభ సూచనలు
+    function jkSubha(lagna) {
+        const lord = LAGNA_LORD_INFO[lagna] || LAGNA_LORD_INFO[0];
+        const t = 'లగ్నాధిపతి <b>' + lord.lord + '</b>. శుభ దినం: <b>' + lord.day + '</b>. '
+            + 'శుభ రంగు: <b>' + lord.colour + '</b>. శుభ సంఖ్య: <b>' + lord.num + '</b>. '
+            + 'ముఖ్యమైన పనులు ఈ దినాన, ఈ రంగు దుస్తులతో ప్రారంభించడం సంప్రదాయం — '
+            + 'ఇది మనస్సుకు ధైర్యాన్ని ఇచ్చే ఒక సంకేతం మాత్రమే, ఫలితానికి కారణం కాదు.';
+        return jkBlock('🍀 శుభ సూచనలు', t);
+    }
+
+    // 16. కర్మ పరిహారం (జాతకానికి తగినది)
+    function jkParihar(lagna) {
+        const c = karmaCtx(lagna);
+        const weak = c.planets.map(function (p) { return { n: p.name, s: planetStrength(p, lagna, true).score }; })
+            .sort(function (a, b) { return a.s - b.s; }).slice(0, 2).map(function (x) { return x.n; });
+        const tips = {
+            'సూర్య': 'ఉదయాన్ని, తండ్రిని, ఆత్మగౌరవాన్ని గౌరవించడం; సూర్య నమస్కారం.',
+            'చంద్ర': 'తల్లిని, జలాన్ని గౌరవించడం; పౌర్ణమి రోజు దానం.',
+            'కుజ': 'ఆవేశాన్ని వ్యాయామం, క్రీడల ద్వారా బయటకు పంపడం; భూమికి సేవ.',
+            'బుధ': 'విద్యార్థులకు సహాయం, పుస్తక దానం; మాటలో సత్యం.',
+            'గురు': 'గురువులను, జ్ఞానాన్ని గౌరవించడం; అన్నదానం.',
+            'శుక్ర': 'స్త్రీలను గౌరవించడం; కళకు, సౌందర్యానికి తోడ్పాటు.',
+            'శని': 'నిష్కామ సేవ, పేదలకు, వృద్ధులకు సహాయం; శనివారం నిష్ఠ.',
+            'రాహు': 'అనుమానాన్ని విడిచి, ధ్యానం, ఏకాంతం; దానం.',
+            'కేతు': 'ఆధ్యాత్మిక అభ్యాసం, మౌనం; జంతు సేవ.'
+        };
+        let t = 'బలహీనంగా ఉన్న గ్రహాలు: <b>' + weak.join(', ') + '</b>. వాటికి తగిన పరిహారం — '
+            + weak.map(function (n) { return '<b>' + n + '</b>: ' + (tips[n] || ''); }).join(' ') + ' ';
+        t += 'సాధారణంగా — నిష్కామ సేవ, సత్యం, దానం, క్షమ, ధ్యానం ఏ గ్రహానికైనా పనిచేసే పరిహారం. '
+            + 'కర్మ ఫలాన్ని విధిగా కాకుండా పాఠంగా చూసినప్పుడే అది మనల్ని బంధించదు.';
+        return jkBlock('🕯️ కర్మ పరిహారం', t);
+    }
+
+    // 17. సలహాలు మరియు సంప్రదింపు — చివరిది
+    function jkAdvice(lagna) {
+        const c = karmaCtx(lagna);
+        const lord = LAGNA_LORD_INFO[lagna] || LAGNA_LORD_INFO[0];
+        const weak = c.planets.map(function (p) { return { n: p.name, s: planetStrength(p, lagna, true).score }; })
+            .sort(function (a, b) { return a.s - b.s; })[0];
+        const lines = [
+            'జాతకం విధి శాసనం కాదు — మీ గత కర్మల ప్రతిబింబం. చదివి భయపడకుండా, అర్థం చేసుకుని ఆచరించండి.',
+            'మీ లగ్నాధిపతి ' + lord.lord + ' — ఆ గ్రహ గుణాన్ని (క్రమశిక్షణ, జ్ఞానం, కరుణ) రోజువారీ జీవితంలో పాటించడం మీకు ఎక్కువ ఉపయోగపడుతుంది.',
+            (weak ? 'బలహీనంగా ఉన్న <b>' + weak.n + '</b> గ్రహం విషయంలో ఆత్మవిశ్వాసాన్ని కోల్పోకండి; పరిహారం, ఓర్పు రెండూ అవసరం.' : ''),
+            'ముఖ్యమైన నిర్ణయాలు (వివాహం, ఉద్యోగం, వ్యాపారం, ఆస్తి) — మీ కుటుంబ పురోహితులను, పంచాంగాన్ని సంప్రదించి తీసుకోండి.',
+            'సందేహం ఉంటే — ఈ యాప్‌లోని జ్యోతిష్కులతో నేరుగా మాట్లాడి, మీ పూర్తి వివరాలతో సలహా తీసుకోండి.'
+        ].filter(Boolean);
+        const body = '<div style="line-height: 1.9;">' + lines.map(function (l, i) {
+            return '<div style="margin-bottom: 6px;"><b>' + (i + 1) + '.</b> ' + l + '</div>';
+        }).join('') + '</div>'
+            ;
+        return '<div class="card-box" style="margin-bottom: 10px; border: 1px solid rgba(139,94,60,.25);">'
+            + '<div class="section-heading" style="font-size: 0.95rem; margin-bottom: 6px;">🤲 సలహాలు మరియు సంప్రదింపు</div>'
+            + '<div class="info-meaning">' + body + '</div></div>';
+    }
+
+    function renderJatakaPhalalu() {
+        const box = document.getElementById('jatakaPhalalu');
+        if (!box || !currentPlanets || !currentPlanets.length) return;
+        const lagna = currentLagnaRasi;
+
+        let html = '';
+        html += jkSummary(lagna);        // 1  సారాంశం
+        html += jkLagna(lagna);          // 2  లగ్నం
+        html += jkNak(lagna);            // 3  నక్షత్రం
+        html += jkRasi(lagna);           // 4  రాశి
+        html += jkMoon(lagna);           // 5  మనస్సు
+        html += jkGrahaTable(lagna);     // 6  గ్రహ స్థానాలు
+        html += jkSthiti(lagna);         // 7  గ్రహ స్థితి
+        html += jkKarmaTable(lagna);     // 8  కర్మ ఫలం
+        html += jkCombo(lagna);          // 9  గుణం + తత్వం
+        html += jkKarak(lagna);          // 10 కర్మ కారకులు
+        html += jkGuna(lagna);           // 11 త్రిగుణం
+        html += jkKalasarpa(lagna);      // 12 కాలసర్ప
+        html += jkKuja(lagna);           // 13 కుజ దోషం
+        html += jkDasha(lagna);          // 14 ప్రస్తుత దశ
+        html += jkSubha(lagna);          // 15 శుభ సూచనలు
+        html += jkParihar(lagna);        // 16 పరిహారం
+        html += jkAdvice(lagna);         // 17 సలహాలు — చివరిది
 
         box.innerHTML = html;
+
+        // జాతక ఫలితాలు బార్ తర్వాత (బార్ వెలుపల) — తదుపరి చర్యలు
+        const acts = document.getElementById('phalaActions');
+        if (acts) acts.style.display = 'block';
     }
+
 
     function generateHoroscope() {
         let name = document.getElementById('inName').value.trim() || "సూర్యారాం";
@@ -5786,15 +6844,15 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         const birthVaraStart = new Date(year, month - 1, day,
             Math.floor(birthSun.sunrise), Math.round((birthSun.sunrise - Math.floor(birthSun.sunrise)) * 60));
         document.getElementById('panchangaDetailsTable').innerHTML = `
-            <tr><td>తిథి</td><td>${res.tithi}</td></tr>
-            <tr><td>వారం</td><td>${res.vara} — ${fmtWindow(birthVaraStart, birthVaraEnd, birthRefDate)}<br><span class="since-note">తదుపరి: ${birthNextVara}</span></td></tr>
-            <tr><td>నక్షత్రం మరియు పాదం</td><td>${moonObj.nak} ${moonObj.pada}వ పాదం</td></tr>
-            <tr><td>యోగం</td><td>${res.yoga}</td></tr>
-            <tr><td>కరణం</td><td>${res.karana}</td></tr>
-            <tr><td>జన్మ రాశి</td><td>${moonObj.rasiFull}</td></tr>
-            <tr><td>లగ్నం</td><td>${RASI_FULL[currentLagnaRasi]}</td></tr>
             <tr><td>సూర్యోదయం</td><td>${fmtClock(birthSun.sunrise)}</td></tr>
             <tr><td>సూర్యాస్తమయం</td><td>${fmtClock(birthSun.sunset)}</td></tr>
+            <tr><td>తిథి</td><td>${res.tithi}</td></tr>
+            <tr><td>వారం</td><td>${res.vara} — ${fmtWindow(birthVaraStart, birthVaraEnd, birthRefDate)}<br><span class="since-note">తదుపరి: ${birthNextVara}</span></td></tr>
+            <tr><td>యోగం</td><td>${res.yoga}</td></tr>
+            <tr><td>కరణం</td><td>${res.karana}</td></tr>
+            <tr class="pk-hl"><td>నక్షత్రం</td><td>${moonObj.nak} — ${moonObj.pada}వ పాదం</td></tr>
+            <tr class="pk-hl"><td>జన్మ రాశి</td><td>${moonObj.rasiFull}</td></tr>
+            <tr class="pk-hl"><td>లగ్నం</td><td>${RASI_FULL[currentLagnaRasi]}</td></tr>
         `;
 
         // Chart Sub-Label (ఉదా: తుల లగ్నం | మిథున రాశి)
@@ -7603,7 +8661,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
                     <div class="pk-logo">${PATRIKA_LOGO_SVG}</div>
                     <div class="pk-title">LR జ్యోతిశాలయం</div>
                 </div>
-                <div class="pk-sub">శ్రీ లింగరాజ్ సూర్యరామ్ శర్మ</div>
+                <div class="pk-sub">బ్రాహ్మశ్రీ లింగరాజ్ సూర్యరామ్ శాస్త్రి</div>
                 <div class="pk-banner2">శుభ ముహూర్త నిర్ణయ పత్రం</div>
 
                 <div class="pk-box">
@@ -7653,7 +8711,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
                 <div class="pk-bottom">
                     <div class="pk-acharya">
                         ఆశీస్సులతో,<br>
-                        <b>శ్రీ లింగరాజ్ సూర్యరామ్ శర్మ</b><br>
+                        <b>బ్రాహ్మశ్రీ లింగరాజ్ సూర్యరామ్ శాస్త్రి</b><br>
                         ఫోన్ : ____________
                     </div>
                 </div>
@@ -8444,7 +9502,6 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
             if (logoutItem) logoutItem.style.display = 'flex';
         } else {
             if (label) label.textContent = 'లాగిన్';
-            if (userBox) userBox.innerHTML = '<strong>మీరు లాగిన్ అవలేదు</strong>జాతక వివరాలు సేవ్ చేసుకోవడానికి లాగిన్ అవ్వండి.';
             if (loginItem) loginItem.style.display = 'flex';
             if (logoutItem) logoutItem.style.display = 'none';
         }
@@ -10304,7 +11361,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         <button type="button" class="primary-btn" onclick="closeVisitorSettings(); showPage('jatakamPage')">సేవ్ చేసిన జాతక వివరాలు</button>
         <button type="button" class="primary-btn" onclick="clearVisitorData()">సేవ్ చేసిన డేటా తీసేయండి</button>
         <button type="button" class="primary-btn" onclick="closeVisitorSettings()">మూసివేయండి</button>
-        <div class="build-stamp">బిల్డ్ v2026.11.25-2 · చెల్లింపు నిర్ధారణ · లాగౌట్ · సంప్రదింపు బటన్</div>
+        <div class="build-stamp">బిల్డ్ v2026.11.26-12 · పంచాంగ బటన్ ఒకే రంగు/సెంటర్ · పంచాంగ బార్ మూసి</div>
     </div>
 </div>
 
@@ -10321,7 +11378,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         });
     });
 })();
-console.info('LR Astrology build v3.4 single-file — 2026-11-25 16:19');
+console.info('LR Astrology build v4.6 single-file — 2026-11-26 · panchang button + collapsed bar');
 </script>
 </body>
 </html>
