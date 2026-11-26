@@ -3491,7 +3491,6 @@
         <a class="drawer-link" data-page="astrologersPage" onclick="drawerGo('astrologersPage')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 20a6.2 6.2 0 0 1 12.4 0"/><circle cx="17.5" cy="9.5" r="2.6"/><path d="M14.6 20a5.4 5.4 0 0 1 6.6-4.4"/></svg> జ్యోతిష్కులు</a>
         <div class="drawer-sep"></div>
         <a class="drawer-link" onclick="openProfile()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg> ప్రొఫైల్</a>
-        <a class="drawer-link" id="drawerLogoutItem" style="display: none;" onclick="doLogout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12H4m0 0 3.5-3.5M4 12l3.5 3.5"/><path d="M10 4h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-8"/></svg> లాగ్ అవుట్</a>
     </nav>
 
     <div class="drawer-foot">© 2026 LR Astrology<br>జ్యోతిష్య ఫలితాలు సూచనాత్మకమే.</div>
@@ -3583,20 +3582,14 @@
             
 
             <div class="as-steps" id="asSteps">
-                <div class="as-step" data-step="1"><span>1</span> మొబైల్ &amp; పేరు</div>
-                
-                <div class="as-step" data-step="3"><span>3</span> జన్మ వివరాలు</div>
-                <div class="as-step" data-step="4"><span>4</span> స్థలం</div>
-                <div class="as-step" data-step="5"><span>5</span> సరిచూడండి</div>
+                <div class="as-step" data-step="3"><span>1</span> జన్మ వివరాలు</div>
+                <div class="as-step" data-step="4"><span>2</span> స్థలం</div>
+                <div class="as-step" data-step="5"><span>3</span> సరిచూడండి</div>
             </div>
 
-            <!-- STEP 1: ఖాతా లాగిన్ -->
-            <div class="card-box as-panel" id="asPanel1">
-                <div class="section-heading">1️⃣ మీ ఖాతా</div>
-                <div class="input-group">
-                    <label class="input-label">పూర్తి పేరు</label>
-                    <input type="text" id="asName" class="input-field" placeholder="మీ పేరు" autocomplete="name">
-                </div>
+            <!-- STEP 1: ఖాతా (లాగిన్ అవసరం లేదు — ఈ ప్యానెల్ చూపబడదు) -->
+            <div class="card-box as-panel" id="asPanel1" style="display: none !important;">
+                <div class="section-heading">మీ ఖాతా</div>
                 <div class="input-group">
                     <label class="input-label">మొబైల్ నంబర్</label>
                     <div class="otp-row">
@@ -3604,11 +3597,6 @@
                         <input type="tel" id="asMobile" class="input-field" placeholder="10 అంకెల మొబైల్ నంబర్" maxlength="10" inputmode="numeric">
                     </div>
                 </div>
-                <div class="input-group">
-                    <label class="input-label">పాస్‌కోడ్</label>
-                    <input type="password" id="asPass" class="input-field" placeholder="పాస్‌కోడ్">
-                </div>
-                <button type="button" class="primary-btn" onclick="asLoginContinue()">లాగిన్ అవ్వండి</button>
             </div>
 
             <!-- STEP 2: OTP -->
@@ -3623,7 +3611,11 @@
 
             <!-- STEP 3: name, date, time -->
             <div class="card-box as-panel" id="asPanel3" style="display: none;">
-                <div class="section-heading">3️⃣ జన్మ తేదీ మరియు సమయం</div>
+                <div class="section-heading">1️⃣ జన్మ వివరాలు</div>
+                <div class="input-group">
+                    <label class="input-label">పూర్తి పేరు</label>
+                    <input type="text" id="asName" class="input-field" placeholder="మీ పేరు" autocomplete="name">
+                </div>
                 <div class="row-split">
                     <div class="input-group">
                         <label class="input-label">జన్మ తేదీ</label>
@@ -3635,14 +3627,13 @@
                     </div>
                 </div>
                 <div class="as-nav-row">
-                    <button type="button" class="primary-btn as-back-btn" onclick="asShowStep(1)">← వెనుకకు</button>
                     <button type="button" class="primary-btn" onclick="asNext3()">తర్వాత →</button>
                 </div>
             </div>
 
             <!-- STEP 4: country + location -->
             <div class="card-box as-panel" id="asPanel4" style="display: none;">
-                <div class="section-heading">4️⃣ జన్మ స్థలం</div>
+                <div class="section-heading">2️⃣ జన్మ స్థలం</div>
                 <div class="input-group">
                     <label class="input-label">దేశం</label>
                     <select id="asCountry" class="select-field" onchange="onCountryChanged('as')"></select>
@@ -3681,7 +3672,7 @@
 
             <!-- STEP 5: review + save -->
             <div class="card-box as-panel" id="asPanel5" style="display: none;">
-                <div class="section-heading">5️⃣ సరిచూడండి</div>
+                <div class="section-heading">3️⃣ సరిచూడండి</div>
                 <table class="info-grid" id="asReviewTable"></table>
                 <div class="as-nav-row">
                     <button type="button" class="primary-btn as-back-btn" onclick="asShowStep(4)">← వెనుకకు</button>
@@ -3694,7 +3685,6 @@
                 <div class="astro-head2">
                     <div class="atb-pic" id="atbPic">👤</div>
                     <div class="atb-name" id="atbName">సందర్శకుడు</div>
-                    <button type="button" class="atb-logout" id="atbLogout" onclick="asSignOut()" title="లాగ్ అవుట్">⎋ లాగ్ అవుట్</button>
                 </div>
 
                 <div class="wallet-line2">
@@ -7581,16 +7571,9 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         try { localStorage.setItem(PROF_KEY, JSON.stringify(obj)); } catch (e) { }
     }
     // లాగిన్ సెషన్ — ఖాతా డేటా (lrProfile) తీసేయకుండా, సెషన్ మాత్రమే మూసివేస్తుంది
+    // లాగిన్ గేట్ తీసేశాం — యాప్ నేరుగా తెరుచుకుంటుంది
     function profLoggedIn() {
-        try {
-            const s = localStorage.getItem('lrSession');
-            if (s === null) {
-                const has = !!profLoad();
-                localStorage.setItem('lrSession', has ? '1' : '0');
-                return has;
-            }
-            return s === '1';
-        } catch (e) { return !!profLoad(); }
+        return true;
     }
     function profSetSession(on) {
         try { localStorage.setItem('lrSession', on ? '1' : '0'); } catch (e) { }
@@ -7613,8 +7596,9 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         const p = profLoad();
         const m = document.getElementById('profileModal');
         if (m) m.classList.add('open');
-        if (p && profLoggedIn()) { profSetSession(true); profShow('inside'); profRender(); }
+        if (p && p.name) { profSetSession(true); profShow('inside'); profRender(); }
         else {
+            // లాగిన్ / పాస్‌కోడ్ అడగము — పేరు, మొబైల్ మాత్రమే
             profShow('login');
             const mob = document.getElementById('profMobile');
             const nm = document.getElementById('profNameLogin');
@@ -7622,49 +7606,37 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
             if (nm && p) nm.value = p.name || '';
             const btn = document.getElementById('profAuthBtn');
             const wrap = document.getElementById('profConfirmWrap');
-            const note = document.getElementById('profAuthNote');
-            if (p) {
-                if (btn) btn.textContent = 'లాగిన్ అవ్వండి';
-                if (wrap) wrap.style.display = 'none';
-                if (note) note.textContent = 'ఈ నంబర్‌కు ఖాతా ఉంది — పాస్‌కోడ్ ఇవ్వండి.';
-            } else {
-                if (btn) btn.textContent = 'ఖాతా సృష్టించండి';
-                if (wrap) wrap.style.display = 'block';
-                if (note) note.textContent = 'మొదటిసారి — నంబర్ మరియు కొత్త పాస్‌కోడ్ ఇవ్వండి.';
-            }
+            if (btn) btn.textContent = 'సేవ్ చేయండి';
+            if (wrap) wrap.style.display = 'none';
         }
     }
     function closeProfile() {
         const m = document.getElementById('profileModal');
         if (m) m.classList.remove('open');
     }
+    // పాస్‌కోడ్ లేదు — పేరు, మొబైల్ ఇచ్చి సేవ్ చేసుకోవడం మాత్రమే
     function profileAuth() {
         const nameEl = document.getElementById('profNameLogin');
         const mobEl = document.getElementById('profMobile');
-        const passEl = document.getElementById('profPass');
         const name = (nameEl ? nameEl.value : '').trim();
         const mobile = (mobEl ? mobEl.value : '').replace(/\D/g, '');
-        const pass = (passEl ? passEl.value : '') || '';
 
-        if (mobile.length !== 10) { alert('10 అంకెల మొబైల్ నంబర్ ఇవ్వండి.'); return; }
-        if (pass.length < 4) { alert('కనీసం 4 అక్షరాల పాస్‌కోడ్ ఇవ్వండి.'); return; }
+        if (!name) { alert('మీ పేరు ఇవ్వండి.'); if (nameEl) nameEl.focus(); return; }
+        if (mobile.length !== 10) { alert('10 అంకెల మొబైల్ నంబర్ ఇవ్వండి.'); if (mobEl) mobEl.focus(); return; }
 
         let p = profLoad();
         if (!p) {
-            if (!name) { alert('మీ పేరు ఇవ్వండి.'); return; }
-            p = { mobile: mobile, pass: profHash(pass), name: name, dob: '', tob: '', place: '', photo: '', wallet: 0, tx: [], minutes: 0 };
-            profSave(p);
-            profSetSession(true);
-            profShow('inside');
-            profRender();
-            alert('ఖాతా సృష్టించబడింది.');
-            return;
+            p = { mobile: mobile, name: name, dob: '', tob: '', place: '', photo: '', wallet: 0, tx: [], minutes: 0 };
+        } else {
+            p.name = name;
+            p.mobile = mobile;
         }
-        if (p.mobile !== mobile || p.pass !== profHash(pass)) { alert('నంబర్ లేదా పాస్‌కోడ్ తప్పు.'); return; }
-        if (name) { p.name = name; profSave(p); }
+        profSave(p);
         profSetSession(true);
         profShow('inside');
         profRender();
+        renderAuth();
+        if (typeof fillAstroTopbar === 'function') fillAstroTopbar();
     }
 
     function profileLogout() {
@@ -7867,13 +7839,11 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         closeLogin();
     }
 
-    function doLogout() {
-        // డ్రాయర్ లాగౌట్ కూడా పూర్తి సెషన్ మూసివేత జరగాలి — ఒకే మార్గం
-        asSignOut();
-    }
+    // లాగిన్ లేదు కాబట్టి లాగౌట్ కూడా లేదు — పాత కాల్‌లు సురక్షితంగా ఇగ్నోర్ అవుతాయి
+    function doLogout() { }
 
     function handleHeaderAuth() {
-        if (authUser) { openDrawer(); } else { openLogin(); }
+        openProfile();
     }
 
     function renderAuth() {
@@ -7881,19 +7851,18 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         var userBox = document.getElementById('drawerUser');
         var loginItem = document.getElementById('drawerLoginItem');
         var logoutItem = document.getElementById('drawerLogoutItem');
-        if (authUser) {
-            var first = String(authUser.name).split(' ')[0];
-            if (label) label.textContent = first;
-            var mob = String(authUser.mobile || '').replace(/\D/g, '');
+        if (loginItem) loginItem.style.display = 'none';
+        if (logoutItem) logoutItem.style.display = 'none';
+        // లాగిన్ లేదు — ఈ పరికరంలో సేవ్ అయిన ప్రొఫైల్ ఉంటే పేరు చూపుతాం
+        var p = profLoad();
+        if (p && p.name) {
+            if (label) label.textContent = String(p.name).split(' ')[0];
+            var mob = String(p.mobile || '').replace(/\D/g, '');
             var mobText = mob.length >= 4 ? 'మొబైల్: ••••••' + mob.slice(-4) : '';
-            if (userBox) userBox.innerHTML = '<strong>నమస్కారం, ' + escHtml(authUser.name) + '</strong>' + mobText;
-            if (loginItem) loginItem.style.display = 'none';
-            if (logoutItem) logoutItem.style.display = 'flex';
+            if (userBox) userBox.innerHTML = '<strong>నమస్కారం, ' + escHtml(p.name) + '</strong>' + mobText;
         } else {
-            if (label) label.textContent = 'లాగిన్';
-            if (userBox) userBox.innerHTML = '<strong>మీరు లాగిన్ అవలేదు</strong>జాతక వివరాలు సేవ్ చేసుకోవడానికి లాగిన్ అవ్వండి.';
-            if (loginItem) loginItem.style.display = 'flex';
-            if (logoutItem) logoutItem.style.display = 'none';
+            if (label) label.textContent = 'ప్రొఫైల్';
+            if (userBox) userBox.innerHTML = '<strong>నమస్కారం</strong>మీ పేరు ఇచ్చి ప్రొఫైల్ సేవ్ చేసుకోవచ్చు.';
         }
     }
 
@@ -8102,12 +8071,6 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
     let consultAstro = null;
 
     function openConsult(idx) {
-        if (!astroState.verified) {
-            alert('సంప్రదింపు కోసం మొదట మొబైల్ OTPతో లాగిన్ అవ్వండి.');
-            const lc = document.getElementById('astroLoginCard');
-            if (lc) lc.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            return;
-        }
         if (!astroState.birth) {
             alert('దయచేసి మీ జన్మ వివరాలు నింపి సేవ్ చేయండి.');
             const bc = document.getElementById('astroBirthCard');
@@ -8317,6 +8280,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
     }
 
     function asShowStep(n) {
+        if (n === 1 || n === 2) n = 3; // లాగిన్ / OTP దశలు తీసేశాం
         asStep = n;
         for (let i = 1; i <= 6; i++) {
             const p = document.getElementById('asPanel' + i);
@@ -8347,10 +8311,16 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // లాగిన్ దశ తీసేశాం — పిలిస్తే నేరుగా జన్మ వివరాలకు
     function asLoginContinue() {
+        asShowStep(3);
+        return;
+    }
+
+    function asLoginContinueLegacy() {
         const name = (document.getElementById('asName').value || '').trim();
         const mobile = (document.getElementById('asMobile').value || '').replace(/\D/g, '');
-        const pass = (document.getElementById('asPass').value || '') || '';
+        const pass = (document.getElementById('asPass') ? document.getElementById('asPass').value : '') || '';
         if (!name) { alert('మీ పేరు ఇవ్వండి.'); return; }
         if (mobile.length !== 10) { alert('10 అంకెల మొబైల్ నంబర్ ఇవ్వండి.'); return; }
         if (pass.length < 4) { alert('కనీసం 4 అక్షరాల పాస్‌కోడ్ ఇవ్వండి.'); return; }
@@ -8587,7 +8557,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
 
         renderWallet();
 
-        if (entry) asShowStep(asSessionVerified ? (astroState.saved ? 6 : 3) : 1);
+        if (entry) asShowStep(astroState.saved ? 6 : 3);
     }
 
     // ================= వాలెట్ + రీచార్జ్ =================
@@ -8714,11 +8684,6 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
     }
 
     function astroGateOk() {
-        if (!astroState.verified) {
-            alert('దయచేసి మొదట మొబైల్ OTPతో లాగిన్ అవ్వండి.');
-            asShowStep(1);
-            return false;
-        }
         if (!astroState.birth) {
             alert('దయచేసి మీ జన్మ వివరాలు ఇవ్వండి.');
             asShowStep(3);
@@ -9756,11 +9721,11 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
             </select>
             <div class="hint-text" style="margin-top:6px;">భాష మార్చినప్పుడు మెనూ, బటన్లు మరియు శీర్షికలు మారుతాయి. అర్థం ఎక్కడా మారదు.</div>
         </div>
-        <button type="button" class="primary-btn" onclick="closeVisitorSettings(); openLogin();">ప్రొఫైల్ / లాగిన్</button>
+        <button type="button" class="primary-btn" onclick="closeVisitorSettings(); openProfile();">ప్రొఫైల్</button>
         <button type="button" class="primary-btn" onclick="closeVisitorSettings(); showPage('astrologersPage')">సేవ్ చేసిన జాతక వివరాలు</button>
         <button type="button" class="primary-btn" onclick="clearVisitorData()">సేవ్ చేసిన డేటా తీసేయండి</button>
         <button type="button" class="primary-btn" onclick="closeVisitorSettings()">మూసివేయండి</button>
-        <div class="build-stamp">బిల్డ్ v2026.11.25-3 · లాగౌట్ సరిచేయబడింది · చెల్లింపు నిర్ధారణ · సంప్రదింపు బటన్</div>
+        <div class="build-stamp">బిల్డ్ v2026.11.25-4 · లాగిన్ / పాస్‌కోడ్ అవసరం లేదు · నేరుగా ఓపెన్</div>
     </div>
 </div>
 
@@ -9772,7 +9737,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
 
     <!-- లాగిన్ -->
     <div id="profLoginView">
-      <p class="login-sub">మీ పేరు, మొబైల్ నంబర్ మరియు పాస్‌కోడ్ ఇవ్వండి.</p>
+      <p class="login-sub">మీ పేరు మరియు మొబైల్ నంబర్ ఇవ్వండి — పాస్‌కోడ్ అవసరం లేదు.</p>
       <div class="input-group">
         <label class="input-label">పూర్తి పేరు</label>
         <input type="text" id="profNameLogin" class="input-field" placeholder="మీ పేరు" autocomplete="name">
@@ -9784,11 +9749,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
           <input type="tel" id="profMobile" class="input-field" maxlength="10" inputmode="numeric" placeholder="10 అంకెల నంబర్">
         </div>
       </div>
-      <div class="input-group">
-        <label class="input-label">పాస్‌కోడ్</label>
-        <input type="password" id="profPass" class="input-field" placeholder="పాస్‌కోడ్">
-      </div>
-      <button type="button" class="primary-btn" id="profAuthBtn" onclick="profileAuth()">లాగిన్ అవ్వండి</button>
+      <button type="button" class="primary-btn" id="profAuthBtn" onclick="profileAuth()">సేవ్ చేయండి</button>
     </div>
 
     <!-- లోపల -->
@@ -9804,7 +9765,6 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         </div>
         <div class="prof-name-row">
           <div class="prof-name" id="profNameShow">పేరు నింపండి</div>
-          <button type="button" class="atb-logout" id="profLogoutBtn" onclick="asSignOut()" title="లాగ్ అవుట్">⎋ లాగ్ అవుట్</button>
         </div>
       </div>
 
@@ -9851,7 +9811,7 @@ return new kd(this.curr.time,a,b)};$jscomp.global.Object.defineProperties(H.prot
         });
     });
 })();
-console.info('LR Jyothishkulu build v2026.11.25-3 single-file — logout fix 2026-11-25');
+console.info('LR Jyothishkulu build v2026.11.25-4 single-file — no login/passcode 2026-11-25');
 </script>
 </body>
 </html>
